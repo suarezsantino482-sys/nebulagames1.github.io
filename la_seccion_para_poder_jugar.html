@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Sala Arcade</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a1a; color: #e0e0ff; font-family: 'Courier New', monospace; }
+        header { background: #111133; padding: 20px; text-align: center; border-bottom: 3px solid #ff00ff; }
+        header h1 { font-size: 2rem; color: #ff00ff; letter-spacing: 6px; text-shadow: 0 0 10px #ff00ff; }
+        nav { background: #0d0d2b; padding: 12px; text-align: center; border-bottom: 2px solid #333; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        nav a { color: #00ffff; text-decoration: none; padding: 6px 14px; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; border: 1px solid #333; }
+        nav a:hover { color: #ff00ff; border-color: #ff00ff; }
+        .page-hero { position: relative; height: 220px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .page-hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; position: absolute; top:0; left:0; }
+        .page-hero h2 { position: relative; z-index: 1; font-size: 2rem; color: #ff00ff; letter-spacing: 5px; text-shadow: 0 0 15px #ff00ff; text-align: center; }
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .section-title { color: #00ffff; letter-spacing: 4px; font-size: 1.2rem; margin: 30px 0 16px; border-left: 4px solid #ff00ff; padding-left: 12px; }
+        p { color: #bbb; line-height: 1.7; margin-bottom: 16px; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+        .game-card { background: #111133; border: 2px solid #222255; padding: 0; overflow: hidden; }
+        .game-card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+        .game-info { padding: 14px; }
+        .game-info h3 { color: #ff00ff; font-size: 0.95rem; letter-spacing: 2px; margin-bottom: 6px; }
+        .game-info p { color: #aaa; font-size: 0.8rem; line-height: 1.5; margin: 0 0 12px; }
+        .btn-play { display: inline-block; background: #00ffff; color: #000; padding: 8px 18px; font-family: 'Courier New', monospace; font-weight: bold; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; border: 2px solid #00ffff; }
+        .btn-play:hover { background: transparent; color: #00ffff; }
+        .btn { display: inline-block; margin-top: 30px; background: #ff00ff; color: #000; padding: 12px 28px; font-family: 'Courier New', monospace; font-weight: bold; text-decoration: none; letter-spacing: 2px; border: 2px solid #ff00ff; }
+        .btn:hover { background: transparent; color: #ff00ff; }
+        footer { background: #111133; border-top: 3px solid #ff00ff; text-align: center; padding: 20px; color: #888; font-size: 0.85rem; margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <header><h1>★ NEBULA GAMES ★</h1></header>
+    <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.html">Jugar</a>
+        <a href="seccion_de_blog_.html">Blog</a>
+        <a href="seccion_de_el_curso.html">Curso</a>
+        <a href="secion_de_quienes_somos.html">Quiénes Somos</a>
+        <a href="secion_de_cv.html">CV</a>
+    </nav>
+
+    <div class="page-hero">
+        <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&q=80&w=1200" alt="Sala Arcade">
+        <h2>🎮 SALA ARCADE</h2>
+    </div>
+
+    <div class="container">
+        <h3 class="section-title">JUEGOS DESTACADOS</h3>
+        <p>Juega directamente desde el navegador. Sin descargas, sin instalaciones. Solo clásicos.</p>
+
+        <div class="game-grid">
+            <div class="game-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png" alt="Mario Bros">
+                <div class="game-info">
+                    <h3>SUPER MARIO BROS.</h3>
+                    <p>El plataformas más famoso del mundo. Salta, corre y salva a la princesa.</p>
+                    <a href="https://www.nintendo.com/" target="_blank" class="btn-play">▶ VER EN NINTENDO</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="imagenes/sonic.jpg" alt="Sonic">
+                <div class="game-info">
+                    <h3>SONIC THE HEDGEHOG</h3>
+                    <p>La velocidad hecha juego. El erizo azul que desafió a Mario en los 90.</p>
+                    <a href="https://www.sega.com/" target="_blank" class="btn-play">▶ VER EN SEGA</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="imagenes/tetris.jpg" alt="Tetris">
+                <div class="game-info">
+                    <h3>TETRIS</h3>
+                    <p>Encaja los bloques y acumula puntos. El juego más adictivo de la historia.</p>
+                    <a href="https://tetris.com/play-tetris" target="_blank" class="btn-play">▶ JUGAR GRATIS</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="imagenes/pacman.jfif" alt="Pac-Man">
+                <div class="game-info">
+                    <h3>PAC-MAN</h3>
+                    <p>Come puntos, evita fantasmas. El comecocos que nunca pasa de moda.</p>
+                    <a href="https://www.google.com/logos/2010/pacman10-hp.html" target="_blank" class="btn-play">▶ JUGAR GRATIS</a>
+                </div>
+            </div>
+        </div>
+
+        <a href="inicio.html" class="btn">← VOLVER AL INICIO</a>
+    </div>
+
+    <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
+</body>
+</html>

@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RetroZone - ¡Juega tus clásicos favoritos!</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0f;--bg2:#12121e;--bg3:#1a1a2e;--accent:#ff6b35;--accent2:#ffd700;--neon:#00ff88;--text:#e8e8f0;--muted:#888;--card-bg:#16162a;--card-border:#2a2a4a}
+body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 10% 15%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 25% 35%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 40% 8%,rgba(255,255,255,.6) 0%,transparent 100%),radial-gradient(1px 1px at 55% 45%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 70% 20%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 85% 55%,rgba(255,255,255,.6) 0%,transparent 100%),radial-gradient(1px 1px at 5% 65%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 18% 80%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 33% 70%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 48% 88%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 62% 75%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 78% 90%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 3% 40%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 15% 50%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 28% 22%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 58% 30%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 88% 40%,rgba(255,255,255,.6) 0%,transparent 100%),radial-gradient(1px 1px at 97% 95%,rgba(255,255,255,.3) 0%,transparent 100%);pointer-events:none;z-index:0}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:200;background:rgba(10,10,15,.97);border-bottom:2px solid var(--accent);padding:0 1rem;display:flex;align-items:center;gap:1rem;height:54px}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;flex-shrink:0;cursor:pointer}
+.logo-icon{width:36px;height:36px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'Press Start 2P',monospace;font-size:11px;color:#fff}
+.logo-text{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.2rem;color:var(--accent);letter-spacing:2px}
+.search-wrap{flex:1;max-width:460px;position:relative}
+.search-wrap input{width:100%;background:var(--bg3);border:1.5px solid var(--card-border);border-radius:8px;padding:8px 14px 8px 38px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:15px;outline:none;transition:border-color .2s}
+.search-wrap input::placeholder{color:var(--muted)}
+.search-wrap input:focus{border-color:var(--accent)}
+.si{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:15px;color:var(--muted)}
+#sr{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg2);border:1.5px solid var(--accent);border-radius:8px;z-index:999;display:none;max-height:320px;overflow-y:auto}
+.sri{display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;border-bottom:1px solid var(--card-border)}
+.sri:last-child{border-bottom:none}
+.sri:hover{background:rgba(255,107,53,.1)}
+.sri img{width:48px;height:36px;object-fit:cover;border-radius:4px;background:#111}
+.sri-name{font-size:14px;font-weight:700;color:var(--text)}
+.sri-tag{font-size:11px;color:var(--muted)}
+.hbtns{margin-left:auto;display:flex;gap:.4rem;flex-shrink:0}
+.btn{padding:6px 14px;border-radius:6px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;cursor:pointer;border:none;transition:all .15s;display:inline-flex;align-items:center;gap:5px}
+.btn-out{background:transparent;border:1.5px solid var(--accent);color:var(--accent)}
+.btn-out:hover{background:var(--accent);color:#fff}
+.btn-sol{background:var(--accent);color:#fff}
+.btn-sol:hover{background:#e05828}
+
+/* LAYOUT */
+.layout{display:flex;position:relative;z-index:1}
+aside{width:170px;min-width:170px;background:var(--bg2);border-right:1px solid var(--card-border);min-height:calc(100vh - 54px);padding:1rem 0;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto}
+.sbl{font-family:'Orbitron',sans-serif;font-size:9px;color:var(--muted);letter-spacing:2px;padding:4px 16px 2px;text-transform:uppercase}
+.sbi{display:flex;align-items:center;gap:9px;padding:8px 16px;cursor:pointer;font-size:14px;font-weight:600;color:var(--muted);border-left:3px solid transparent;transition:all .15s;text-decoration:none}
+.sbi:hover,.sbi.active{color:var(--accent);background:rgba(255,107,53,.07);border-left-color:var(--accent)}
+.sbd{height:1px;background:var(--card-border);margin:.5rem 1rem}
+main{flex:1;padding:1rem 1.2rem;min-width:0}
+
+/* GAME GRID */
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;margin-top:.3rem}
+.st{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:.5rem}
+.st::before{content:'';width:4px;height:18px;background:var(--accent);border-radius:2px;display:inline-block}
+.sa{font-size:12px;color:var(--accent);text-decoration:none;font-weight:600;cursor:pointer}
+.sa:hover{text-decoration:underline}
+.gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(142px,1fr));gap:.7rem;margin-bottom:1.5rem}
+.gc{background:var(--card-bg);border:1px solid var(--card-border);border-radius:11px;overflow:hidden;cursor:pointer;transition:all .2s;display:block;position:relative}
+.gc:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 8px 22px rgba(255,107,53,.22)}
+.gtw{position:relative;overflow:hidden}
+.gt{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#0d0d1a;color:transparent;font-size:0}
+.cb{position:absolute;top:5px;left:5px;background:rgba(0,0,0,.85);color:var(--accent2);font-family:'Press Start 2P',monospace;font-size:5.5px;padding:3px 5px;border-radius:3px;z-index:2}
+.pvb{position:absolute;bottom:6px;right:6px;background:rgba(255,107,53,.92);color:#fff;border:none;border-radius:5px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;padding:4px 8px;cursor:pointer;opacity:0;transition:opacity .2s;z-index:3}
+.gc:hover .pvb{opacity:1}
+.gi{padding:9px 11px}
+.gn{font-weight:700;font-size:12.5px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+.gts{display:flex;gap:3px;flex-wrap:wrap}
+.tag{font-size:9.5px;padding:2px 5px;border-radius:3px;font-weight:700;border:1px solid}
+.nes{background:rgba(255,107,53,.15);color:#fb923c;border-color:rgba(255,107,53,.3)}
+.snes{background:rgba(0,200,150,.15);color:#34d399;border-color:rgba(0,200,150,.3)}
+.gba{background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3)}
+.gen{background:rgba(50,150,255,.15);color:#60a5fa;border-color:rgba(50,150,255,.3)}
+.gb{background:rgba(200,200,100,.15);color:#d4d437;border-color:rgba(200,200,100,.3)}
+
+/* MODAL */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.87);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem}
+.ov.open{display:flex}
+.mo{background:var(--bg2);border:1.5px solid var(--card-border);border-radius:16px;width:100%;max-width:820px;max-height:92vh;overflow-y:auto;position:relative;animation:su .25s ease}
+@keyframes su{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.mc{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.08);border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .15s}
+.mc:hover{background:rgba(255,107,53,.4)}
+.mt{display:flex;min-height:260px}
+.mi{width:340px;min-width:340px;position:relative;overflow:hidden}
+.mi img{width:100%;height:100%;object-fit:cover;display:block}
+.mbadge{position:absolute;top:10px;left:10px;background:var(--accent);color:#fff;font-family:'Press Start 2P',monospace;font-size:7px;padding:4px 8px;border-radius:4px}
+.mdet{flex:1;padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:.6rem}
+.mti{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:900;color:#fff;line-height:1.2}
+.mm{display:flex;flex-wrap:wrap;gap:.6rem;font-size:13px;color:var(--muted)}
+.mdesc{font-size:15px;color:#bbb;line-height:1.55;flex:1}
+.rr{display:flex;align-items:center;gap:.8rem}
+.lb,.db{display:flex;align-items:center;gap:6px;border-radius:7px;padding:6px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;cursor:pointer;border:1.5px solid;transition:all .15s}
+.lb{background:rgba(0,200,100,.1);color:#00dc64;border-color:#00dc64}
+.lb:hover,.lb.voted{background:#00dc64;color:#000}
+.db{background:rgba(220,60,60,.1);color:#e05555;border-color:#e05555}
+.db:hover,.db.voted{background:#e05555;color:#fff}
+.mact{display:flex;gap:.6rem;flex-wrap:wrap}
+.pb{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.pb:hover{background:#e05828;transform:scale(1.03)}
+.fb{background:transparent;border:1.5px solid var(--accent2);color:var(--accent2);border-radius:8px;padding:10px 18px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all .15s}
+.fb:hover{background:var(--accent2);color:#000}
+.mbot{display:flex;border-top:1px solid var(--card-border)}
+.rel{flex:1;padding:1rem 1.2rem}
+.relt{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:.7rem;text-transform:uppercase;letter-spacing:1px}
+.relg{display:flex;gap:.6rem;overflow-x:auto;padding-bottom:4px}
+.rc{flex-shrink:0;width:110px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;overflow:hidden;cursor:pointer;transition:all .15s}
+.rc:hover{border-color:var(--accent);transform:translateY(-2px)}
+.rc img{width:100%;height:70px;object-fit:cover;display:block;background:#0d0d1a}
+.rc p{font-size:10.5px;font-weight:700;color:#fff;padding:5px 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cp{width:210px;min-width:210px;border-left:1px solid var(--card-border);display:flex;flex-direction:column;padding:.9rem;gap:6px;background:rgba(10,10,20,.4);max-height:220px}
+.ch{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:2px}
+.cms{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:5px}
+.cm{font-size:12px;line-height:1.4}
+.u1{color:var(--accent);font-weight:700}.u2{color:#7c88ff;font-weight:700}.u3{color:#34d399;font-weight:700}.u4{color:#f472b6;font-weight:700}
+.ci{display:flex;gap:5px;margin-top:auto;padding-top:6px;border-top:1px solid var(--card-border)}
+.ci input{flex:1;background:var(--bg3);border:1px solid var(--card-border);border-radius:5px;padding:5px 7px;color:var(--text);font-size:11px;outline:none;font-family:'Rajdhani',sans-serif}
+.ci input:focus{border-color:var(--accent)}
+.cs{background:var(--accent);border:none;border-radius:5px;color:#fff;padding:5px 8px;cursor:pointer;font-size:12px}
+.cs:hover{background:#e05828}
+
+/* ============ SHARED PAGE STYLES ============ */
+.page-wrap{max-width:900px;margin:0 auto}
+.page-hero{background:linear-gradient(135deg,#16162a 0%,#1e1e3a 100%);border:1px solid var(--card-border);border-radius:16px;padding:2.5rem 2rem;margin-bottom:2rem;text-align:center}
+.page-hero h1{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;color:var(--accent);margin-bottom:.6rem}
+.page-hero p{color:var(--muted);font-size:16px;line-height:1.6}
+.card-box{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:1.5rem 1.8rem;margin-bottom:1.5rem}
+.card-box h2{font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.card-box h3{font-size:1.05rem;color:var(--accent2);margin:1rem 0 .5rem;font-weight:700}
+.card-box h4{font-size:.95rem;color:var(--neon);margin:.8rem 0 .3rem;font-weight:700}
+.card-box h5{font-size:.88rem;color:#a78bfa;margin:.6rem 0 .2rem;font-weight:700}
+.card-box h6{font-size:.82rem;color:var(--muted);margin:.4rem 0 .2rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.card-box p{color:#bbb;font-size:15px;line-height:1.6;margin-bottom:.6rem}
+.card-box ul,.card-box ol{color:#bbb;font-size:15px;line-height:1.8;padding-left:1.4rem;margin-bottom:.6rem}
+.card-box li{margin-bottom:.2rem}
+.page-hr{border:none;border-top:1px solid var(--card-border);margin:1.5rem 0}
+.badge-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0}
+.badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:700;border:1px solid}
+.badge-orange{background:rgba(255,107,53,.15);color:#fb923c;border-color:rgba(255,107,53,.3)}
+.badge-green{background:rgba(0,220,100,.15);color:#34d399;border-color:rgba(0,220,100,.3)}
+.badge-purple{background:rgba(124,58,237,.15);color:#a78bfa;border-color:rgba(124,58,237,.3)}
+.badge-blue{background:rgba(50,150,255,.15);color:#60a5fa;border-color:rgba(50,150,255,.3)}
+.badge-gold{background:rgba(255,215,0,.15);color:#ffd700;border-color:rgba(255,215,0,.3)}
+.progress-bar{background:var(--bg3);border-radius:20px;height:8px;margin:.4rem 0 .8rem;overflow:hidden}
+.progress-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.sec-footer{background:var(--bg2);border-top:1px solid var(--card-border);padding:1.2rem 1.8rem;margin-top:2rem;border-radius:0 0 12px 12px;position:relative;z-index:1}
+.sec-footer hr{border:none;border-top:2px solid var(--accent);margin-bottom:.8rem;opacity:.4}
+.sec-footer p{color:var(--muted);font-size:12px;text-align:center}
+.sec-footer a{color:var(--accent);text-decoration:none}
+
+/* CURSO */
+.module-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;font-weight:900;font-size:13px;flex-shrink:0}
+.lesson-row{display:flex;align-items:center;gap:.7rem;padding:.5rem 0;border-bottom:1px solid var(--card-border)}
+.lesson-row:last-child{border-bottom:none}
+.lesson-icon{font-size:16px}
+.lesson-text{flex:1;font-size:14px;color:var(--text)}
+.lesson-dur{font-size:11px;color:var(--muted)}
+.course-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1.5rem}
+.cs-item{background:var(--bg3);border-radius:8px;padding:.8rem;text-align:center;border:1px solid var(--card-border)}
+.cs-val{font-family:'Orbitron',sans-serif;font-size:1.3rem;color:var(--accent);font-weight:900}
+.cs-lbl{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* BLOG */
+.blog-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;overflow:hidden;margin-bottom:1.2rem;transition:border-color .2s}
+.blog-card:hover{border-color:var(--accent)}
+.blog-img{width:100%;height:160px;object-fit:cover;background:linear-gradient(135deg,#1a1a3e,#2a1a4e);display:flex;align-items:center;justify-content:center;font-size:4rem}
+.blog-body{padding:1.2rem 1.5rem}
+.blog-meta{font-size:12px;color:var(--muted);margin-bottom:.5rem;display:flex;gap:1rem;flex-wrap:wrap}
+.blog-body h2{font-family:'Orbitron',sans-serif;font-size:1.1rem;color:#fff;margin-bottom:.5rem;cursor:pointer}
+.blog-body h2:hover{color:var(--accent)}
+.blog-excerpt{color:#bbb;font-size:14px;line-height:1.6;margin-bottom:.8rem}
+.blog-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
+.read-more{color:var(--accent);font-size:13px;font-weight:700;cursor:pointer;text-decoration:none}
+.read-more:hover{text-decoration:underline}
+.comment-box{background:var(--bg3);border-radius:8px;padding:1rem;margin-bottom:.8rem;border-left:3px solid var(--accent)}
+.comment-box h5{font-size:13px;color:var(--accent2);margin-bottom:.3rem}
+.comment-box p{font-size:13px;color:#bbb;line-height:1.5}
+.comment-form input,.comment-form textarea{width:100%;background:var(--bg2);border:1px solid var(--card-border);border-radius:6px;padding:8px 12px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:14px;outline:none;margin-bottom:.6rem}
+.comment-form input:focus,.comment-form textarea:focus{border-color:var(--accent)}
+.comment-form textarea{resize:vertical;min-height:80px}
+
+/* CV */
+.cv-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:1.5rem}
+.cv-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Press Start 2P',monospace;font-size:22px;color:#fff;flex-shrink:0}
+.cv-name h1{font-family:'Orbitron',sans-serif;font-size:1.6rem;color:#fff;margin-bottom:.2rem}
+.cv-name h2{font-size:1rem;color:var(--accent);font-weight:600;font-family:'Rajdhani',sans-serif}
+.cv-contact{font-size:13px;color:var(--muted);margin-top:.3rem}
+.exp-item{border-left:2px solid var(--accent);padding-left:1rem;margin-bottom:1.2rem;position:relative}
+.exp-item::before{content:'';position:absolute;left:-5px;top:4px;width:8px;height:8px;background:var(--accent);border-radius:50%}
+.exp-item h3{font-size:1rem;color:#fff;font-weight:700}
+.exp-item h4{font-size:.9rem;color:var(--accent);font-weight:600;margin-bottom:.2rem}
+.exp-item .exp-date{font-size:11px;color:var(--muted);margin-bottom:.4rem}
+.skill-bar{margin-bottom:.7rem}
+.skill-bar .label{display:flex;justify-content:space-between;font-size:13px;color:var(--text);margin-bottom:3px}
+
+/* FAQ */
+.faq-item{border:1px solid var(--card-border);border-radius:8px;margin-bottom:.7rem;overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;cursor:pointer;background:var(--card-bg);font-size:15px;font-weight:700;color:var(--text);transition:background .15s}
+.faq-q:hover{background:rgba(255,107,53,.08)}
+.faq-q .arrow{transition:transform .2s;font-size:12px;color:var(--accent)}
+.faq-a{display:none;padding:.9rem 1.2rem;background:var(--bg3);color:#bbb;font-size:14px;line-height:1.6;border-top:1px solid var(--card-border)}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .arrow{transform:rotate(90deg)}
+
+/* QUIENES SOMOS */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-top:1rem}
+.team-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:1.2rem;text-align:center;transition:border-color .2s}
+.team-card:hover{border-color:var(--accent)}
+.team-avatar{width:60px;height:60px;border-radius:50%;margin:0 auto .7rem;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--bg3)}
+.team-card h4{font-size:14px;color:#fff;font-weight:700;margin-bottom:.2rem}
+.team-card p{font-size:12px;color:var(--muted)}
+.value-item{display:flex;gap:.8rem;padding:.8rem 0;border-bottom:1px solid var(--card-border)}
+.value-item:last-child{border-bottom:none}
+.value-icon{font-size:24px;flex-shrink:0}
+.value-item h4{font-size:14px;color:var(--accent2);font-weight:700;margin-bottom:.2rem}
+.value-item p{font-size:13px;color:#bbb;line-height:1.5}
+
+/* GLOBAL FOOTER */
+.global-footer{background:var(--bg2);border-top:2px solid var(--accent);padding:2rem 1.6rem 1rem;position:relative;z-index:1}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto 1.5rem}
+.footer-col h4{font-family:'Orbitron',sans-serif;font-size:.85rem;color:var(--accent);margin-bottom:.8rem;letter-spacing:1px}
+.footer-col a{display:block;color:var(--muted);font-size:13px;text-decoration:none;margin-bottom:.3rem;transition:color .15s;cursor:pointer}
+.footer-col a:hover{color:var(--accent)}
+.footer-col p{color:var(--muted);font-size:13px;line-height:1.6}
+.footer-bottom hr{border:none;border-top:1px solid var(--card-border);margin-bottom:.8rem}
+.footer-bottom p{text-align:center;font-size:12px;color:var(--muted)}
+.footer-bottom a{color:var(--accent);text-decoration:none}
+
+@media(max-width:900px){aside{display:none}.mi{width:200px;min-width:200px}.cp{display:none}.two-col{grid-template-columns:1fr}.course-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.mt{flex-direction:column}.mi{width:100%;min-width:0;height:180px}.mti{font-size:1.1rem}main{padding:.9rem}.page-hero h1{font-size:1.4rem}}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="logo" onclick="goSec('games')">
+    <div class="logo-icon">RZ</div>
+    <span class="logo-text">RetroZone</span>
+  </div>
+  <div class="search-wrap">
+    <span class="si">🔍</span>
+    <input type="text" id="sinput" placeholder="¿A que jugamos hoy?......" autocomplete="off"/>
+    <div id="sr"></div>
+  </div>
+  <div class="hbtns">
+    <button class="btn btn-out" onclick="alert('¡Próximamente!')">Iniciar sesión</button>
+    <button class="btn btn-sol" onclick="alert('¡Próximamente!')">Registrarse</button>
+  </div>
+</header>
+
+<!-- ===== LAYOUT ===== -->
+<div class="layout">
+<aside id="sidebar">
+  <div class="sbl">Juegos</div>
+  <div class="sbi active" onclick="goSec('games');showSec('all');setAct(this)">⭐ Destacados</div>
+  <div class="sbi" onclick="goSec('games');showSec('rec');setAct(this)">🕐 Recientes</div>
+  <div class="sbd"></div>
+  <div class="sbl">Personajes</div>
+  <div class="sbi" onclick="goSec('games');showSec('mario');setAct(this)">🍄 Mario</div>
+  <div class="sbi" onclick="goSec('games');showSec('sonic');setAct(this)">💨 Sonic</div>
+  <div class="sbi" onclick="goSec('games');showSec('kirby');setAct(this)">🌸 Kirby</div>
+  <div class="sbi" onclick="goSec('games');showSec('zelda');setAct(this)">🗡️ Zelda</div>
+  <div class="sbi" onclick="goSec('games');showSec('pokemon');setAct(this)">⚡ Pokémon</div>
+  <div class="sbi" onclick="goSec('games');showSec('dragon');setAct(this)">🐉 Dragon Ball</div>
+  <div class="sbi" onclick="goSec('games');showSec('tmnt');setAct(this)">🐢 TMNT</div>
+  <div class="sbd"></div>
+  <div class="sbl">Géneros</div>
+  <div class="sbi" onclick="goSec('games');showSec('pelea');setAct(this)">👊 Pelea</div>
+  <div class="sbi" onclick="goSec('games');showSec('plat');setAct(this)">🏃 Plataformas</div>
+  <div class="sbi" onclick="goSec('games');showSec('rpg');setAct(this)">🧙 RPG</div>
+  <div class="sbd"></div>
+  <div class="sbl">Consolas</div>
+  <div class="sbi" onclick="goSec('games');showSec('nes');setAct(this)">🎮 NES</div>
+  <div class="sbi" onclick="goSec('games');showSec('snes');setAct(this)">🕹️ SNES</div>
+  <div class="sbi" onclick="goSec('games');showSec('gb');setAct(this)">📺 Game Boy</div>
+  <div class="sbi" onclick="goSec('games');showSec('gba');setAct(this)">⚡ GBA</div>
+  <div class="sbi" onclick="goSec('games');showSec('gen');setAct(this)">🎯 Genesis</div>
+  <div class="sbd"></div>
+  <div class="sbl">Sitio</div>
+  <div class="sbi" onclick="goSec('curso');setAct(this)">📚 Curso</div>
+  <div class="sbi" onclick="goSec('blog');setAct(this)">✍️ Blog</div>
+  <div class="sbi" onclick="goSec('cv');setAct(this)">👤 CV / Equipo</div>
+  <div class="sbi" onclick="goSec('faq');setAct(this)">❓ FAQ</div>
+  <div class="sbi" onclick="goSec('quienes');setAct(this)">🏢 Quiénes Somos</div>
+</aside>
+
+<main id="main"></main>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="ov" id="ov" onclick="closeMo(event)">
+  <div class="mo">
+    <button class="mc" onclick="closeMo(null)">✕</button>
+    <div class="mt">
+      <div class="mi"><img id="mimg" src="" alt=""/><div class="mbadge" id="mbadge"></div></div>
+      <div class="mdet">
+        <div class="mti" id="mtitle"></div>
+        <div class="mm" id="mmeta"></div>
+        <div class="mdesc" id="mdesc"></div>
+        <div class="rr">
+          <button class="lb" id="lbtn" onclick="doVote('like')">👍 <span id="lc">95</span>%</button>
+          <button class="db" id="dbtn" onclick="doVote('dis')">👎 <span id="dc">5</span>%</button>
+        </div>
+        <div class="mact">
+          <a class="pb" id="mplay" href="#" target="_blank">▶ JUGAR AHORA</a>
+          <button class="fb" id="favbtn" onclick="doFav()">⭐ Favorito</button>
+        </div>
+      </div>
+    </div>
+    <div class="mbot">
+      <div class="rel"><div class="relt">Juegos similares</div><div class="relg" id="relg"></div></div>
+      <div class="cp">
+        <div class="ch">💬 Chat en vivo</div>
+        <div class="cms" id="cms"></div>
+        <div class="ci"><input id="cinput" placeholder="escribe algo..." onkeydown="if(event.key==='Enter')doChat()"/><button class="cs" onclick="doChat()">➤</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GLOBAL FOOTER ===== -->
+<footer class="global-footer" id="globalFooter" style="display:none">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>🎮 RetroZone</h4>
+      <p>Tu portal de videojuegos retro clásicos. Más de 60 títulos para jugar gratis en línea.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Juegos</h4>
+      <a onclick="goSec('games');showSec('mario');setActKey('mario')">Mario</a>
+      <a onclick="goSec('games');showSec('sonic');setActKey('sonic')">Sonic</a>
+      <a onclick="goSec('games');showSec('zelda');setActKey('zelda')">Zelda</a>
+      <a onclick="goSec('games');showSec('pokemon');setActKey('pokemon')">Pokémon</a>
+    </div>
+    <div class="footer-col">
+      <h4>Sitio</h4>
+      <a onclick="goSec('curso');setActKey('curso')">📚 Curso</a>
+      <a onclick="goSec('blog');setActKey('blog')">✍️ Blog</a>
+      <a onclick="goSec('faq');setActKey('faq')">❓ FAQ</a>
+      <a onclick="goSec('quienes');setActKey('quienes')">🏢 Quiénes Somos</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <p>📧 hola@retrozone.gg</p>
+      <p>🐦 @RetroZoneGG</p>
+      <p>💬 Discord: RetroZone</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <hr>
+    <p>© 2025 <strong>RetroZone</strong> — Todos los derechos reservados &nbsp;|&nbsp; <a href="#">Términos</a> &nbsp;|&nbsp; <a href="#">Privacidad</a> &nbsp;|&nbsp; Juegos enlazados a <a href="https://www.retrogames.cc" target="_blank">RetroGames.cc</a></p>
+  </div>
+</footer>
+
+<script>
+// ===================== GAME DATA =====================
+const G=[
+ {id:'smb1',n:'Super Mario Bros',c:'NES',g:'Plataformas',s:'mario',img:'https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png',url:'https://www.retrogames.cc/nes-games/super-mario-bros.html',desc:'El clásico de Nintendo que definió los videojuegos de plataformas. Ayuda a Mario a rescatar a la Princesa Peach del malvado Bowser a través de 8 mundos.',y:'1985',p:'1-2',lk:95},
+ {id:'smb2',n:'Super Mario Bros 2',c:'NES',g:'Plataformas',s:'mario',img:'imagenes/mario bros 2.jpg',desc:'Elige entre Mario, Luigi, Toad y Peach. Derrota al malvado Wart en el mundo de los sueños Subcon.',y:'1988',p:'1',lk:88},
+ {id:'smb3',n:'Super Mario Bros 3',c:'NES',g:'Plataformas',s:'mario',img:'https://upload.wikimedia.org/wikipedia/en/a/a5/Super_Mario_Bros._3_coverart.png',url:'https://www.retrogames.cc/nes-games/super-mario-bros-3.html',desc:'Uno de los mejores juegos de NES. Vuela con la hoja de mapache y explora 8 mundos únicos.',y:'1988',p:'1-2',lk:97},
+ {id:'smw',n:'Super Mario World',c:'SNES',g:'Plataformas',s:'mario',img:'https://upload.wikimedia.org/wikipedia/en/3/32/Super_Mario_World_Coverart.png',url:'https://www.retrogames.cc/snes-games/super-mario-world.html',desc:'El juego de lanzamiento de SNES con Yoshi. Más de 96 salidas secretas.',y:'1990',p:'1-2',lk:98},
+ {id:'smkart',n:'Super Mario Kart',c:'SNES',g:'Carreras',s:'mario',img:'imagenes/mario kart.jpg',url:'https://www.retrogames.cc/snes-games/super-mario-kart.html',desc:'El inicio de la legendaria saga de carreras con 8 personajes y 20 pistas.',y:'1992',p:'1-2',lk:94},
+ {id:'yoshi',n:"Yoshi's Island",c:'SNES',g:'Plataformas',s:'mario',img:'imagenes/yoshi island.jpg',url:'https://www.retrogames.cc/snes-games/yoshi-s-island-super-mario-world-2.html',desc:'Los Yoshis cargan al bebé Mario. Usa huevos como proyectiles en niveles espectaculares.',y:'1995',p:'1',lk:96},
+ {id:'smrpg',n:'Super Mario RPG',c:'SNES',g:'RPG',s:'mario',img:'imagenes/rpg.jpg',url:'https://www.retrogames.cc/snes-games/super-mario-rpg-legend-of-the-seven-stars.html',desc:'La primera aventura RPG de Mario desarrollada por Square.',y:'1996',p:'1',lk:96},
+ {id:'smland',n:'Super Mario Land',c:'GB',g:'Plataformas',s:'mario',img:'imagenes/land.jpg',url:'https://www.retrogames.cc/gameboy-games/super-mario-land.html',desc:'La primera aventura portátil de Mario en Game Boy.',y:'1989',p:'1',lk:87},
+ {id:'sonic1',n:'Sonic the Hedgehog',c:'Genesis',g:'Plataformas',s:'sonic',img:'imagenes/sonic.jpg',url:'https://www.retrogames.cc/genesis-games/sonic-the-hedgehog.html',desc:'El inicio del erizo más veloz. Desafía al Dr. Robotnik en Green Hill Zone.',y:'1991',p:'1',lk:94},
+ {id:'sonic2',n:'Sonic the Hedgehog 2',c:'Genesis',g:'Plataformas',s:'sonic',img:'imagenes/sonic 2.jpg',url:'https://www.retrogames.cc/genesis-games/sonic-the-hedgehog-2.html',desc:'Sonic con Tails. Modo 2 jugadores y el icónico Spin Dash.',y:'1992',p:'1-2',lk:96},
+ {id:'sonic3',n:'Sonic the Hedgehog 3',c:'Genesis',g:'Plataformas',s:'sonic',img:'imagenes/sonic 3.jpg',url:'https://www.retrogames.cc/genesis-games/sonic-the-hedgehog-3.html',desc:'Sonic conoce a Knuckles con escudos mágicos y nuevas habilidades.',y:'1994',p:'1-2',lk:97},
+ {id:'soniccd',n:'Sonic CD',c:'Genesis',g:'Plataformas',s:'sonic',img:'imagenes/sonic cd.jfif',url:'https://www.retrogames.cc/genesis-games/sonic-cd.html',desc:'Viaje en el tiempo para salvar a Amy Rose y derrotar a Metal Sonic.',y:'1993',p:'1',lk:93},
+ {id:'sonicadv',n:'Sonic Advance',c:'GBA',g:'Plataformas',s:'sonic',img:'imagenes/sonic adv.jpg',url:'https://www.retrogames.cc/gba-games/sonic-advance.html',desc:'Primera aventura portátil de Sonic en GBA con 4 personajes.',y:'2001',p:'1-2',lk:88},
+ {id:'kirby1',n:"Kirby's Adventure",c:'NES',g:'Plataformas',s:'kirby',img:'imagenes/kirby adventure.jfif',url:'https://www.retrogames.cc/nes-games/kirby-s-adventure.html',desc:'La mecánica de copiar habilidades de enemigos. Más de 20 poderes distintos.',y:'1993',p:'1',lk:95},
+ {id:'kirbydl',n:"Kirby's Dream Land",c:'GB',g:'Plataformas',s:'kirby',img:'imagenes/kirby dream.jpg',url:'https://www.retrogames.cc/gameboy-games/kirby-s-dream-land.html',desc:'El primer juego de Kirby en Game Boy. Rescata la comida del Rey Dedede.',y:'1992',p:'1',lk:86},
+ {id:'kirbyam',n:'Kirby: Amazing Mirror',c:'GBA',g:'Plataformas',s:'kirby',img:'imagenes/kirby mirror.jpg',url:'https://www.retrogames.cc/gba-games/kirby-the-amazing-mirror.html',desc:'Laberinto Metroidvania con 4 Kirbys simultáneos en multijugador.',y:'2004',p:'1-4',lk:90},
+ {id:'kirbynl',n:'Kirby: Nightmare in Dream Land',c:'GBA',g:'Plataformas',s:'kirby',img:'imagenes/kirby night.jfif',url:'https://www.retrogames.cc/gba-games/kirby-nightmare-in-dream-land.html',desc:'Remake de Kirby\'s Adventure con gráficos mejorados y modo 4 jugadores.',y:'2002',p:'1-4',lk:92},
+ {id:'zelda1',n:'The Legend of Zelda',c:'NES',g:'Aventura',s:'zelda',img:'imagenes/zelda.jpg',url:'https://www.retrogames.cc/nes-games/the-legend-of-zelda.html',desc:'El origen de la saga. Link reúne los fragmentos de la Trifuerza para salvar a Zelda.',y:'1986',p:'1',lk:94},
+ {id:'zeldatp',n:'Zelda: A Link to the Past',c:'SNES',g:'Aventura',s:'zelda',img:'imagenes/zelda past.jpg',url:'https://www.retrogames.cc/snes-games/the-legend-of-zelda-a-link-to-the-past.html',desc:'Uno de los mejores juegos de todos los tiempos. Dos mundos, 12 mazmorras.',y:'1991',p:'1',lk:99},
+ {id:'zeldagba',n:'Zelda: A Link to the Past GBA',c:'GBA',g:'Aventura',s:'zelda',img:'imagenes/zelda a link gba.jfif',url:'https://www.retrogames.cc/gba-games/the-legend-of-zelda-a-link-to-the-past-four-swords.html',desc:'Versión portátil del clásico con modo Four Swords multijugador.',y:'2002',p:'1-4',lk:97},
+ {id:'zeldaoa',n:'Zelda: Oracle of Ages',c:'GB',g:'Aventura',s:'zelda',img:'imagenes/zelda ages.jfif',url:'https://www.retrogames.cc/gameboy-games/the-legend-of-zelda-oracle-of-ages.html',desc:'Viaje en el tiempo con el Harpa de las Edades para salvar a Nayru.',y:'2001',p:'1',lk:92},
+ {id:'zeldaos',n:'Zelda: Oracle of Seasons',c:'GB',g:'Aventura',s:'zelda',img:'imagenes/zelda seasons.jfif',url:'https://www.retrogames.cc/gameboy-games/the-legend-of-zelda-oracle-of-seasons.html',desc:'Cambia las estaciones para abrir nuevos caminos y resolver puzzles.',y:'2001',p:'1',lk:92},
+ {id:'pkred',n:'Pokémon Rojo',c:'GB',g:'RPG',s:'pokemon',img:'imagenes/pokemon rojo.jfif',url:'https://www.retrogames.cc/gameboy-games/pokemon-red-version.html',desc:'El comienzo de la revolución Pokémon. Captura 151 Pokémon en Kanto.',y:'1996',p:'1-2',lk:97},
+ {id:'pkblue',n:'Pokémon Azul',c:'GB',g:'RPG',s:'pokemon',img:'imagenes/pokemon azul.jfif',url:'https://www.retrogames.cc/gameboy-games/pokemon-blue-version.html',desc:'Contraparte de Pokémon Rojo con 12 Pokémon exclusivos.',y:'1996',p:'1-2',lk:97},
+ {id:'pkyellow',n:'Pokémon Amarillo',c:'GB',g:'RPG',s:'pokemon',img:'imagenes/pokemon amarrillo.jfif',url:'https://www.retrogames.cc/gameboy-games/pokemon-yellow-version-special-pikachu-edition.html',desc:'Tu Pikachu te sigue y muestra emociones basado en el anime.',y:'1998',p:'1-2',lk:96},
+ {id:'pkgold',n:'Pokémon Oro',c:'GB',g:'RPG',s:'pokemon',img:'imagenes/pokemon oro.jfif',url:'https://www.retrogames.cc/gameboy-games/pokemon-gold-version.html',desc:'100 nuevos Pokémon en Johto con ciclo día/noche y aventura doble.',y:'1999',p:'1-2',lk:96},
+ {id:'pkfire',n:'Pokémon Rojo Fuego',c:'GBA',g:'RPG',s:'pokemon',img:'imagenes/pokemon rojo fuego.jfif',url:'https://www.retrogames.cc/gba-games/pokemon-firered.html',desc:'Remake de Pokémon Rojo con gráficos mejorados y el Archipiélago Sevii.',y:'2004',p:'1-2',lk:95},
+ {id:'pkemerald',n:'Pokémon Esmeralda',c:'GBA',g:'RPG',s:'pokemon',img:'imagenes/pokemon esmeralda.jpg',url:'https://www.retrogames.cc/gba-games/pokemon-emerald.html',desc:'La versión definitiva de Hoenn con el Frente de Batalla.',y:'2004',p:'1-2',lk:97},
+ {id:'dbadv',n:'Dragon Ball: Advanced Adventure',c:'GBA',g:'Acción',s:'dragon',img:'https://upload.wikimedia.org/wikipedia/en/0/0f/Dragon_Ball_Advanced_Adventure_box.jpg',url:'https://www.retrogames.cc/gba-games/dragon-ball-advanced-adventure.html',desc:'Revive la saga original de Dragon Ball como Goku joven en más de 30 niveles.',y:'2004',p:'1-2',lk:91},
+ {id:'dbzsb',n:'DBZ: Super Butouden',c:'SNES',g:'Pelea',s:'dragon',img:'https://upload.wikimedia.org/wikipedia/en/8/8a/Dbzsbcover.jpg',url:'https://www.retrogames.cc/snes-games/dragon-ball-z-super-butouden.html',desc:'El primer juego de pelea de DBZ en SNES. Sagas Saiyajin y Namek.',y:'1993',p:'1-2',lk:88},
+ {id:'dbzsb2',n:'DBZ: Super Butouden 2',c:'SNES',g:'Pelea',s:'dragon',img:'https://upload.wikimedia.org/wikipedia/en/5/5e/DragonBallZSuperButouden2cover.jpg',url:'https://www.retrogames.cc/snes-games/dragon-ball-z-super-butouden-2.html',desc:'Secuela con mecánicas de vuelo y más personajes de la saga Cell.',y:'1993',p:'1-2',lk:89},
+ {id:'dbleg',n:'DBZ: Legacy of Goku',c:'GBA',g:'RPG',s:'dragon',img:'https://upload.wikimedia.org/wikipedia/en/d/d5/Dragon_Ball_Z_Legacy_of_Goku_cover.jpg',url:'https://www.retrogames.cc/gba-games/dragon-ball-z-the-legacy-of-goku.html',desc:'RPG de acción que cubre las sagas Saiyajin y Frieza.',y:'2002',p:'1',lk:85},
+ {id:'dbhy',n:'DBZ: Hyper Dimension',c:'SNES',g:'Pelea',s:'dragon',img:'https://upload.wikimedia.org/wikipedia/en/5/56/DBZ_Hyper_Dimension.jpg',url:'https://www.retrogames.cc/snes-games/dragon-ball-z-hyper-dimension.html',desc:'El mejor juego de peleas de DBZ en SNES con escenarios destructibles.',y:'1996',p:'1-2',lk:90},
+ {id:'dbgt',n:'Dragon Ball GT: Transformation',c:'GBA',g:'Acción',s:'dragon',img:'https://upload.wikimedia.org/wikipedia/en/8/86/Dragon_Ball_GT_-_Transformation.jpg',url:'https://www.retrogames.cc/gba-games/dragon-ball-gt-transformation.html',desc:'Beat\'em up basado en la serie GT con Goku, Trunks y Pan.',y:'2005',p:'1-2',lk:82},
+ {id:'tmnt1',n:'TMNT',c:'NES',g:"Beat'em Up",s:'tmnt',img:'https://upload.wikimedia.org/wikipedia/en/2/25/Teenage_Mutant_Ninja_Turtles_%28NES%29_coverart.png',url:'https://www.retrogames.cc/nes-games/teenage-mutant-ninja-turtles.html',desc:'El primer videojuego de las Tortugas Ninja en NES.',y:'1989',p:'1',lk:82},
+ {id:'tmnt2',n:'TMNT II: The Arcade Game',c:'NES',g:"Beat'em Up",s:'tmnt',img:'https://upload.wikimedia.org/wikipedia/en/1/17/TMNT2arcadegame.png',url:'https://www.retrogames.cc/nes-games/teenage-mutant-ninja-turtles-ii-the-arcade-game.html',desc:'La versión hogar del arcade con 2 jugadores simultáneos.',y:'1990',p:'1-2',lk:91},
+ {id:'tmnt3',n:'TMNT III: Manhattan Project',c:'NES',g:"Beat'em Up",s:'tmnt',img:'https://upload.wikimedia.org/wikipedia/en/f/fd/TMNT3NES.jpg',url:'https://www.retrogames.cc/nes-games/teenage-mutant-ninja-turtles-iii-the-manhattan-project.html',desc:'Las tortugas salvan Manhattan levantada por la nave del Shredder.',y:'1992',p:'1-2',lk:88},
+ {id:'tmnt4',n:'TMNT IV: Turtles in Time',c:'SNES',g:"Beat'em Up",s:'tmnt',img:'https://upload.wikimedia.org/wikipedia/en/8/8a/TMNT_4_Turtles_in_Time_SNES_cover.jpg',url:'https://www.retrogames.cc/snes-games/teenage-mutant-ninja-turtles-iv-turtles-in-time.html',desc:'El mejor TMNT. Viaje en el tiempo con combos devastadores.',y:'1992',p:'1-2',lk:96},
+ {id:'tmnt5',n:'TMNT: Tournament Fighters',c:'SNES',g:'Pelea',s:'tmnt',img:'https://upload.wikimedia.org/wikipedia/en/5/55/TMNT_tournament_fighters.jpg',url:'https://www.retrogames.cc/snes-games/teenage-mutant-ninja-turtles-tournament-fighters.html',desc:'Juego de pelea 1vs1 al estilo Street Fighter con las tortugas.',y:'1993',p:'1-2',lk:84},
+ {id:'sf2',n:'Street Fighter II Turbo',c:'SNES',g:'Pelea',s:'pelea',img:'https://upload.wikimedia.org/wikipedia/en/8/8f/Street_Fighter_II_Turbo_SNES.jpg',url:'https://www.retrogames.cc/snes-games/street-fighter-ii-turbo.html',desc:'16 personajes, velocidad Turbo y el torneo de artes marciales más épico.',y:'1992',p:'1-2',lk:96},
+ {id:'mk1',n:'Mortal Kombat',c:'SNES',g:'Pelea',s:'pelea',img:'https://upload.wikimedia.org/wikipedia/en/5/5b/Mortal_Kombat_SNES.png',url:'https://www.retrogames.cc/snes-games/mortal-kombat.html',desc:'El torneo de artes marciales más brutal por el destino de la Tierra.',y:'1993',p:'1-2',lk:91},
+ {id:'mk2',n:'Mortal Kombat II',c:'SNES',g:'Pelea',s:'pelea',img:'https://upload.wikimedia.org/wikipedia/en/7/78/Mortal_Kombat_II.jpg',url:'https://www.retrogames.cc/snes-games/mortal-kombat-ii.html',desc:'La secuela superior con Fatalities, Babalities y Friendships.',y:'1994',p:'1-2',lk:94},
+ {id:'duckhunt',n:'Duck Hunt',c:'NES',g:'Disparo',s:'pelea',img:'https://upload.wikimedia.org/wikipedia/en/7/71/Duck_hunt_boxart.png',url:'https://www.retrogames.cc/nes-games/duck-hunt.html',desc:'El clásico de tiro con pistola Zapper. El perro riéndose es inmortal.',y:'1984',p:'1',lk:87},
+ {id:'punch',n:'Punch-Out!!',c:'NES',g:'Pelea',s:'pelea',img:'https://upload.wikimedia.org/wikipedia/en/6/68/Punch-Out%21%21_cover.jpg',url:'https://www.retrogames.cc/nes-games/punch-out.html',desc:'Little Mac aspira al campeonato mundial de boxeo. Aprende los patrones.',y:'1987',p:'1',lk:95},
+ {id:'contra',n:'Contra',c:'NES',g:'Plataformas',s:'plat',img:'https://upload.wikimedia.org/wikipedia/en/e/e5/Contra_%28NES%29_box_art.jpg',url:'https://www.retrogames.cc/nes-games/contra.html',desc:'Código Konami: 30 vidas. Co-op de acción clásico e intenso.',y:'1988',p:'1-2',lk:95},
+ {id:'mega2',n:'Mega Man 2',c:'NES',g:'Plataformas',s:'plat',img:'https://upload.wikimedia.org/wikipedia/en/b/ba/Mega_Man_2_Box_Art.jpg',url:'https://www.retrogames.cc/nes-games/mega-man-2.html',desc:'El mejor Mega Man. 8 Robot Masters y música icónica.',y:'1988',p:'1',lk:97},
+ {id:'castlev',n:'Castlevania',c:'NES',g:'Plataformas',s:'plat',img:'https://upload.wikimedia.org/wikipedia/en/0/05/Castlevania_%28NES%29_box_art.jpg',url:'https://www.retrogames.cc/nes-games/castlevania.html',desc:'Simon Belmont contra el Conde Drácula. Dificultad legendaria.',y:'1986',p:'1',lk:93},
+ {id:'dkc',n:'Donkey Kong Country',c:'SNES',g:'Plataformas',s:'plat',img:'https://upload.wikimedia.org/wikipedia/en/5/5b/Donkey_Kong_Country.jpg',url:'https://www.retrogames.cc/snes-games/donkey-kong-country.html',desc:'Gráficos revolucionarios y una banda sonora memorable en SNES.',y:'1994',p:'1-2',lk:97},
+ {id:'dkc2',n:'Donkey Kong Country 2',c:'SNES',g:'Plataformas',s:'plat',img:'https://upload.wikimedia.org/wikipedia/en/b/bf/Dkc2snes.jpg',url:'https://www.retrogames.cc/snes-games/donkey-kong-country-2.html',desc:'Diddy y Dixie en el barco pirata de K. Rool. El mejor de la trilogía.',y:'1995',p:'1-2',lk:98},
+ {id:'ff6',n:'Final Fantasy VI',c:'SNES',g:'RPG',s:'rpg',img:'https://upload.wikimedia.org/wikipedia/en/0/00/FF6_SNES_JP.jpg',url:'https://www.retrogames.cc/snes-games/final-fantasy-vi.html',desc:'14 personajes, el villano Kefka y una historia épica. El mejor FF.',y:'1994',p:'1',lk:99},
+ {id:'chrono',n:'Chrono Trigger',c:'SNES',g:'RPG',s:'rpg',img:'https://upload.wikimedia.org/wikipedia/en/a/a7/Chrono_Trigger.jpg',url:'https://www.retrogames.cc/snes-games/chrono-trigger.html',desc:'Obra maestra del RPG. Viaje en el tiempo y múltiples finales.',y:'1995',p:'1',lk:100},
+ {id:'earthbound',n:'EarthBound',c:'SNES',g:'RPG',s:'rpg',img:'https://upload.wikimedia.org/wikipedia/en/b/bb/EarthBound_Box.jpg',url:'https://www.retrogames.cc/snes-games/earthbound.html',desc:'RPG extravagante con humor absurdo y momentos emotivos.',y:'1994',p:'1',lk:97},
+ {id:'secretmana',n:'Secret of Mana',c:'SNES',g:'RPG',s:'rpg',img:'https://upload.wikimedia.org/wikipedia/en/4/44/Secret_of_mana_box_art.jpg',url:'https://www.retrogames.cc/snes-games/secret-of-mana.html',desc:'RPG de acción en tiempo real con hasta 3 jugadores.',y:'1993',p:'1-3',lk:96},
+ {id:'ff4',n:'Final Fantasy IV',c:'SNES',g:'RPG',s:'rpg',img:'https://upload.wikimedia.org/wikipedia/en/8/81/FF4_SNES_NA.jpg',url:'https://www.retrogames.cc/snes-games/final-fantasy-iv.html',desc:'La historia del Paladín Cecil. Introdujo el sistema ATB.',y:'1991',p:'1',lk:95},
+];
+
+const CT={NES:'nes',SNES:'snes',GBA:'gba',GB:'gb',Genesis:'gen'};
+const SF={
+ all:()=>true,rec:()=>true,
+ mario:g=>g.s==='mario',sonic:g=>g.s==='sonic',kirby:g=>g.s==='kirby',
+ zelda:g=>g.s==='zelda',pokemon:g=>g.s==='pokemon',dragon:g=>g.s==='dragon',tmnt:g=>g.s==='tmnt',
+ pelea:g=>g.g==='Pelea'||g.g==='Disparo',
+ plat:g=>g.g==='Plataformas'||g.g==="Beat'em Up",
+ rpg:g=>g.g==='RPG'||g.g==='Aventura',
+ nes:g=>g.c==='NES',snes:g=>g.c==='SNES',gb:g=>g.c==='GB',gba:g=>g.c==='GBA',gen:g=>g.c==='Genesis',
+};
+const ST={all:'⭐ Juegos Destacados',rec:'🕐 Agregados Recientemente',mario:'🍄 Juegos de Mario',sonic:'💨 Juegos de Sonic',kirby:'🌸 Juegos de Kirby',zelda:'🗡️ Juegos de Zelda',pokemon:'⚡ Juegos de Pokémon',dragon:'🐉 Dragon Ball',tmnt:'🐢 Tortugas Ninja',pelea:'👊 Pelea y Disparo',plat:'🏃 Plataformas',rpg:'🧙 RPG y Aventura',nes:'🎮 NES',snes:'🕹️ SNES',gb:'📺 Game Boy',gba:'⚡ GBA',gen:'🎯 Sega Genesis'};
+let votes={},curGame=null;
+
+function makeFallbackSvg(name){
+ const short=name.length>20?name.slice(0,20)+'…':name;
+ const enc=encodeURIComponent(short);
+ return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%2316162a'/%3E%3Crect x='0' y='0' width='200' height='4' fill='%23ff6b35'/%3E%3Crect x='0' y='146' width='200' height='4' fill='%23ff6b35'/%3E%3Ctext x='100' y='68' text-anchor='middle' font-size='34' fill='%23ff6b35'%3E%F0%9F%8E%AE%3C/text%3E%3Ctext x='100' y='105' text-anchor='middle' font-family='monospace' font-size='9' fill='%23aaa'%3E"+enc+"%3C/text%3E%3C/svg%3E";
+}
+function card(g){
+ const fb=makeFallbackSvg(g.n);
+ return `<div class="gc" onclick="openMo('${g.id}')">
+  <div class="gtw"><img class="gt" src="${g.img}" alt="" onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src='${fb}'}" loading="lazy"/>
+  <span class="cb">${g.c}</span>
+  <button class="pvb" onclick="event.stopPropagation();openMo('${g.id}')">👁 Vista previa</button></div>
+  <div class="gi"><div class="gn">${g.n}</div><div class="gts"><span class="tag ${CT[g.c]||'nes'}">${g.c}</span><span class="tag">${g.g}</span></div></div></div>`;
+}
+
+function showSec(k){
+ const m=document.getElementById('main');
+ if(k==='all'){
+  const grps=[{k:'mario',t:'🍄 Mario'},{k:'sonic',t:'💨 Sonic'},{k:'kirby',t:'🌸 Kirby'},{k:'zelda',t:'🗡️ Zelda'},{k:'pokemon',t:'⚡ Pokémon'},{k:'dragon',t:'🐉 Dragon Ball'},{k:'tmnt',t:'🐢 TMNT'},{k:'pelea',t:'👊 Pelea'},{k:'plat',t:'🏃 Plataformas'},{k:'rpg',t:'🧙 RPG'}];
+  let h='';
+  grps.forEach(({k:gk,t})=>{
+   const gg=G.filter(SF[gk]);if(!gg.length)return;
+   h+=`<div class="sh"><div class="st">${t}</div><span class="sa" onclick="showSec('${gk}');setActKey('${gk}')">Ver todos →</span></div><div class="gg">${gg.map(card).join('')}</div>`;
+  });
+  h+=secFooter('juegos');
+  m.innerHTML=h;return;
+ }
+ const gg=G.filter(SF[k]||SF.all);
+ let h=`<div class="sh"><div class="st">${ST[k]||k}</div><span style="font-size:12px;color:var(--muted)">${gg.length} juegos</span></div>`;
+ h+=gg.length?`<div class="gg">${gg.map(card).join('')}</div>`:'<p style="color:var(--muted);padding:2rem">Sin resultados.</p>';
+ h+=secFooter('juegos');
+ m.innerHTML=h;
+}
+
+function secFooter(type){
+ const extra = type==='juegos' ? `<span> | <a onclick="goSec('curso');setActKey('curso')">📚 Curso</a> | <a onclick="goSec('blog');setActKey('blog')">✍️ Blog</a> | <a onclick="goSec('faq');setActKey('faq')">❓ FAQ</a></span>` : '';
+ return `<div class="sec-footer"><hr><p>🎮 <strong>RetroZone</strong> — ¡Tu portal retro favorito! ${extra}</p></div>`;
+}
+
+// ===================== MODAL =====================
+function openMo(id){
+ const g=G.find(x=>x.id===id);if(!g)return;curGame=g;
+ document.getElementById('mimg').src=g.img;
+ document.getElementById('mimg').onerror=function(){if(!this.dataset.tried){this.dataset.tried=1;this.src=makeFallbackSvg(g.n);}}
+ document.getElementById('mbadge').textContent=g.c;
+ document.getElementById('mtitle').textContent=g.n;
+ document.getElementById('mmeta').innerHTML=`<span>🎮 ${g.c} · ${g.y}</span><span>👤 ${g.p} Jug.</span><span>🏷️ ${g.g}</span>`;
+ document.getElementById('mdesc').textContent=g.desc;
+ document.getElementById('mplay').href=g.url;
+ if(!votes[id])votes[id]={lk:g.lk,dk:100-g.lk,v:null};
+ renderVotes(id);
+ const rel=G.filter(x=>x.id!==id&&(x.s===g.s||x.c===g.c)).slice(0,6);
+ document.getElementById('relg').innerHTML=rel.map(r=>`<div class="rc" onclick="openMo('${r.id}')"><img src="${r.img}" alt="${r.n}" onerror="this.src='https://via.placeholder.com/110x70/16162a/ff6b35?text=?'" loading="lazy"/><p>${r.n}</p></div>`).join('');
+ document.getElementById('cms').innerHTML=[`<div class="cm"><span class="u1">player1:</span> ¡${g.n} es increíble!</div>`,`<div class="cm"><span class="u2">RetroFan:</span> Clásico total 🔥</div>`,`<div class="cm"><span class="u3">Gamer88:</span> Lo jugué de chico</div>`,`<div class="cm"><span class="u4">Neo:</span> ${g.lk}% no miente!</div>`].join('');
+ const fb=document.getElementById('favbtn');fb.textContent='⭐ Favorito';fb.style.background='';fb.style.color='';
+ document.getElementById('ov').classList.add('open');document.body.style.overflow='hidden';
+}
+function closeMo(e){if(e&&e.target!==document.getElementById('ov'))return;document.getElementById('ov').classList.remove('open');document.body.style.overflow='';}
+function renderVotes(id){const v=votes[id];document.getElementById('lc').textContent=v.lk;document.getElementById('dc').textContent=v.dk;document.getElementById('lbtn').classList.toggle('voted',v.v==='like');document.getElementById('dbtn').classList.toggle('voted',v.v==='dis');}
+function doVote(t){if(!curGame)return;const v=votes[curGame.id];if(!v||v.v===t)return;if(v.v){if(t==='like'){v.lk=Math.min(100,v.lk+2);v.dk=Math.max(0,v.dk-2);}else{v.dk=Math.min(100,v.dk+2);v.lk=Math.max(0,v.lk-2);}}else{if(t==='like'){v.lk=Math.min(100,v.lk+1);v.dk=Math.max(0,v.dk-1);}else{v.dk=Math.min(100,v.dk+1);v.lk=Math.max(0,v.lk-1);}}v.v=t;renderVotes(curGame.id);}
+function doFav(){const fb=document.getElementById('favbtn');if(fb.textContent.includes('⭐')){fb.textContent='💛 ¡Guardado!';fb.style.background='#ffd700';fb.style.color='#000';}else{fb.textContent='⭐ Favorito';fb.style.background='';fb.style.color='';}}
+const uu=['player1','RetroFan','Gamer88','Neo','JoyPad','PixelBro'];const ucls=['u1','u2','u3','u4'];let ci=0;
+function doChat(){const inp=document.getElementById('cinput');const msg=inp.value.trim();if(!msg)return;const box=document.getElementById('cms');const d=document.createElement('div');d.className='cm';d.innerHTML=`<span class="${ucls[ci%4]}">tú:</span> ${msg}`;box.appendChild(d);box.scrollTop=box.scrollHeight;inp.value='';ci++;setTimeout(()=>{const r=['¡Genial!','Clásico total!','¡Pura nostalgia!','100% de acuerdo','¡Top de la consola!'][Math.floor(Math.random()*5)];const nm=uu[Math.floor(Math.random()*uu.length)];const d2=document.createElement('div');d2.className='cm';d2.innerHTML=`<span class="${ucls[ci%4]}">${nm}:</span> ${r}`;box.appendChild(d2);box.scrollTop=box.scrollHeight;ci++;},700+Math.random()*600);}
+
+// ===================== SEARCH =====================
+const sinput=document.getElementById('sinput');const srd=document.getElementById('sr');
+sinput.addEventListener('input',function(){const q=this.value.trim().toLowerCase();if(q.length<2){srd.style.display='none';return;}const hits=G.filter(g=>g.n.toLowerCase().includes(q)||g.g.toLowerCase().includes(q)||g.c.toLowerCase().includes(q)||g.s.toLowerCase().includes(q)).slice(0,8);if(!hits.length){srd.style.display='none';return;}srd.innerHTML=hits.map(g=>`<div class="sri" onclick="openMo('${g.id}');srd.style.display='none';sinput.value=''"><img src="${g.img}" alt="" onerror="if(!this.dataset.tried){this.dataset.tried=1;this.src=makeFallbackSvg('${g.n.replace(/'/g,"\\'")}')}" /><div><div class="sri-name">${g.n}</div><div class="sri-tag">${g.c} · ${g.g}</div></div></div>`).join('');srd.style.display='block';});
+document.addEventListener('click',e=>{if(!sinput.contains(e.target)&&!srd.contains(e.target))srd.style.display='none';});
+
+// ===================== NAVIGATION =====================
+function setAct(el){document.querySelectorAll('.sbi').forEach(i=>i.classList.remove('active'));if(el)el.classList.add('active');}
+function setActKey(k){document.querySelectorAll('.sbi').forEach(i=>{if(i.getAttribute('onclick')&&i.getAttribute('onclick').includes(`'${k}'`)){setAct(i);}});}
+
+function goSec(sec){
+ const m=document.getElementById('main');
+ const gf=document.getElementById('globalFooter');
+ // Show global footer for non-game pages
+ if(sec!=='games'){gf.style.display='block';}else{gf.style.display='none';}
+ if(sec==='games')return; // handled by showSec
+ if(sec==='curso') renderCurso(m);
+ else if(sec==='blog') renderBlog(m);
+ else if(sec==='cv') renderCV(m);
+ else if(sec==='faq') renderFAQ(m);
+ else if(sec==='quienes') renderQuienes(m);
+}
+
+// ==================== CURSO ====================
+function renderCurso(m){
+m.innerHTML=`
+<div class="page-wrap">
+  <div class="page-hero">
+    <h1>📚 Curso: Historia y Cultura del Videojuego Retro</h1>
+    <p>Aprende todo sobre los videojuegos clásicos: su historia, mecánicas, impacto cultural y cómo disfrutarlos al máximo. ¡Gratis para todos los usuarios de RetroZone!</p>
+    <div class="badge-row" style="justify-content:center;margin-top:.8rem">
+      <span class="badge badge-orange">🎓 Nivel Principiante</span>
+      <span class="badge badge-green">✅ Gratis</span>
+      <span class="badge badge-blue">🕐 12 horas</span>
+      <span class="badge badge-gold">⭐ 4.9/5</span>
+    </div>
+  </div>
+
+  <div class="course-stats">
+    <div class="cs-item"><div class="cs-val">6</div><div class="cs-lbl">Módulos</div></div>
+    <div class="cs-item"><div class="cs-val">38</div><div class="cs-lbl">Lecciones</div></div>
+    <div class="cs-item"><div class="cs-val">12h</div><div class="cs-lbl">Duración</div></div>
+    <div class="cs-item"><div class="cs-val">2.4K</div><div class="cs-lbl">Estudiantes</div></div>
+  </div>
+
+  <!-- MÓDULO 1 -->
+  <div class="card-box">
+    <h2><span class="module-num">1</span> Introducción al Videojuego Retro</h2>
+    <p>En este primer módulo conocerás los fundamentos históricos que dieron vida a los videojuegos. Desde los primeros experimentos electrónicos hasta las consolas que definieron una generación.</p>
+    <hr class="page-hr">
+    <h3>1.1 ¿Qué es un videojuego retro?</h3>
+    <p>Definición, criterios de clasificación y por qué seguimos jugando títulos de hace 30+ años.</p>
+    <h4>1.1.1 Definición temporal vs. cultural</h4>
+    <p>No todos los juegos viejos son "retro" — exploraremos la diferencia entre antigüedad y valor cultural.</p>
+    <h5>Lecturas recomendadas</h5>
+    <ul><li>"The Ultimate History of Video Games" — Steven L. Kent</li><li>Artículos del Museo del Videojuego de Madrid</li></ul>
+    <h4>1.1.2 El fenómeno de la nostalgia</h4>
+    <p>La neurociencia detrás de por qué los videojuegos retro nos generan una conexión emocional tan intensa.</p>
+    <hr class="page-hr">
+    <h3>1.2 Cronología del videojuego (1950–2000)</h3>
+    <div class="lesson-row"><span class="lesson-icon">🎬</span><span class="lesson-text">Video: Los primeros videojuegos (Pong, Space Invaders)</span><span class="lesson-dur">18 min</span></div>
+    <div class="lesson-row"><span class="lesson-icon">📖</span><span class="lesson-text">Lectura: La era dorada del arcade (1978–1985)</span><span class="lesson-dur">12 min</span></div>
+    <div class="lesson-row"><span class="lesson-icon">❓</span><span class="lesson-text">Quiz: Línea de tiempo del videojuego</span><span class="lesson-dur">10 min</span></div>
+    <h6>Objetivo del módulo</h6>
+    <p>Identificar los hitos principales de la historia del videojuego y comprender el contexto cultural de la era retro.</p>
+  </div>
+
+  <!-- MÓDULO 2 -->
+  <div class="card-box">
+    <h2><span class="module-num">2</span> Las Consolas Clásicas y su Legado</h2>
+    <p>Un recorrido técnico y cultural por las consolas más importantes de la historia: NES, SNES, Game Boy, Sega Genesis y Game Boy Advance.</p>
+    <hr class="page-hr">
+    <h3>2.1 Nintendo Entertainment System (NES)</h3>
+    <h4>2.1.1 Hardware y limitaciones técnicas</h4>
+    <p>CPU MOS 6502 a 1.79 MHz, 2KB de RAM y paleta de 54 colores. Aprende cómo los desarrolladores crearon maravillas con estos recursos mínimos.</p>
+    <h5>Especificaciones técnicas clave</h5>
+    <ul><li>Procesador: Ricoh 2A03 (MOS 6502 modificado)</li><li>RAM: 2 KB + 2 KB de Video RAM</li><li>Resolución: 256 × 240 píxeles</li><li>Colores simultáneos: 25 de una paleta de 54</li></ul>
+    <h4>2.1.2 Los 10 juegos que definieron la NES</h4>
+    <div class="lesson-row"><span class="lesson-icon">🎮</span><span class="lesson-text">Super Mario Bros. — El estándar de plataformas</span><span class="lesson-dur">Análisis: 20 min</span></div>
+    <div class="lesson-row"><span class="lesson-icon">🎮</span><span class="lesson-text">The Legend of Zelda — El open world original</span><span class="lesson-dur">Análisis: 20 min</span></div>
+    <div class="lesson-row"><span class="lesson-icon">🎮</span><span class="lesson-text">Mega Man 2 — Diseño de niveles perfecto</span><span class="lesson-dur">Análisis: 18 min</span></div>
+    <hr class="page-hr">
+    <h3>2.2 Super Nintendo (SNES)</h3>
+    <h4>2.2.1 El salto generacional</h4>
+    <p>Modo 7, sonido SNES SPC700 y el chip SuperFX. Cómo la SNES superó a la competencia técnica y creativamente.</p>
+    <h4>2.2.2 La guerra SNES vs. Sega Genesis</h4>
+    <p>El contexto cultural y comercial de la primera gran guerra de consolas, sus efectos en la industria y en los jugadores.</p>
+    <h3>2.3 Game Boy y GBA</h3>
+    <h4>2.3.1 El poder del gaming portátil</h4>
+    <p>Por qué la Game Boy triunfó sobre competidores más potentes como el Sega Game Gear y el Atari Lynx.</p>
+    <h5>Actividad práctica</h5>
+    <p>Juega 30 minutos de Tetris en Game Boy y escribe una reflexión sobre la experiencia de juego portátil vs. consola.</p>
+    <h6>Recursos adicionales</h6>
+    <ul><li>Documental: "Game Over: Kasparov and the Machine"</li><li>YouTube: MVG — Modern Vintage Gamer</li></ul>
+  </div>
+
+  <!-- MÓDULO 3 -->
+  <div class="card-box">
+    <h2><span class="module-num">3</span> Géneros y Mecánicas de Juego</h2>
+    <p>Explora los principales géneros del juego retro, sus mecánicas fundacionales y cómo influyeron en los videojuegos modernos.</p>
+    <hr class="page-hr">
+    <h3>3.1 Plataformas: El rey del catálogo retro</h3>
+    <h4>3.1.1 Principios del diseño de niveles</h4>
+    <p>Analizamos cómo Nintendo diseñó el Mundo 1-1 de Super Mario Bros para enseñar al jugador sin texto.</p>
+    <h4>3.1.2 Evolución del scroll y la física</h4>
+    <p>Del scroll estático (Donkey Kong) al scroll multi-direccional (Super Mario Bros 3).</p>
+    <hr class="page-hr">
+    <h3>3.2 RPG: Narrativa en píxeles</h3>
+    <h4>3.2.1 El sistema de combate por turnos</h4>
+    <p>Origen en juegos de rol de mesa, implementación en Final Fantasy y su evolución hasta Chrono Trigger.</p>
+    <h4>3.2.2 Narrativa ambiental y worldbuilding</h4>
+    <p>Cómo los RPGs de SNES contaban historias épicas con sprite art de 16 bits.</p>
+    <hr class="page-hr">
+    <h3>3.3 Beat'em Up y Juegos de Pelea</h3>
+    <h4>3.3.1 Del arcade al salón</h4>
+    <p>El proceso de portar Street Fighter II al SNES y las decisiones técnicas que se tomaron.</p>
+    <div class="lesson-row"><span class="lesson-icon">🎬</span><span class="lesson-text">Video: Análisis de hitboxes en SF II Turbo</span><span class="lesson-dur">25 min</span></div>
+    <div class="lesson-row"><span class="lesson-icon">🎮</span><span class="lesson-text">Práctica: Aprende 3 combos de Ryu</span><span class="lesson-dur">30 min</span></div>
+    <div class="lesson-row"><span class="lesson-icon">📝</span><span class="lesson-text">Ensayo: Impacto cultural de MK en 1993</span><span class="lesson-dur">40 min</span></div>
+  </div>
+
+  <!-- MÓDULO 4 -->
+  <div class="card-box">
+    <h2><span class="module-num">4</span> Franquicias Icónicas</h2>
+    <p>Estudio profundo de las sagas más importantes del mundo retro: Mario, Zelda, Pokémon, Sonic y más.</p>
+    <hr class="page-hr">
+    <h3>4.1 El universo de Nintendo</h3>
+    <h4>4.1.1 Shigeru Miyamoto y el diseño centrado en el jugador</h4>
+    <p>Filosofía de diseño del creador de Mario, Zelda y Donkey Kong. La importancia de la experiencia antes que la tecnología.</p>
+    <h4>4.1.2 La Triforce: Mario, Zelda y Pokémon</h4>
+    <p>Cómo estas tres franquicias dominaron el mercado de consolas domésticas y portátiles durante dos décadas.</p>
+    <h5>Comparativa de ventas históricas</h5>
+    <div class="progress-bar"><div class="progress-fill" style="width:98%"></div></div>
+    <p style="font-size:12px;color:var(--muted)">Super Mario — 780M unidades acumuladas</p>
+    <div class="progress-bar"><div class="progress-fill" style="width:82%"></div></div>
+    <p style="font-size:12px;color:var(--muted)">Pokémon — 440M unidades</p>
+    <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+    <p style="font-size:12px;color:var(--muted)">The Legend of Zelda — 125M unidades</p>
+    <hr class="page-hr">
+    <h3>4.2 Sega: El eterno rival</h3>
+    <h4>4.2.1 Sonic y la estrategia de marketing de Sega</h4>
+    <p>"Genesis does what Nintendon't" — la campaña publicitaria más agresiva de la historia del gaming.</p>
+    <div class="lesson-row"><span class="lesson-icon">🎬</span><span class="lesson-text">Documental: Sega vs. Nintendo — La guerra de los 16 bits</span><span class="lesson-dur">45 min</span></div>
+    <div class="lesson-row"><span class="lesson-icon">❓</span><span class="lesson-text">Examen módulo 4</span><span class="lesson-dur">20 min</span></div>
+  </div>
+
+  <!-- MÓDULO 5 -->
+  <div class="card-box">
+    <h2><span class="module-num">5</span> Música y Arte en el Videojuego Retro</h2>
+    <p>El arte chiptune, pixel art y cómo las limitaciones técnicas forzaron una creatividad sin precedentes.</p>
+    <hr class="page-hr">
+    <h3>5.1 Chiptune: La música de los píxeles</h3>
+    <h4>5.1.1 El chip de sonido de la NES (2A03)</h4>
+    <p>5 canales de audio, síntesis por formas de onda y cómo Koji Kondo compuso la música de Mario y Zelda.</p>
+    <h4>5.1.2 El SNES SPC700 — Un salto cuántico</h4>
+    <p>8 canales de audio, samples reales y reverberación. La banda sonora de Chrono Trigger como obra maestra.</p>
+    <hr class="page-hr">
+    <h3>5.2 Pixel Art: El arte de las limitaciones</h3>
+    <h4>5.2.1 Sprites y tiles: Vocabulario visual básico</h4>
+    <p>Cómo se construían los personajes y escenarios con cuadrículas de 8×8 o 16×16 píxeles.</p>
+    <h4>5.2.2 La influencia del pixel art en el diseño moderno</h4>
+    <p>Juegos como Celeste, Shovel Knight y Stardew Valley y su deuda con la estética retro.</p>
+    <div class="lesson-row"><span class="lesson-icon">🎨</span><span class="lesson-text">Taller: Crea tu propio sprite de 16×16</span><span class="lesson-dur">60 min</span></div>
+    <div class="lesson-row"><span class="lesson-icon">🎵</span><span class="lesson-text">Taller: Compón un loop de 8 compases en chiptune</span><span class="lesson-dur">45 min</span></div>
+  </div>
+
+  <!-- MÓDULO 6 -->
+  <div class="card-box">
+    <h2><span class="module-num">6</span> Proyecto Final y Certificación</h2>
+    <p>Aplica todo lo aprendido en un proyecto integrador y obtén tu certificado de RetroZone Academy.</p>
+    <hr class="page-hr">
+    <h3>6.1 Proyecto integrador</h3>
+    <h4>6.1.1 Opción A: Análisis crítico de un juego retro</h4>
+    <p>Escribe un análisis de 1500 palabras sobre un juego retro de tu elección, cubriendo contexto histórico, mecánicas, arte y sonido.</p>
+    <h4>6.1.2 Opción B: Diseño de nivel retro</h4>
+    <p>Diseña un nivel de plataformas en papel o en Tiled Map Editor aplicando los principios de diseño aprendidos.</p>
+    <h4>6.1.3 Opción C: Documental corto (3-5 min)</h4>
+    <p>Crea un video corto sobre cualquier aspecto de la cultura retro que hayas investigado en el curso.</p>
+    <hr class="page-hr">
+    <h3>6.2 Evaluación final</h3>
+    <div class="lesson-row"><span class="lesson-icon">📝</span><span class="lesson-text">Examen final — 50 preguntas múltiple opción</span><span class="lesson-dur">60 min</span></div>
+    <div class="lesson-row"><span class="lesson-icon">🏆</span><span class="lesson-text">Entrega del proyecto integrador</span><span class="lesson-dur">—</span></div>
+    <div class="lesson-row"><span class="lesson-icon">🎓</span><span class="lesson-text">Emisión de certificado digital RetroZone Academy</span><span class="lesson-dur">—</span></div>
+    <h5>Criterios de aprobación</h5>
+    <ul><li>Examen final: mínimo 70% de respuestas correctas</li><li>Proyecto integrador: evaluado por el equipo docente</li><li>Participación en foros: al menos 5 comentarios significativos</li></ul>
+    <h6>Nota importante</h6>
+    <p>El certificado es gratuito y tiene valor académico honorífico. No acredita créditos universitarios.</p>
+    <div style="margin-top:1.2rem;text-align:center"><button class="btn btn-sol" onclick="alert('¡Inscripción próximamente! Deja tu email y te avisamos.')" style="font-size:15px;padding:12px 28px">🎓 Inscribirme al Curso — ¡Es Gratis!</button></div>
+  </div>
+
+  <div class="sec-footer"><hr><p>📚 <strong>RetroZone Academy</strong> — Educación retro gratuita | <a onclick="goSec('games');showSec('all')">🎮 Volver a Juegos</a> | <a onclick="goSec('blog');setActKey('blog')">✍️ Blog</a> | <a onclick="goSec('faq');setActKey('faq')">❓ FAQ</a></p></div>
+</div>`;
+}
+
+// ==================== BLOG ====================
+function renderBlog(m){
+m.innerHTML=`
+<div class="page-wrap">
+  <div class="page-hero">
+    <h1>✍️ Blog de RetroZone</h1>
+    <p>Artículos, análisis, curiosidades y opiniones sobre el mundo del videojuego retro. Escrito por jugadores, para jugadores.</p>
+  </div>
+
+  <!-- ENTRADA DESTACADA -->
+  <div class="card-box" style="border-color:var(--accent)">
+    <h2>📌 Artículo Destacado</h2>
+    <div class="blog-img" style="font-size:5rem">🍄</div>
+    <div class="blog-body" style="padding:0;margin-top:.8rem">
+      <div class="blog-meta"><span>📅 15 de mayo, 2025</span><span>👤 Carlos RetroFan</span><span>👁️ 8,420 visitas</span><span>⏱️ 8 min lectura</span></div>
+      <h2 style="cursor:default">Por Qué Super Mario Bros Sigue Siendo el Juego Más Importante de la Historia</h2>
+      <h3 style="font-size:.95rem;color:var(--accent);margin:.4rem 0 .6rem">El diseño perfecto que redefinió una industria completa en 1985</h3>
+      <p class="blog-excerpt">Cuarenta años después de su lanzamiento, Super Mario Bros sigue siendo analizado, speedrunneado y amado por millones. Pero, ¿qué tiene este juego de NES de 40KB que lo hace inmortal? Analizamos su diseño desde los fundamentos...</p>
+      <div class="blog-tags">
+        <span class="badge badge-orange">Mario</span>
+        <span class="badge badge-blue">Análisis</span>
+        <span class="badge badge-green">NES</span>
+        <span class="badge badge-gold">Destacado</span>
+      </div>
+      <a class="read-more" onclick="alert('Artículo completo próximamente — ¡Inscríbete al newsletter!')">Leer artículo completo →</a>
+    </div>
+  </div>
+
+  <hr class="page-hr">
+
+  <!-- LISTADO DE ARTÍCULOS -->
+  <div class="sh"><div class="st">📰 Artículos Recientes</div><span class="sa">Ver todos →</span></div>
+
+  <div class="blog-card">
+    <div class="blog-img">🗡️</div>
+    <div class="blog-body">
+      <div class="blog-meta"><span>📅 10 mayo 2025</span><span>👤 Ana García</span><span>👁️ 3,201</span></div>
+      <h2>Zelda: A Link to the Past — Por Qué Sigue Siendo el Mejor RPG de Acción</h2>
+      <h3 style="font-size:.9rem;color:var(--muted);margin:.3rem 0 .5rem">Analizamos el Mundo Oscuro, el diseño de mazmorras y la música de Koji Kondo</h3>
+      <p class="blog-excerpt">La dualidad entre el Mundo de la Luz y el Mundo Oscuro no es solo un truco visual. Es la metáfora central de una narrativa sobre corrupción y redención que pocos juegos han igualado...</p>
+      <div class="blog-tags"><span class="badge badge-purple">Zelda</span><span class="badge badge-blue">Análisis</span><span class="badge badge-green">SNES</span></div>
+      <a class="read-more" onclick="alert('¡Próximamente!')">Leer más →</a>
+    </div>
+  </div>
+
+  <div class="blog-card">
+    <div class="blog-img">⚡</div>
+    <div class="blog-body">
+      <div class="blog-meta"><span>📅 3 mayo 2025</span><span>👤 Miguel Pixel</span><span>👁️ 5,744</span></div>
+      <h2>Pokémon Rojo y Azul: 25 Glitches y Secretos que Probablemente No Conocías</h2>
+      <h3 style="font-size:.9rem;color:var(--muted);margin:.3rem 0 .5rem">MissingNo., el Pokémon imposible y la habitación de safari sin límite</h3>
+      <p class="blog-excerpt">La primera generación de Pokémon está plagada de errores que se convirtieron en leyenda urbana. Desde el infame MissingNo. hasta el truco del pokémon de nivel 100 gratuito...</p>
+      <div class="blog-tags"><span class="badge badge-gold">Pokémon</span><span class="badge badge-orange">Secretos</span><span class="badge badge-gb" style="background:rgba(200,200,100,.15);color:#d4d437;border:1px solid rgba(200,200,100,.3)">Game Boy</span></div>
+      <a class="read-more" onclick="alert('¡Próximamente!')">Leer más →</a>
+    </div>
+  </div>
+
+  <div class="blog-card">
+    <div class="blog-img">🐉</div>
+    <div class="blog-body">
+      <div class="blog-meta"><span>📅 28 abril 2025</span><span>👤 Tomás 16bit</span><span>👁️ 2,180</span></div>
+      <h2>La Historia Detrás de Dragon Ball en los Videojuegos: De Famicom a GBA</h2>
+      <h3 style="font-size:.9rem;color:var(--muted);margin:.3rem 0 .5rem">Cómo Banpresto y Bandai construyeron un legado interactivo sobre el manga de Toriyama</h3>
+      <p class="blog-excerpt">Antes de los juegos modernos de Budokai y Sparking, Dragon Ball tuvo una historia rich y a veces olvidada en consolas retro. Desde los primeros RPGs de Famicom hasta el brillante Advanced Adventure en GBA...</p>
+      <div class="blog-tags"><span class="badge badge-orange">Dragon Ball</span><span class="badge badge-purple">Historia</span></div>
+      <a class="read-more" onclick="alert('¡Próximamente!')">Leer más →</a>
+    </div>
+  </div>
+
+  <div class="blog-card">
+    <div class="blog-img">🏁</div>
+    <div class="blog-body">
+      <div class="blog-meta"><span>📅 20 abril 2025</span><span>👤 Laura Speed</span><span>👁️ 4,890</span></div>
+      <h2>Speedrunning Retro: La Comunidad que Convirtió los Juegos Clásicos en Deporte</h2>
+      <h3 style="font-size:.9rem;color:var(--muted);margin:.3rem 0 .5rem">GDQ, world records y la ciencia detrás de completar Mario en menos de 5 minutos</h3>
+      <p class="blog-excerpt">Games Done Quick recauda millones para caridad mientras jugadores de élite completan Super Mario Bros en 4 minutos y 54 segundos. Pero el speedrunning es mucho más que tiempo: es una forma de arte...</p>
+      <div class="blog-tags"><span class="badge badge-green">Speedrun</span><span class="badge badge-blue">Comunidad</span><span class="badge badge-orange">Mario</span></div>
+      <a class="read-more" onclick="alert('¡Próximamente!')">Leer más →</a>
+    </div>
+  </div>
+
+  <hr class="page-hr">
+
+  <!-- SECCIÓN DE COMENTARIOS -->
+  <div class="card-box">
+    <h2>💬 Comentarios de la Comunidad</h2>
+    <h3>Lo que dicen los lectores</h3>
+
+    <div class="comment-box">
+      <h5>🎮 RetroGamer92 · hace 2 días</h5>
+      <p>Excelente artículo sobre Mario. Llevo 33 años jugando el juego y todavía descubro cosas nuevas. ¡El análisis del diseño del Mundo 1-1 es perfecto!</p>
+      <div class="badge-row"><span class="badge badge-green">👍 42 me gusta</span></div>
+    </div>
+
+    <div class="comment-box">
+      <h5>⚡ PokéVet · hace 3 días</h5>
+      <p>El artículo de glitches me voló la cabeza. Sabía lo de MissingNo. pero lo del safari infinito... ¡llevo 25 años jugando Pokémon y nunca lo había hecho!</p>
+      <div class="badge-row"><span class="badge badge-green">👍 28 me gusta</span></div>
+    </div>
+
+    <div class="comment-box">
+      <h5>🗡️ ZeldaFan · hace 5 días</h5>
+      <p>Link to the Past es mi juego favorito de todos los tiempos. Sería genial que hicieran un artículo sobre la música de Koji Kondo específicamente en ese juego.</p>
+      <div class="badge-row"><span class="badge badge-green">👍 19 me gusta</span></div>
+    </div>
+
+    <hr class="page-hr">
+    <h3>Deja tu comentario</h3>
+    <h4>¿Tienes algo que decir? ¡La comunidad quiere leerlo!</h4>
+    <div class="comment-form">
+      <input type="text" placeholder="Tu nombre o apodo de gamer" />
+      <input type="email" placeholder="Tu email (no se publicará)" />
+      <textarea placeholder="Escribe tu comentario aquí..."></textarea>
+      <button class="btn btn-sol" onclick="alert('¡Comentario enviado! Será revisado antes de publicarse.')">💬 Publicar Comentario</button>
+    </div>
+  </div>
+
+  <div class="sec-footer"><hr><p>✍️ <strong>RetroZone Blog</strong> — Artículos semanales sobre gaming retro | <a onclick="goSec('games');showSec('all')">🎮 Volver a Juegos</a> | <a onclick="goSec('curso');setActKey('curso')">📚 Curso</a> | <a onclick="goSec('faq');setActKey('faq')">❓ FAQ</a></p></div>
+</div>`;
+}
+
+// ==================== CV ====================
+function renderCV(m){
+m.innerHTML=`
+<div class="page-wrap">
+  <div class="page-hero">
+    <h1>👤 CV — Equipo RetroZone</h1>
+    <p>Conoce al equipo detrás del proyecto. Apasionados del gaming retro, la programación y el diseño.</p>
+  </div>
+
+  <!-- CV PRINCIPAL -->
+  <div class="card-box">
+    <div class="cv-header">
+      <div class="cv-avatar">CR</div>
+      <div class="cv-name">
+        <h1>Carlos Retro Dev</h1>
+        <h2>Fundador & Desarrollador Principal — RetroZone</h2>
+        <div class="cv-contact">📧 carlos@retrozone.gg &nbsp;|&nbsp; 🌐 retrozone.gg &nbsp;|&nbsp; 🐦 @carlosretrodev &nbsp;|&nbsp; 📍 Buenos Aires, Argentina</div>
+      </div>
+    </div>
+    <hr class="page-hr">
+
+    <!-- RESUMEN -->
+    <h2>📋 Resumen Profesional</h2>
+    <p>Desarrollador web con 8 años de experiencia y apasionado del gaming retro desde los 6 años. Especializado en frontend moderno y preservación digital de videojuegos clásicos. Fundé RetroZone en 2022 con la misión de hacer los juegos clásicos accesibles para nuevas generaciones.</p>
+    <div class="badge-row">
+      <span class="badge badge-orange">HTML / CSS / JS</span>
+      <span class="badge badge-blue">React · Vue</span>
+      <span class="badge badge-green">Node.js</span>
+      <span class="badge badge-purple">Game Preservation</span>
+      <span class="badge badge-gold">UX Design</span>
+    </div>
+    <hr class="page-hr">
+
+    <!-- EXPERIENCIA -->
+    <h2>💼 Experiencia Laboral</h2>
+
+    <div class="exp-item">
+      <h3>Fundador & Lead Developer</h3>
+      <h4>RetroZone · retrozone.gg</h4>
+      <div class="exp-date">📅 Enero 2022 — Presente · Buenos Aires, Argentina (Remoto)</div>
+      <p>Diseño, desarrollo y mantenimiento del portal de videojuegos retro más grande de habla hispana. Gestión de base de datos de más de 200 juegos, integración de emuladores, y construcción de comunidad con 15,000 usuarios activos.</p>
+      <ul><li>Desarrollo full-stack: HTML, CSS, JavaScript vanilla y Node.js</li><li>Optimización de rendimiento: Lighthouse score 94/100</li><li>Crecimiento orgánico de SEO: 45,000 visitas mensuales</li><li>Gestión de comunidad en Discord con 8,000 miembros</li></ul>
+    </div>
+
+    <div class="exp-item">
+      <h3>Frontend Developer Senior</h3>
+      <h4>TechCorp Solutions · Buenos Aires</h4>
+      <div class="exp-date">📅 Marzo 2019 — Diciembre 2021 · Presencial</div>
+      <p>Desarrollo de interfaces web para clientes enterprise en sectores financiero y educativo. Lideré un equipo de 4 desarrolladores junior.</p>
+      <ul><li>Migración de 12 proyectos legacy a React 17</li><li>Reducción de bundle size en 40% mediante code splitting</li><li>Implementación de sistema de design tokens reutilizables</li></ul>
+    </div>
+
+    <div class="exp-item">
+      <h3>Junior Web Developer</h3>
+      <h4>StartupDigital · Córdoba, Argentina</h4>
+      <div class="exp-date">📅 Junio 2016 — Febrero 2019 · Presencial / Remoto</div>
+      <p>Desarrollo de landing pages, tiendas online y aplicaciones web para PyMEs. Primer contacto con metodologías ágiles y control de versiones.</p>
+    </div>
+
+    <hr class="page-hr">
+
+    <!-- EDUCACIÓN -->
+    <h2>🎓 Educación</h2>
+
+    <div class="exp-item">
+      <h3>Licenciatura en Ciencias de la Computación</h3>
+      <h4>Universidad Nacional de Córdoba (UNC)</h4>
+      <div class="exp-date">📅 2011 — 2016 · Córdoba, Argentina</div>
+      <p>Graduado con promedio 8.4/10. Tesis: "Preservación digital de videojuegos: Técnicas de emulación y archivado".</p>
+    </div>
+
+    <div class="exp-item">
+      <h3>Curso: Full-Stack JavaScript</h3>
+      <h4>Platzi — Online</h4>
+      <div class="exp-date">📅 2018 · 240 horas</div>
+    </div>
+
+    <div class="exp-item">
+      <h3>Certificado: UX Design Fundamentals</h3>
+      <h4>Google — Coursera</h4>
+      <div class="exp-date">📅 2020 · Credential ID: GUX-2020-AR</div>
+    </div>
+
+    <hr class="page-hr">
+
+    <!-- HABILIDADES -->
+    <h2>🛠️ Habilidades Técnicas</h2>
+    <div class="two-col">
+      <div>
+        <h3>Frontend</h3>
+        <div class="skill-bar"><div class="label"><span>HTML5 / CSS3</span><span>98%</span></div><div class="progress-bar"><div class="progress-fill" style="width:98%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>JavaScript (ES6+)</span><span>92%</span></div><div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>React / Vue</span><span>85%</span></div><div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>Figma / Diseño UI</span><span>75%</span></div><div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div></div>
+      </div>
+      <div>
+        <h3>Backend & Otros</h3>
+        <div class="skill-bar"><div class="label"><span>Node.js / Express</span><span>80%</span></div><div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>MongoDB / SQL</span><span>72%</span></div><div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>Git / GitHub</span><span>90%</span></div><div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>SEO / Analytics</span><span>78%</span></div><div class="progress-bar"><div class="progress-fill" style="width:78%"></div></div></div>
+      </div>
+    </div>
+
+    <hr class="page-hr">
+
+    <!-- HABILIDADES BLANDAS -->
+    <h2>🤝 Habilidades Blandas</h2>
+    <h3>Trabajo en equipo y comunicación</h3>
+    <div class="badge-row">
+      <span class="badge badge-green">Liderazgo de equipos</span>
+      <span class="badge badge-blue">Comunicación técnica</span>
+      <span class="badge badge-purple">Gestión de proyectos</span>
+      <span class="badge badge-orange">Pensamiento creativo</span>
+      <span class="badge badge-gold">Resolución de problemas</span>
+    </div>
+    <h4>Idiomas</h4>
+    <div class="skill-bar"><div class="label"><span>🇦🇷 Español (nativo)</span><span>100%</span></div><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div></div>
+    <div class="skill-bar"><div class="label"><span>🇺🇸 Inglés (avanzado)</span><span>85%</span></div><div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div></div>
+    <div class="skill-bar"><div class="label"><span>🇧🇷 Portugués (básico)</span><span>40%</span></div><div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div></div>
+
+    <hr class="page-hr">
+
+    <!-- PROYECTOS -->
+    <h2>🚀 Proyectos Destacados</h2>
+    <h3>RetroZone — Portal de Videojuegos Retro</h3>
+    <p>Plataforma web con catálogo de 200+ juegos, sistema de búsqueda, valoraciones y comunidad activa. 45,000 visitas/mes y creciendo.</p>
+    <h3>RetroZone Academy — Curso Gratuito</h3>
+    <p>Guía educativa interactiva sobre historia del videojuego retro con 6 módulos y 38 lecciones. Más de 2,400 estudiantes inscritos.</p>
+    <h3>PixelPreserve — Archivo Digital</h3>
+    <p>Proyecto de código abierto para documentar y preservar los manuales originales de juegos retro en español.</p>
+
+    <hr class="page-hr">
+    <div style="text-align:center">
+      <button class="btn btn-sol" onclick="alert('CV en formato PDF disponible próximamente')" style="font-size:14px;padding:10px 24px">📄 Descargar CV en PDF</button>
+      &nbsp;
+      <button class="btn btn-out" onclick="alert('Formulario de contacto próximamente')" style="font-size:14px;padding:10px 24px">📧 Contactar</button>
+    </div>
+  </div>
+
+  <div class="sec-footer"><hr><p>👤 <strong>CV RetroZone</strong> — Equipo apasionado por los clásicos | <a onclick="goSec('quienes');setActKey('quienes')">🏢 Quiénes Somos</a> | <a onclick="goSec('games');showSec('all')">🎮 Ver Juegos</a></p></div>
+</div>`;
+}
+
+// ==================== FAQ ====================
+function renderFAQ(m){
+m.innerHTML=`
+<div class="page-wrap">
+  <div class="page-hero">
+    <h1>❓ Preguntas Frecuentes</h1>
+    <p>Todo lo que necesitas saber sobre RetroZone. Si tu pregunta no está aquí, contáctanos.</p>
+  </div>
+
+  <div class="card-box">
+    <h2>🎮 Sobre los Juegos</h2>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Los juegos son completamente gratuitos? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>Sí, todos los juegos en RetroZone son <strong>100% gratuitos</strong>. Enlazamos a sitios especializados en emulación como RetroGames.cc donde puedes jugar directamente en tu navegador sin instalar nada.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Necesito instalar algo para jugar? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>No necesitas instalar nada. Los juegos corren directamente en tu navegador web gracias a emuladores JavaScript. Recomendamos usar Chrome, Firefox o Edge en sus versiones más recientes para mejor rendimiento.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Puedo jugar en móvil? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>La mayoría de los juegos son compatibles con dispositivos móviles. Los emuladores ofrecen controles en pantalla táctil. Sin embargo, para la mejor experiencia recomendamos usar un teclado físico o gamepad conectado.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Cuántos juegos tienen en el catálogo? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>Actualmente nuestro catálogo cuenta con más de <strong>60 juegos organizados</strong> en RetroZone, enlazando a cientos más a través de nuestro sistema de búsqueda. Agregamos nuevos títulos semanalmente.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Puedo sugerir un juego para agregar? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>¡Por supuesto! Envía tu sugerencia a <strong>hola@retrozone.gg</strong> con el nombre del juego y la consola. Priorizamos sugerencias que reciben más de 10 votos de la comunidad.</p></div>
+    </div>
+  </div>
+
+  <div class="card-box">
+    <h2>👤 Cuenta y Comunidad</h2>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Para qué sirve crear una cuenta? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>Con una cuenta gratuita puedes: guardar juegos favoritos, llevar tu historial de juegos, participar en rankings de la comunidad, comentar en el blog y acceder al certificado del curso. <em>(Función próximamente disponible)</em></p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Tienen un Discord o comunidad online? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>¡Sí! Nuestro servidor de Discord <strong>"RetroZone Community"</strong> tiene más de 8,000 miembros. Organizamos torneos semanales, speedruns colaborativos y noches de juego. El link está en nuestra cuenta de Twitter @RetroZoneGG.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Cómo funciona el sistema de likes y dislikes? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>Cada juego tiene un porcentaje de valoración de la comunidad. Al hacer click en 👍 o 👎 en la vista previa de un juego, tu voto se cuenta para el promedio general. Solo puedes votar una vez por juego por sesión.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Cómo participo en los torneos retro? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>Los torneos se anuncian en nuestro Discord y en el Blog. Generalmente son de speedrun o puntuación alta en juegos específicos. Son gratuitos y los ganadores reciben menciones especiales y badges digitales.</p></div>
+    </div>
+  </div>
+
+  <div class="card-box">
+    <h2>📚 Sobre el Curso</h2>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿El curso tiene costo? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>El curso "Historia y Cultura del Videojuego Retro" es <strong>completamente gratuito</strong>. El certificado también es gratuito. Creemos que la educación sobre cultura gaming debe ser accesible para todos.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿El certificado tiene validez académica? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>El certificado de RetroZone Academy es un <strong>certificado honorífico digital</strong> de nuestra plataforma. No acredita créditos universitarios, pero puede incluirse en portfolios y LinkedIn como demostración de conocimiento.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Cuánto tiempo tengo para completar el curso? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>El curso es totalmente a tu ritmo. No hay fechas límite. Puedes tomarte días, semanas o meses. El contenido permanece disponible indefinidamente una vez inscripto.</p></div>
+    </div>
+  </div>
+
+  <div class="card-box">
+    <h2>⚖️ Legal y Derechos de Autor</h2>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿RetroZone tiene los derechos de los juegos? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>RetroZone no hospeda ni distribuye ROMs. Somos un <strong>portal de descubrimiento y recomendación</strong> que enlaza a sitios especializados. Todos los derechos de los videojuegos pertenecen a sus respectivos titulares (Nintendo, Sega, Konami, etc.).</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <div class="faq-q">¿Tienen publicidad? ¿Venden mis datos? <span class="arrow">▶</span></div>
+      <div class="faq-a"><p>RetroZone no vende datos de usuarios a terceros. Actualmente el sitio opera sin publicidad intrusiva. Podemos mostrar banners propios de nuestros cursos y productos, pero nunca de anunciantes externos.</p></div>
+    </div>
+  </div>
+
+  <div class="card-box">
+    <h2>📬 ¿No encontraste tu respuesta?</h2>
+    <p>Escríbenos directamente. Respondemos en menos de 24 horas (días hábiles).</p>
+    <div class="comment-form" style="margin-top:.8rem">
+      <input type="text" placeholder="Tu nombre" />
+      <input type="email" placeholder="Tu email" />
+      <textarea placeholder="Describe tu pregunta o problema..."></textarea>
+      <button class="btn btn-sol" onclick="alert('¡Mensaje enviado! Te responderemos pronto.')">📬 Enviar Mensaje</button>
+    </div>
+  </div>
+
+  <div class="sec-footer"><hr><p>❓ <strong>FAQ RetroZone</strong> — Última actualización: Mayo 2025 | <a onclick="goSec('quienes');setActKey('quienes')">🏢 Quiénes Somos</a> | <a onclick="goSec('games');showSec('all')">🎮 Ver Juegos</a> | <a onclick="goSec('blog');setActKey('blog')">✍️ Blog</a></p></div>
+</div>`;
+}
+
+function toggleFAQ(el){el.classList.toggle('open');}
+
+// ==================== QUIÉNES SOMOS ====================
+function renderQuienes(m){
+m.innerHTML=`
+<div class="page-wrap">
+  <div class="page-hero">
+    <h1>🏢 Quiénes Somos</h1>
+    <p>Somos un equipo de apasionados del gaming retro unidos por una misión: preservar y compartir la magia de los videojuegos clásicos con el mundo hispanohablante.</p>
+  </div>
+
+  <!-- MISIÓN -->
+  <div class="card-box">
+    <h2>🎯 Nuestra Misión</h2>
+    <p>En <strong>RetroZone</strong> creemos que los videojuegos retro son patrimonio cultural de la humanidad. Nacieron de la creatividad pura, de programadores que lograron maravillas con kilobytes. Nuestra misión es hacer ese legado accesible, educativo y entretenido para todos.</p>
+    <hr class="page-hr">
+    <h3>Lo que nos mueve</h3>
+    <div class="value-item">
+      <div class="value-icon">🕹️</div>
+      <div><h4>Preservación Digital</h4><p>Los juegos retro merecen ser jugados, no olvidados. Trabajamos para mantener vivo el acceso a estos títulos históricos.</p></div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">📚</div>
+      <div><h4>Educación Gaming</h4><p>A través de nuestro curso y blog, enseñamos la historia, la cultura y el arte detrás de los videojuegos clásicos.</p></div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">🤝</div>
+      <div><h4>Comunidad Inclusiva</h4><p>Somos un espacio seguro para todos los jugadores, sin importar edad, género o nivel de experiencia.</p></div>
+    </div>
+    <div class="value-item">
+      <div class="value-icon">🆓</div>
+      <div><h4>Acceso Gratuito</h4><p>Creemos que jugar y aprender no debería costar dinero. Todo nuestro contenido principal es y será siempre gratuito.</p></div>
+    </div>
+  </div>
+
+  <!-- HISTORIA -->
+  <div class="card-box">
+    <h2>📖 Nuestra Historia</h2>
+    <h3>2022 — El Origen</h3>
+    <p>RetroZone nació en el dormitorio de Carlos cuando, en plena pandemia, quiso jugar Super Mario Bros con su sobrina de 8 años y se dio cuenta de que no había ningún portal en español que lo hiciera simple y atractivo. En dos semanas construyó la primera versión con 12 juegos.</p>
+    <h3>2023 — Crecimiento</h3>
+    <p>La comunidad creció orgánicamente hasta 5,000 usuarios mensuales. Se sumaron Ana y Miguel al equipo como escritores del blog. Se lanzó el servidor de Discord que hoy tiene 8,000 miembros.</p>
+    <h3>2024 — RetroZone Academy</h3>
+    <p>Lanzamiento del primer curso gratuito sobre historia del videojuego retro. Más de 2,400 estudiantes inscritos en los primeros 3 meses. El certificado digital se volvió viral en LinkedIn.</p>
+    <h3>2025 — Hoy</h3>
+    <p>Más de 45,000 visitas mensuales, 60+ juegos en catálogo, equipo de 6 personas y una comunidad apasionada que crece cada día. Y esto es solo el comienzo.</p>
+  </div>
+
+  <!-- EQUIPO -->
+  <div class="card-box">
+    <h2>👥 Nuestro Equipo</h2>
+    <p>Un equipo pequeño pero apasionado, distribuido entre Argentina, México y España.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">👨‍💻</div>
+        <h4>Carlos R.</h4>
+        <p>Fundador & Dev</p>
+        <p style="margin-top:.3rem;font-size:11px;color:var(--accent)">Buenos Aires 🇦🇷</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">✍️</div>
+        <h4>Ana G.</h4>
+        <p>Editora de Blog</p>
+        <p style="margin-top:.3rem;font-size:11px;color:var(--accent)">Ciudad de México 🇲🇽</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">🎨</div>
+        <h4>Miguel P.</h4>
+        <p>Diseño & Arte</p>
+        <p style="margin-top:.3rem;font-size:11px;color:var(--accent)">Madrid 🇪🇸</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">🎓</div>
+        <h4>Laura S.</h4>
+        <p>Directora Académica</p>
+        <p style="margin-top:.3rem;font-size:11px;color:var(--accent)">Córdoba 🇦🇷</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">🛡️</div>
+        <h4>Tomás B.</h4>
+        <p>Comunidad & Discord</p>
+        <p style="margin-top:.3rem;font-size:11px;color:var(--accent)">Rosario 🇦🇷</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">📊</div>
+        <h4>Sofía M.</h4>
+        <p>Marketing & SEO</p>
+        <p style="margin-top:.3rem;font-size:11px;color:var(--accent)">Guadalajara 🇲🇽</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NÚMEROS -->
+  <div class="card-box">
+    <h2>📊 RetroZone en Números</h2>
+    <div class="course-stats">
+      <div class="cs-item"><div class="cs-val">60+</div><div class="cs-lbl">Juegos</div></div>
+      <div class="cs-item"><div class="cs-val">45K</div><div class="cs-lbl">Visitas/mes</div></div>
+      <div class="cs-item"><div class="cs-val">8K</div><div class="cs-lbl">Discord</div></div>
+      <div class="cs-item"><div class="cs-val">2.4K</div><div class="cs-lbl">Estudiantes</div></div>
+    </div>
+    <hr class="page-hr">
+    <h3>Nuestras consolas favoritas (según el equipo)</h3>
+    <div class="skill-bar"><div class="label"><span>🕹️ SNES — "La consola perfecta"</span><span>4 votos</span></div><div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div></div>
+    <div class="skill-bar"><div class="label"><span>🎮 NES — "Donde todo comenzó"</span><span>1 voto</span></div><div class="progress-bar"><div class="progress-fill" style="width:17%"></div></div></div>
+    <div class="skill-bar"><div class="label"><span>📺 Game Boy — "Compañera de vida"</span><span>1 voto</span></div><div class="progress-bar"><div class="progress-fill" style="width:17%"></div></div></div>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="card-box">
+    <h2>📬 Contáctanos</h2>
+    <div class="two-col">
+      <div>
+        <h3>Medios de contacto</h3>
+        <p>📧 Email: <strong>hola@retrozone.gg</strong></p>
+        <p>🐦 Twitter: <strong>@RetroZoneGG</strong></p>
+        <p>💬 Discord: <strong>discord.gg/retrozone</strong></p>
+        <p>📸 Instagram: <strong>@retrozone.gg</strong></p>
+        <h4>Horario de respuesta</h4>
+        <p>Lunes a Viernes: 9:00 — 18:00 (GMT-3)</p>
+        <p>Respondemos en menos de 24 horas hábiles.</p>
+      </div>
+      <div>
+        <h3>Colaborar con nosotros</h3>
+        <p>¿Eres escritor, desarrollador o diseñador apasionado del retrogaming? ¡Queremos escucharte!</p>
+        <h4>Buscamos:</h4>
+        <ul style="margin:.4rem 0 .8rem"><li>Redactores de artículos de análisis</li><li>Desarrolladores para nuevas funciones</li><li>Moderadores de comunidad</li><li>Creadores de contenido en video</li></ul>
+        <button class="btn btn-sol" onclick="alert('Envía tu CV a hola@retrozone.gg con asunto: Quiero colaborar')">📩 Quiero Colaborar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-footer"><hr><p>🏢 <strong>RetroZone</strong> — Hecho con ❤️ y nostalgia desde Argentina | <a onclick="goSec('faq');setActKey('faq')">❓ FAQ</a> | <a onclick="goSec('curso');setActKey('curso')">📚 Curso</a> | <a onclick="goSec('games');showSec('all')">🎮 Ver Juegos</a></p></div>
+</div>`;
+}
+
+// ==================== INIT ====================
+showSec('all');
+goSec('games');
+</script>
+</body>
+</html>

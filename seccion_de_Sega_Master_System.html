@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Sega Master System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a1a; color: #e0e0ff; font-family: 'Courier New', monospace; }
+        header { background: #111133; padding: 20px; text-align: center; border-bottom: 3px solid #ff00ff; }
+        header h1 { font-size: 2rem; color: #ff00ff; letter-spacing: 6px; text-shadow: 0 0 10px #ff00ff; }
+        nav { background: #0d0d2b; padding: 12px; text-align: center; border-bottom: 2px solid #333; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        nav a { color: #00ffff; text-decoration: none; padding: 6px 14px; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; border: 1px solid #333; }
+        nav a:hover { color: #ff00ff; border-color: #ff00ff; }
+        .page-hero { position: relative; height: 220px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .page-hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; position: absolute; top:0; left:0; }
+        .page-hero h2 { position: relative; z-index: 1; font-size: 2rem; color: #ff00ff; letter-spacing: 5px; text-shadow: 0 0 15px #ff00ff; text-align: center; }
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .section-title { color: #00ffff; letter-spacing: 4px; font-size: 1.2rem; margin: 30px 0 16px; border-left: 4px solid #ff00ff; padding-left: 12px; }
+        p { color: #bbb; line-height: 1.7; margin-bottom: 16px; }
+        .game-card { background: #111133; border: 2px solid #222255; display: flex; gap: 20px; margin-bottom: 20px; align-items: center; padding: 16px; }
+        .game-card img { width: 130px; height: 100px; object-fit: cover; border: 2px solid #333; flex-shrink: 0; }
+        .game-card h3 { color: #ff00ff; font-size: 1rem; letter-spacing: 2px; margin-bottom: 6px; }
+        .game-card p { color: #aaa; font-size: 0.85rem; line-height: 1.6; margin: 0; }
+        .btn { display: inline-block; margin-top: 30px; background: #ff00ff; color: #000; padding: 12px 28px; font-family: 'Courier New', monospace; font-weight: bold; text-decoration: none; letter-spacing: 2px; border: 2px solid #ff00ff; }
+        .btn:hover { background: transparent; color: #ff00ff; }
+        .nav-btns { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; }
+        footer { background: #111133; border-top: 3px solid #ff00ff; text-align: center; padding: 20px; color: #888; font-size: 0.85rem; margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <header><h1>★ NEBULA GAMES ★</h1></header>
+    <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.html">Jugar</a>
+        <a href="seccion_de_blog_.html">Blog</a>
+        <a href="seccion_de_el_curso.html">Curso</a>
+        <a href="secion_de_quienes_somos.html">Quiénes Somos</a>
+        <a href="secion_de_cv.html">CV</a>
+    </nav>
+
+    <div class="page-hero">
+        <img src="imagenes/Sega-Master-System-Set.jpg" alt="Sega Master System">
+        <h2>SEGA MASTER SYSTEM</h2>
+    </div>
+
+    <div class="container">
+        <h3 class="section-title">SOBRE LA CONSOLA</h3>
+        <p>La Sega Master System fue lanzada en 1985 como el rival directo de la NES. Con 8 bits y gráficos superiores en muchos aspectos, tuvo un gran éxito en Europa y Brasil, donde sigue siendo popular hasta hoy.</p>
+        <p>Aunque perdió la guerra de consolas contra Nintendo en América y Japón, la Master System dejó un legado enorme con juegos de gran calidad.</p>
+
+        <h3 class="section-title">JUEGOS ICÓNICOS</h3>
+
+        <div class="game-card">
+            <img src="imagenes/kid.jpg" alt="Alex Kidd">
+            <div>
+                <h3>ALEX KIDD IN MIRACLE WORLD</h3>
+                <p>La mascota original de Sega antes de Sonic. Un rey diminuto que destruye bloques con sus puños y juega al Piedra-Papel-Tijeras.</p>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="imagenes/star.jpg" alt="Phantasy Star">
+            <div>
+                <h3>PHANTASY STAR</h3>
+                <p>Un RPG épico para 8 bits con batallas en primera persona y una protagonista femenina. Adelantado a su tiempo.</p>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="imagenes/wonder.jpg" alt="Wonder Boy">
+            <div>
+                <h3>WONDER BOY IN MONSTER LAND</h3>
+                <p>Acción y RPG mezclados en una aventura mágica. Uno de los mejores juegos de la consola con mecánicas que siguen influyendo hoy.</p>
+            </div>
+        </div>
+
+        <div class="nav-btns">
+            <a href="seccion_de_Sega_genesis.html" class="btn">← SEGA GENESIS</a>
+            <a href="seccion_de_Game_Boy.html" class="btn">GAME BOY →</a>
+        </div>
+    </div>
+
+    <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
+</body>
+</html>

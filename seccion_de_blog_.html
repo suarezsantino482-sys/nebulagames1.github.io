@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Blog Gamer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a1a; color: #e0e0ff; font-family: 'Courier New', monospace; }
+        header { background: #111133; padding: 20px; text-align: center; border-bottom: 3px solid #ff00ff; }
+        header h1 { font-size: 2rem; color: #ff00ff; letter-spacing: 6px; text-shadow: 0 0 10px #ff00ff; }
+        nav { background: #0d0d2b; padding: 12px; text-align: center; border-bottom: 2px solid #333; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        nav a { color: #00ffff; text-decoration: none; padding: 6px 14px; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; border: 1px solid #333; }
+        nav a:hover { color: #ff00ff; border-color: #ff00ff; }
+        .page-hero { position: relative; height: 220px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .page-hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; position: absolute; top:0; left:0; }
+        .page-hero h2 { position: relative; z-index: 1; font-size: 2rem; color: #ff00ff; letter-spacing: 5px; text-shadow: 0 0 15px #ff00ff; text-align: center; }
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .section-title { color: #00ffff; letter-spacing: 4px; font-size: 1.2rem; margin: 30px 0 16px; border-left: 4px solid #ff00ff; padding-left: 12px; }
+        p { color: #bbb; line-height: 1.7; margin-bottom: 16px; }
+        .article { background: #111133; border: 2px solid #222255; margin-bottom: 30px; overflow: hidden; }
+        .article img { width: 100%; height: 200px; object-fit: cover; display: block; opacity: 0.8; }
+        .article-body { padding: 20px; }
+        .article-body h3 { color: #ff00ff; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 10px; }
+        .article-body p { color: #aaa; font-size: 0.9rem; line-height: 1.7; }
+        .tag { display: inline-block; background: #ff00ff; color: #000; padding: 3px 10px; font-size: 0.7rem; font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; }
+        .comment-box { background: #0d0d2b; border: 1px solid #333; padding: 16px; margin-top: 10px; }
+        .comment-box p { color: #888; font-size: 0.85rem; font-style: italic; margin: 0; }
+        .btn { display: inline-block; margin-top: 30px; background: #ff00ff; color: #000; padding: 12px 28px; font-family: 'Courier New', monospace; font-weight: bold; text-decoration: none; letter-spacing: 2px; border: 2px solid #ff00ff; }
+        .btn:hover { background: transparent; color: #ff00ff; }
+        footer { background: #111133; border-top: 3px solid #ff00ff; text-align: center; padding: 20px; color: #888; font-size: 0.85rem; margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <header><h1>★ NEBULA GAMES ★</h1></header>
+    <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.html">Jugar</a>
+        <a href="seccion_de_blog_.html">Blog</a>
+        <a href="seccion_de_el_curso.html">Curso</a>
+        <a href="secion_de_quienes_somos.html">Quiénes Somos</a>
+        <a href="secion_de_cv.html">CV</a>
+    </nav>
+
+    <div class="page-hero">
+        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=1200" alt="Blog">
+        <h2>📰 BLOG GAMER</h2>
+    </div>
+
+    <div class="container">
+        <h3 class="section-title">ARTÍCULOS RECIENTES</h3>
+
+        <div class="article">
+            <img src="imagenes/Super-Mario-World-SNES-EU.jpg" alt="Mario">
+            <div class="article-body">
+                <span class="tag">NINTENDO</span>
+                <h3>LOS MEJORES JUEGOS DE MARIO</h3>
+                <p>Los mejores clásicos de Mario incluyen joyas inmortales como Super Mario Bros. 3 (NES), aclamado por sus innovaciones, Super Mario World (SNES) con su diseño de niveles perfecto y la introducción de Yoshi, y Super Mario 64 (N64), pionero en las plataformas 3D. Otros imprescindibles incluyen Super Mario Bros. original de 1985 y Super Mario Land 2 para Game Boy.</p>
+                <div class="comment-box">
+                    <p>💬 "Muy buen juego. Mario World es mi favorito de todos los tiempos." — Usuario</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="article">
+            <img src="imagenes/gerraa.jfif" alt="Sonic">
+            <div class="article-body">
+                <span class="tag">SEGA</span>
+                <h3>LA GUERRA DE CONSOLAS DE LOS 90</h3>
+                <p>Nintendo vs Sega fue la batalla más épica de la historia de los videojuegos. Mario contra Sonic, 16 bits de gloria, y campañas de marketing que cambiaron la industria para siempre. ¿Quién ganó? Depende a quién le preguntes.</p>
+                <div class="comment-box">
+                    <p>💬 "Siempre fui team Sega. ¡Sonic era el mejor!" — Usuario</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="article">
+            <img src="imagenes/Game-Boy-FL.jpg" alt="Game Boy">
+            <div class="article-body">
+                <span class="tag">PORTÁTILES</span>
+                <h3>POR QUÉ LA GAME BOY FUE UN FENÓMENO MUNDIAL</h3>
+                <p>La pantalla verde, las pilas AA y Tetris. Una combinación tan simple que conquistó el mundo. La Game Boy demostró que la potencia no lo es todo: la portabilidad y los buenos juegos son el verdadero rey.</p>
+                <div class="comment-box">
+                    <p>💬 "Jugué Pokémon Rojo en el colectivo durante meses. Recuerdos inolvidables." — Usuario</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="inicio.html" class="btn">← VOLVER AL INICIO</a>
+    </div>
+
+    <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
+</body>
+</html>

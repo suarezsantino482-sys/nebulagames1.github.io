@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Formulario</title>
+    <style>
+        /* Estilos base unificados con tu inicio.html */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a1a; color: #e0e0ff; font-family: 'Courier New', monospace; }
+        header { background: #111133; padding: 20px; text-align: center; border-bottom: 3px solid #ff00ff; }
+        header h1 { font-size: 2.5rem; color: #ff00ff; letter-spacing: 8px; text-shadow: 0 0 10px #ff00ff; }
+        nav { background: #0d0d2b; padding: 12px; text-align: center; border-bottom: 2px solid #333; }
+        nav a { color: #00ffff; text-decoration: none; margin: 0 15px; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; }
+        nav a:hover { color: #ff00ff; text-shadow: 0 0 8px #ff00ff; }
+        
+        /* Contenedor del Formulario */
+        .container { max-width: 600px; margin: 40px auto; padding: 0 20px; }
+        .container h2 { text-align: center; font-size: 1.4rem; color: #00ffff; letter-spacing: 4px; margin-bottom: 30px; }
+        
+        /* Caja del Formulario Retro */
+        .form-arcade { background: #111133; border: 2px solid #333; padding: 30px; box-shadow: 0 0 15px rgba(0, 255, 255, 0.1); }
+        .form-arcade:hover { border-color: #00ffff; }
+        
+        /* Grupos de cada campo */
+        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; }
+        .form-group label { color: #ff00ff; font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; font-size: 0.9rem; }
+        
+        /* Inputs, Select y Textarea con estilo Cyberpunk */
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="number"],
+        .form-group select,
+        .form-group textarea {
+            background: #0d0d2b;
+            border: 2px solid #333;
+            color: #e0e0ff;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        /* Efecto Focus de Neón al hacer clic */
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #ff00ff;
+            box-shadow: 0 0 8px #ff00ff;
+        }
+        
+        /* Alineación para checkboxes y radios */
+        .row-group { display: flex; gap: 15px; align-items: center; margin-top: 5px; }
+        .row-group label { color: #e0e0ff; margin-bottom: 0; cursor: pointer; }
+        
+        /* Botón Enviar (Estilo igual al botón JUGAR AHORA de tu inicio) */
+        .btn-submit { display: inline-block; width: 100%; background: #ff00ff; color: #000; padding: 12px; font-family: 'Courier New', monospace; font-weight: bold; text-decoration: none; letter-spacing: 2px; border: 2px solid #ff00ff; cursor: pointer; margin-top: 10px; font-size: 1rem; }
+        .btn-submit:hover { background: transparent; color: #ff00ff; }
+        
+        /* Botón Reset */
+        .btn-reset { display: inline-block; width: 100%; background: transparent; color: #888; padding: 8px; font-family: 'Courier New', monospace; border: 2px solid #333; cursor: pointer; margin-top: 10px; font-size: 0.85rem; }
+        .btn-reset:hover { border-color: #ff0000; color: #ff0000; }
+
+        footer { background: #111133; border-top: 3px solid #ff00ff; text-align: center; padding: 20px; color: #888; font-size: 0.85rem; margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>★ NEBULA GAMES ★</h1>
+    </header>
+
+    <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.html">Jugar</a>
+        <a href="seccion_de_blog_.html">Blog</a>
+        <a href="seccion_de_el_curso.html">Curso</a>
+        <a href="secion_de_quienes_somos.html">Quiénes Somos</a>
+        <a href="secion_de_cv.html">CV</a>
+        <a href="seccion_de_contacto.html">Formulario</a>
+    </nav>
+
+    <div class="container">
+        <h2>▌ FORMULARIO DE CONTACTO</h2>
+        
+        <form action="https://httpbin.org/post" method="POST" class="form-arcade">
+            
+            <div class="form-group">
+                <label for="nombre">🎮 TU NOMBRE / GAMERTAG:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej: NeoPixel" required minlength="3">
+            </div>
+
+            <div class="form-group">
+                <label for="correo">📧 CORREO ELECTRÓNICO:</label>
+                <input type="email" id="correo" name="correo" placeholder="correo@dominio.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="motivo">❓ MOTIVO DE CONTACTO:</label>
+                <select id="motivo" name="motivo">
+                    <option value="soporte">Reportar un error / Bug</option>
+                    <option value="sugerencia">Sugerir un juego retro</option>
+                    <option value="curso">Consulta sobre los Cursos</option>
+                    <option value="otro">Otro motivo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="mensaje">✍️ MENSAJE / COMENTARIOS:</label>
+                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe aquí tu mensaje..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <div class="row-group">
+                    <input type="checkbox" id="terminos" name="terminos" required>
+                    <label for="terminos">Acepto los términos de la comunidad Nebula.</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">ENVIAR FORMULARIO</button>
+            <button type="reset" class="btn-reset">BORRAR TODO</button>
+
+        </form>
+    </div>
+
+    <footer>
+        <p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES · HECHO CON AMOR PIXELADO &nbsp; ♥ ♥ ♥</p>
+    </footer>
+</body>
+</html>

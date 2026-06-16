@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Game Boy Color</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a1a; color: #e0e0ff; font-family: 'Courier New', monospace; }
+        header { background: #111133; padding: 20px; text-align: center; border-bottom: 3px solid #ff00ff; }
+        header h1 { font-size: 2rem; color: #ff00ff; letter-spacing: 6px; text-shadow: 0 0 10px #ff00ff; }
+        nav { background: #0d0d2b; padding: 12px; text-align: center; border-bottom: 2px solid #333; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        nav a { color: #00ffff; text-decoration: none; padding: 6px 14px; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; border: 1px solid #333; }
+        nav a:hover { color: #ff00ff; border-color: #ff00ff; }
+        .page-hero { position: relative; height: 220px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .page-hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.3; position: absolute; top:0; left:0; }
+        .page-hero h2 { position: relative; z-index: 1; font-size: 2rem; color: #ff00ff; letter-spacing: 5px; text-shadow: 0 0 15px #ff00ff; text-align: center; }
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .section-title { color: #00ffff; letter-spacing: 4px; font-size: 1.2rem; margin: 30px 0 16px; border-left: 4px solid #ff00ff; padding-left: 12px; }
+        p { color: #bbb; line-height: 1.7; margin-bottom: 16px; }
+        .game-card { background: #111133; border: 2px solid #222255; display: flex; gap: 20px; margin-bottom: 20px; align-items: center; padding: 16px; }
+        .game-card img { width: 130px; height: 100px; object-fit: cover; border: 2px solid #333; flex-shrink: 0; }
+        .game-card h3 { color: #ff00ff; font-size: 1rem; letter-spacing: 2px; margin-bottom: 6px; }
+        .game-card p { color: #aaa; font-size: 0.85rem; line-height: 1.6; margin: 0; }
+        .btn { display: inline-block; margin-top: 30px; background: #ff00ff; color: #000; padding: 12px 28px; font-family: 'Courier New', monospace; font-weight: bold; text-decoration: none; letter-spacing: 2px; border: 2px solid #ff00ff; }
+        .btn:hover { background: transparent; color: #ff00ff; }
+        .nav-btns { display: flex; gap: 14px; margin-top: 40px; flex-wrap: wrap; }
+        footer { background: #111133; border-top: 3px solid #ff00ff; text-align: center; padding: 20px; color: #888; font-size: 0.85rem; margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <header><h1>★ NEBULA GAMES ★</h1></header>
+    <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.html">Jugar</a>
+        <a href="seccion_de_blog_.html">Blog</a>
+        <a href="seccion_de_el_curso.html">Curso</a>
+        <a href="secion_de_quienes_somos.html">Quiénes Somos</a>
+        <a href="secion_de_cv.html">CV</a>
+    </nav>
+
+    <div class="page-hero">
+        <img src="imagenes/game boy color.jpg" alt="Game Boy Color">
+        <h2>GAME BOY COLOR</h2>
+    </div>
+
+    <div class="container">
+        <h3 class="section-title">SOBRE LA CONSOLA</h3>
+        <p>La Game Boy Color fue lanzada en 1998 como la evolución directa de la Game Boy original. Con una pantalla a color de 32,768 colores posibles, dio nueva vida a los juegos de Game Boy y trajo títulos exclusivos increíbles.</p>
+        <p>Compatible con todos los juegos originales de Game Boy, la GBC fue el puente perfecto entre la era monocromática y el futuro a color de las portátiles de Nintendo.</p>
+
+        <h3 class="section-title">JUEGOS ICÓNICOS</h3>
+
+        <div class="game-card">
+            <img src="imagenes/pokemon oro.jfif" alt="Pokemon Gold Silver">
+            <div>
+                <h3>POKÉMON ORO / PLATA</h3>
+                <p>Dos regiones, 251 Pokémon y un reloj interno real. Considerados los mejores juegos de Pokémon de todos los tiempos por muchos fans.</p>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="imagenes/zelda ages.jfif" alt="Zelda Oracle">
+            <div>
+                <h3>THE LEGEND OF ZELDA: ORACLE OF AGES</h3>
+                <p>Link viaja en el tiempo para salvar el mundo. Puzzles ingeniosos y un mundo rico en colores que lucía espectacular en la GBC.</p>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="imagenes/Dragonwarrior1.jpg" alt="Dragon Warrior Monsters">
+            <div>
+                <h3>DRAGON WARRIOR MONSTERS</h3>
+                <p>Captura y cría monstruos en este RPG que compitió directamente con Pokémon. Una joya escondida de la Game Boy Color.</p>
+            </div>
+        </div>
+
+        <div class="nav-btns">
+            <a href="seccion_de_Game_Boy.html" class="btn">← GAME BOY</a>
+            <a href="seccion_de_Game_Boy_advance.html" class="btn">GAME BOY ADVANCE →</a>
+        </div>
+    </div>
+
+    <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
+</body>
+</html>

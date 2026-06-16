@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Inicio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a1a; color: #e0e0ff; font-family: 'Courier New', monospace; }
+        header { background: #111133; padding: 20px; text-align: center; border-bottom: 3px solid #ff00ff; }
+        header h1 { font-size: 2.5rem; color: #ff00ff; letter-spacing: 8px; text-shadow: 0 0 10px #ff00ff; }
+        nav { background: #0d0d2b; padding: 12px; text-align: center; border-bottom: 2px solid #333; }
+        nav a { color: #00ffff; text-decoration: none; margin: 0 15px; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; }
+        nav a:hover { color: #ff00ff; text-shadow: 0 0 8px #ff00ff; }
+        .hero { position: relative; height: 320px; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: center; }
+        .hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; position: absolute; top:0; left:0; }
+        .hero-text { position: relative; z-index: 1; }
+        .hero-text h2 { font-size: 2rem; color: #ff00ff; text-shadow: 0 0 15px #ff00ff; letter-spacing: 4px; }
+        .hero-text p { color: #aaa; margin-top: 10px; font-size: 1rem; }
+        .btn { display: inline-block; margin-top: 20px; background: #ff00ff; color: #000; padding: 12px 28px; font-family: 'Courier New', monospace; font-weight: bold; text-decoration: none; letter-spacing: 2px; border: 2px solid #ff00ff; }
+        .btn:hover { background: transparent; color: #ff00ff; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .container h2 { text-align: center; font-size: 1.4rem; color: #00ffff; letter-spacing: 4px; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        .card { background: #111133; border: 2px solid #333; text-decoration: none; color: #e0e0ff; display: block; transition: border-color 0.2s; }
+        .card:hover { border-color: #ff00ff; }
+        .card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+        .card h3 { padding: 12px; font-size: 0.95rem; letter-spacing: 2px; color: #00ffff; text-align: center; }
+        footer { background: #111133; border-top: 3px solid #ff00ff; text-align: center; padding: 20px; color: #888; font-size: 0.85rem; margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>★ NEBULA GAMES ★</h1>
+    </header>
+
+    <nav>
+        <a href="inicio.html">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.html">Jugar</a>
+        <a href="seccion_de_blog_.html">Blog</a>
+        <a href="seccion_de_el_curso.html">Curso</a>
+        <a href="secion_de_quienes_somos.html">Quiénes Somos</a>
+        <a href="secion_de_cv.html">CV</a>
+    </nav>
+
+    <div class="hero">
+        <img src="imagenes/retro.jpg" alt="Retro Gaming">
+        <div class="hero-text">
+            <h2>INSERTA MONEDA PARA COMENZAR</h2>
+            <p>El mejor arcade retro de la web. Consolas clásicas, guías, blog y cursos.</p>
+            <a href="la_seccion_para_poder_jugar.html" class="btn">▶ JUGAR AHORA</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>▌ EXPLORA POR CONSOLA</h2>
+        <div class="grid">
+            <a href="seccion_de_NES.html" class="card">
+                <img src="imagenes/nes.jfif" alt="NES">
+                <h3>NINTENDO NES</h3>
+            </a>
+            <a href="seccion_de_SNES.html" class="card">
+                <img src="imagenes/snes.jpg" alt="SNES">
+                <h3>SUPER NINTENDO</h3>
+            </a>
+            <a href="seccion_de_Sega_genesis.html" class="card">
+                <img src="imagenes/genesis.jpg" alt="Sega Genesis">
+                <h3>SEGA GENESIS</h3>
+            </a>
+            <a href="seccion_de_Sega_Master_System.html" class="card">
+                <img src="imagenes/Sega-Master-System-Set.jpg" alt="Sega Master System">
+                <h3>SEGA MASTER SYSTEM</h3>
+            </a>
+            <a href="seccion_de_Game_Boy.html" class="card">
+                <img src="imagenes/Game-Boy-FL.jpg" alt="Game Boy">
+                <h3>GAME BOY</h3>
+            </a>
+            <a href="sccion_de_Game_Boy_Color.html" class="card">
+                <img src="imagenes/game boy color.jpg" alt="Game Boy Color">
+                <h3>GAME BOY COLOR</h3>
+            </a>
+            <a href="seccion_de_Game_Boy_advance.html" class="card">
+                <img src="imagenes/advance.jfif" alt="Game Boy Advance">
+                <h3>GAME BOY ADVANCE</h3>
+            </a>
+            <a href="seccion_de_atari_2600.html" class="card">
+                <img src="imagenes/atari.jfif" alt="Atari 2600">
+                <h3>ATARI 2600</h3>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES · HECHO CON AMOR PIXELADO &nbsp; ♥ ♥ ♥</p>
+    </footer>
+</body>
+</html>
