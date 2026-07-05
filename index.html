@@ -6,23 +6,28 @@
     <title>Nebula Games | Juegos Retro y Consolas Clásicas Arcade</title>
     <meta name="description" content="Revive la nostalgia en Nebula Games. Descubre la historia de las consolas clásicas como la Super Nintendo, Sega Genesis y Atari, y juega a los mejores videojuegos retro gratis de los 80 y 90.">
     <style>
-        /* Tus estilos CSS existentes se quedan aquí igual... */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #0a0a1a; color: #e0e0ff; font-family: 'Courier New', monospace; }
+        body { background: #0a0a1a; color: #e0e0ff; font-family: 'Courier New', monospace; line-height: 1.6; }
         header { background: #111133; padding: 20px; text-align: center; border-bottom: 3px solid #ff00ff; }
         header h1 { font-size: 2.5rem; color: #ff00ff; letter-spacing: 8px; text-shadow: 0 0 10px #ff00ff; }
         nav { background: #0d0d2b; padding: 12px; text-align: center; border-bottom: 2px solid #333; }
         nav a { color: #00ffff; text-decoration: none; margin: 0 15px; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; }
         nav a:hover { color: #ff00ff; text-shadow: 0 0 8px #ff00ff; }
+        
         .hero { position: relative; height: 320px; overflow: hidden; text-align: center; display: flex; align-items: center; justify-content: center; }
         .hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; position: absolute; top:0; left:0; }
-        .hero-text { position: relative; z-index: 1; }
-        .hero-text h2 { font-size: 2rem; color: #ff00ff; text-shadow: 0 0 15px #ff00ff; letter-spacing: 4px; }
-        .hero-text p { color: #aaa; margin-top: 10px; font-size: 1rem; }
+        .hero-text { position: relative; z-index: 1; padding: 0 20px; }
+        .hero-text h2 { font-size: 2rem; color: #ff00ff; text-shadow: 0 0 15px #ff00ff; letter-spacing: 4px; margin-bottom: 10px; }
+        .hero-text p { color: #aaa; font-size: 1rem; }
         .btn { display: inline-block; margin-top: 20px; background: #ff00ff; color: #000; padding: 12px 28px; font-family: 'Courier New', monospace; font-weight: bold; text-decoration: none; letter-spacing: 2px; border: 2px solid #ff00ff; }
         .btn:hover { background: transparent; color: #ff00ff; }
+        
         .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
-        .container h2 { text-align: center; font-size: 1.4rem; color: #00ffff; letter-spacing: 4px; margin-bottom: 30px; }
+        .seo-text-block { background: #111133; border: 2px dashed #00ffff; padding: 25px; margin-bottom: 40px; border-radius: 4px; }
+        .seo-text-block h2 { text-align: left; color: #ff00ff; font-size: 1.5rem; margin-bottom: 15px; text-shadow: 0 0 5px #ff00ff; }
+        .seo-text-block p { margin-bottom: 15px; color: #d0d0ff; font-size: 0.95rem; text-align: justify; }
+        
+        .catalog-title { text-align: center; font-size: 1.4rem; color: #00ffff; letter-spacing: 4px; margin-bottom: 30px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
         .card { background: #111133; border: 2px solid #333; text-decoration: none; color: #e0e0ff; display: block; transition: border-color 0.2s; }
         .card:hover { border-color: #ff00ff; }
@@ -36,7 +41,7 @@
         <h1>★ NEBULA GAMES ★</h1>
     </header>
 
-   <nav>
+    <nav>
         <a href="index.html">Inicio</a>
         <a href="la_seccion_para_poder_jugar.html">Jugar</a>
         <a href="seccion_de_blog_.html">Blog</a>
@@ -45,52 +50,65 @@
         <a href="seccion_de_cv.html">CV</a>
         <a href="seccion_de_contacto.html">Formulario</a>
     </nav>
-    <div class="hero">
-        <img src="imagenes/retro.jpg" alt="Retro Gaming">
-        <div class="hero-text">
-            <h2>INSERTA MONEDA PARA COMENZAR</h2>
-            <p>El mejor arcade retro de la web. Consolas clásicas, guías, blog y cursos.</p>
-            <a href="la_seccion_para_poder_jugar.html" class="btn">▶ JUGAR AHORA</a>
-        </div>
-    </div>
 
-    <div class="container">
-        <h2>▌ EXPLORA POR CONSOLA</h2>
-        <div class="grid">
-            <a href="seccion_de_NES.html" class="card">
-                <img src="imagenes/nes.jfif" alt="Consola Nintendo Consola System">
-                <h3>NINTENDO NES</h3>
-            </a>
-            <a href="seccion_de_SNES.html" class="card">
-                <img src="imagenes/snes.jpg" alt="Consola Super Nintendo de 16 bits en su caja original">
-                <h3>SUPER NINTENDO</h3>
-            </a>
-            <a href="seccion_de_Sega_genesis.html" class="card">
-                <img src="imagenes/genesis.jpg" alt="Consola Sega Genesis con su característico control de tres botones">
-                <h3>SEGA GENESIS</h3>
-            </a>
-            <a href="seccion_de_Sega_Master_System.html" class="card">
-                <img src="imagenes/Sega-Master-System-Set.jpg" alt="Consola Sega Master System con su joystick de palanca">
-                <h3>SEGA MASTER SYSTEM</h3>
-            </a>
-            <a href="seccion_de_Game_Boy.html" class="card">
-                <img src="imagenes/Game-Boy-FL.jpg" alt="Consola portátil Game Boy clásica de pantalla verde">
-                <h3>GAME BOY</h3>
-            </a>
-            <a href="sccion_de_Game_Boy_Color.html" class="card">
-                <img src="imagenes/game boy color.jpg" alt="Consola portátil Game Boy Color de color violeta transparente">
-                <h3>GAME BOY COLOR</h3>
-            </a>
-            <a href="seccion_de_Game_Boy_advance.html" class="card">
-                <img src="imagenes/advance.jfif" alt="Consola portátil Game Boy Advance en posición horizontal">
-                <h3>GAME BOY ADVANCE</h3>
-            </a>
-            <a href="seccion_de_atari_2600.html" class="card">
-                <img src="imagenes/atari.jfif" alt="Consola clásica Atari 2600 con acabado de madera y palanca de mando">
-                <h3>ATARI 2600</h3>
-            </a>
+    <main>
+        <div class="hero">
+            <img src="imagenes/retro.jpg" alt="Fondo de pantalla estilo arcade retro con luces de neón">
+            <div class="hero-text">
+                <h2>INSERTA MONEDA PARA COMENZAR</h2>
+                <p>El mejor arcade retro de la web. Consolas clásicas, guías, blog y cursos.</p>
+                <a href="la_seccion_para_poder_jugar.html" class="btn">▶ JUGAR AHORA</a>
+            </div>
         </div>
-    </div>
+
+        <div class="container">
+            <section class="seo-text-block">
+                <h2>▌ HISTORIA Y PASIÓN POR LOS VIDEOJUEGOS RETRO</h2>
+                <p>Bienvenido a Nebula Games, la plataforma definitiva diseñada para los amantes del retrogaming y los sistemas arcade de salón. Nuestro objetivo principal es rescatar y preservar la historia dorada del entretenimiento digital, ofreciendo un catálogo interactivo con información técnica, curiosidades y guías detalladas sobre las <strong>consolas clásicas</strong> que marcaron un antes y un después en las infancias de millones de jugadores durante las décadas de los 80 y 90.</p>
+                
+                <p>Si alguna vez te has preguntado <strong>cómo jugar juegos de sega genesis en pc</strong> o cuáles son los <strong>mejores juegos de super nintendo de la historia</strong>, has llegado al rincón web indicado. Aquí exploramos desde el impacto cultural de los procesadores de 8 bits hasta la evolución gráfica tridimensional. Creemos firmemente que comprender el pasado de los videojuegos es fundamental para apreciar las obras maestras contemporáneas de la industria actual.</p>
+                
+                <p>En este espacio no solo recordamos la nostalgia técnica de los cartuchos y los microchips de sonido icónicos, sino que también te damos acceso a herramientas de aprendizaje dedicadas. A través de nuestra sección especializada, vas a poder interactuar de forma directa, leer análisis en nuestro blog de noticias retro y sumarte a nuestra comunidad mediante el formulario de contacto para debatir sobre trucos de software o mecánicas de emulación. ¡Prepara tus reflejos, selecciona tu sistema favorito aquí abajo y vuelve a disfrutar de la verdadera jugabilidad arcade sin salir de tu navegador!</p>
+            </section>
+
+            <h2 class="catalog-title">▌ EXPLORA POR CONSOLA</h2>
+            
+            <div class="grid">
+                <a href="seccion_de_NES.html" class="card">
+                    <img src="imagenes/nes.jfif" alt="Consola de mesa Nintendo Entertainment System original de ocho bits">
+                    <h3>NINTENDO NES</h3>
+                </a>
+                <a href="seccion_de_SNES.html" class="card">
+                    <img src="imagenes/snes.jpg" alt="Consola Super Nintendo de 16 bits en su caja original">
+                    <h3>SUPER NINTENDO</h3>
+                </a>
+                <a href="seccion_de_Sega_genesis.html" class="card">
+                    <img src="imagenes/genesis.jpg" alt="Consola Sega Genesis con su característico control de tres botones">
+                    <h3>SEGA GENESIS</h3>
+                </a>
+                <a href="seccion_de_Sega_Master_System.html" class="card">
+                    <img src="imagenes/Sega-Master-System-Set.jpg" alt="Consola Sega Master System con su joystick de palanca">
+                    <h3>SEGA MASTER SYSTEM</h3>
+                </a>
+                <a href="seccion_de_Game_Boy.html" class="card">
+                    <img src="imagenes/Game-Boy-FL.jpg" alt="Consola portátil Game Boy clásica de pantalla verde">
+                    <h3>GAME BOY</h3>
+                </a>
+                <a href="sccion_de_Game_Boy_Color.html" class="card">
+                    <img src="imagenes/game boy color.jpg" alt="Consola portátil Game Boy Color de color violeta transparente">
+                    <h3>GAME BOY COLOR</h3>
+                </a>
+                <a href="seccion_de_Game_Boy_advance.html" class="card">
+                    <img src="imagenes/advance.jfif" alt="Consola portátil Game Boy Advance en posición horizontal">
+                    <h3>GAME BOY ADVANCE</h3>
+                </a>
+                <a href="seccion_de_atari_2600.html" class="card">
+                    <img src="imagenes/atari.jfif" alt="Consola clásica Atari 2600 con acabado de madera y palanca de mando">
+                    <h3>ATARI 2600</h3>
+                </a>
+            </div>
+        </div>
+    </main>
 
     <footer>
         <p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES · HECHO CON AMOR PIXELADO &nbsp; ♥ ♥ ♥</p>
