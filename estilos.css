@@ -1,0 +1,211 @@
+/* =========================================================
+   ESTILOS GENERALES Y CONFIGURACIÓN DE COLORES (NEBULA GAMES)
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------
+   1. FONDO -> Formato RGB
+   Usamos rgb(10, 10, 26) para el fondo oscuro general
+   --------------------------------------------------------- */
+body {
+    background-color: rgb(10, 10, 26); /* <--- FONDO EN FORMATO RGB */
+    color: rgb(224, 224, 255);          /* <--- TEXTO EN FORMATO RGB */
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+}
+
+header {
+    background-color: rgb(17, 17, 51);  /* <--- ENCABEZADO EN RGB */
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid rgb(255, 0, 255);
+}
+
+/* ---------------------------------------------------------
+   2. TÍTULO -> Formato Nombre (Named Color)
+   Usamos 'fuchsia' o 'cyan' directo por nombre
+   --------------------------------------------------------- */
+header h1 {
+    font-size: 2.5rem;
+    color: fuchsia;                   /* <--- TÍTULO EN FORMATO NOMBRE */
+    letter-spacing: 8px;
+    text-shadow: 0 0 10px fuchsia;
+}
+
+/* ---------------------------------------------------------
+   3. MENÚ -> Formato HEX (Hexadecimal)
+   Usamos #0d0d2b para el fondo del menú y #00ffff para links
+   --------------------------------------------------------- */
+nav {
+    background-color: #0d0d2b;         /* <--- MENÚ EN FORMATO HEX */
+    padding: 12px;
+    text-align: center;
+    border-bottom: 2px solid #333333;  /* <--- BORDE EN HEX */
+}
+
+nav a {
+    color: #00ffff;                    /* <--- ENLACES DEL MENÚ EN HEX */
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    color: #ff00ff;                    /* <--- HOVER DEL MENÚ EN HEX */
+    text-shadow: 0 0 8px #ff00ff;
+}
+
+/* ---------------------------------------------------------
+   4. BOTÓN -> Formato HSL (Hue, Saturation, Lightness)
+   Usamos hsl(300, 100%, 50%) para el fondo magenta del botón
+   --------------------------------------------------------- */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: hsl(300, 100%, 50%);  /* <--- BOTÓN EN FORMATO HSL */
+    color: hsl(0, 0%, 0%);                 /* <--- TEXTO DEL BOTÓN EN HSL */
+    padding: 12px 28px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 2px;
+    border: 2px solid hsl(300, 100%, 50%);  /* <--- BORDE DEL BOTÓN EN HSL */
+}
+
+.btn:hover {
+    background-color: transparent;
+    color: hsl(300, 100%, 50%);
+}
+
+/* ---------------------------------------------------------
+   ESTRUCTURA GENERAL Y TARJETAS (CONTENEDORES Y REJILLA)
+   --------------------------------------------------------- */
+main {
+    display: block;
+}
+
+.hero {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hero-text {
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+}
+
+.hero-text h2 {
+    font-size: 2rem;
+    color: fuchsia;                    /* <--- TÍTULO SECUNDARIO EN NOMBRE */
+    text-shadow: 0 0 15px fuchsia;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    color: #aaaaaa;
+    font-size: 1rem;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.seo-text-block {
+    background-color: rgb(17, 17, 51);
+    border: 2px dashed #00ffff;
+    padding: 25px;
+    margin-bottom: 40px;
+    border-radius: 4px;
+}
+
+.seo-text-block h2 {
+    text-align: left;
+    color: fuchsia;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.seo-text-block p {
+    margin-bottom: 15px;
+    color: rgb(208, 208, 255);
+    font-size: 0.95rem;
+    text-align: justify;
+}
+
+.catalog-title {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #00ffff;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: rgb(17, 17, 51);
+    border: 2px solid #333333;
+    text-decoration: none;
+    color: rgb(224, 224, 255);
+    display: block;
+    transition: border-color 0.2s;
+}
+
+.card:hover {
+    border-color: #ff00ff;
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.card h3 {
+    padding: 12px;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    color: #00ffff;
+    text-align: center;
+}
+
+footer {
+    background-color: rgb(17, 17, 51);
+    border-top: 3px solid #ff00ff;
+    text-align: center;
+    padding: 20px;
+    color: #888888;
+    font-size: 0.85rem;
+    margin-top: 60px;
+}
