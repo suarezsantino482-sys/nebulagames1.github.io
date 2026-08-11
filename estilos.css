@@ -1,17 +1,9 @@
-/* =========================================================
-   ESTILOS GENERALES Y CONFIGURACIÓN DE COLORES (NEBULA GAMES)
-   ========================================================= */
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ---------------------------------------------------------
-   1. FONDO -> Formato RGB
-   Usamos rgb(10, 10, 26) para el fondo oscuro general
-   --------------------------------------------------------- */
 body {
     background-color: rgb(10,10,26);
    color: rgb(224, 224, 255);
@@ -26,10 +18,7 @@ header {
     border-bottom: 3px solid rgb(255, 0, 255);
 }
 
-/* ---------------------------------------------------------
-   2. TÍTULO -> Formato Nombre (Named Color)
-   Usamos 'fuchsia' o 'cyan' directo por nombre
-   --------------------------------------------------------- */
+
 header h1 {
     font-size: 2.5rem;
     color: fuchsia;                   /* <--- TÍTULO EN FORMATO NOMBRE */
@@ -37,10 +26,6 @@ header h1 {
     text-shadow: 0 0 10px fuchsia;
 }
 
-/* ---------------------------------------------------------
-   3. MENÚ -> Formato HEX (Hexadecimal)
-   Usamos #0d0d2b para el fondo del menú y #00ffff para links
-   --------------------------------------------------------- */
 nav {
     background-color: #0d0d2b;         /* <--- MENÚ EN FORMATO HEX */
     padding: 12px;
@@ -62,10 +47,7 @@ nav a:hover {
     text-shadow: 0 0 8px #ff00ff;
 }
 
-/* ---------------------------------------------------------
-   4. BOTÓN -> Formato HSL (Hue, Saturation, Lightness)
-   Usamos hsl(300, 100%, 50%) para el fondo magenta del botón
-   --------------------------------------------------------- */
+
 .btn {
     display: inline-block;
     margin-top: 20px;
