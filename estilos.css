@@ -13,10 +13,7 @@
    Usamos rgb(10, 10, 26) para el fondo oscuro general
    --------------------------------------------------------- */
 body {
-    background-color: rgb(10, 10, 26); /* <--- FONDO EN FORMATO RGB */
-    color: rgb(224, 224, 255);          /* <--- TEXTO EN FORMATO RGB */
-    font-family: 'Courier New', monospace;
-    line-height: 1.6;
+    background-color: red !impotant; /* <--- FONDO EN FORMATO RGB */
 }
 
 header {
