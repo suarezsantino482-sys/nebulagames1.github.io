@@ -223,4 +223,18 @@ footer {
     text-shadow: 0 0 10px fuchsia;
     letter-spacing: 4px;
 }
+    /* Estilos adicionales para el modo claro alternativo */
+body.modo-claro {
+    background-color: #f0f0f0 !important;
+    color: #111111 !important;
+}
+
+body.modo-claro header,
+body.modo-claro nav,
+body.modo-claro .seo-text-block,
+body.modo-claro .card {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    border-color: #ff00ff !important;
+}
 
