@@ -123,6 +123,7 @@ function cerrarModal() {
     if (modal) modal.style.display = 'none';
 }
 
+
 /* =========================================================
    6. CAMBIAR TEMA (MODO CLARO / MODO OSCURO)
    ========================================================= */
@@ -130,3 +131,26 @@ function alternarModoOscuro() {
     // Alterna la clase 'modo-claro' en el elemento body
     document.body.classList.toggle('modo-claro');
 }
+document.addEventListener('DOMContentLoaded', () => {
+    const formulario = document.getElementById('formulario-contacto');
+    const mensajeExito = document.getElementById('mensajeExito');
+
+    if (formulario) {
+        formulario.addEventListener('submit', (e) => {
+            // Evita que la página se vaya a la pantalla negra (JSON)
+            e.preventDefault();
+
+            const nombre = document.getElementById('nombre').value;
+
+            // Muestra mensaje en pantalla
+            mensajeExito.style.display = 'block';
+            mensajeExito.innerHTML = `✔ ¡Gracias por contactarnos, <strong>${nombre}</strong>! Tu mensaje ha sido enviado con éxito.`;
+
+            // Alerta flotante
+            alert(`¡Formulario enviado con éxito, ${nombre}!`);
+
+            // Limpia los campos del formulario
+            formulario.reset();
+        });
+    }
+});
