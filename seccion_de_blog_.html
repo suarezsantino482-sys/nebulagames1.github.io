@@ -66,6 +66,32 @@
     </div>
 
     <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
-    <script src="script.js"></script>
+  <script>
+    const fotos = ['imagenes/nes.jfif', 'imagenes/snes.jpg', 'imagenes/genesis.jpg']; // Cambiá por las rutas de tus imágenes
+    let posicion = 0;
+
+    const visor = document.getElementById('visorGaleria');
+    const modal = document.getElementById('modalImg');
+    const imgGrande = document.getElementById('imgGrande');
+
+    document.getElementById('btnSiguiente').addEventListener('click', function() {
+        posicion = (posicion + 1) % fotos.length;
+        visor.src = fotos[posicion];
+    });
+
+    document.getElementById('btnAnterior').addEventListener('click', function() {
+        posicion = (posicion - 1 + fotos.length) % fotos.length;
+        visor.src = fotos[posicion];
+    });
+
+    visor.addEventListener('click', function() {
+        modal.style.display = 'flex';
+        imgGrande.src = this.src;
+    });
+
+    modal.addEventListener('click', function() {
+        this.style.display = 'none';
+    });
+</script>
 </body>
 </html>
