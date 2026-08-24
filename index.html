@@ -84,6 +84,34 @@
     <footer>
         <p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES · HECHO CON AMOR PIXELADO &nbsp; ♥ ♥ ♥</p>
     </footer>
-    <script src="script.js"></script>
+  <script>
+    // Punto 1: Alerta de saludo al cargar
+    window.addEventListener('DOMContentLoaded', function() {
+        alert("¡Bienvenido a Nebula Games! Inserta moneda para comenzar.");
+    });
+
+    // Punto 3: Fecha y hora en tiempo real
+    function actualizarReloj() {
+        const reloj = document.getElementById('relojArcade');
+        if (reloj) {
+            const ahora = new Date();
+            reloj.textContent = "📅 " + ahora.toLocaleDateString() + " | ⏰ " + ahora.toLocaleTimeString();
+        }
+    }
+    setInterval(actualizarReloj, 1000);
+    actualizarReloj();
+
+    // Punto 4: Menú desplegable / Acordeón
+    document.getElementById('btnAcordeon').addEventListener('click', function() {
+        const panel = document.getElementById('panelAcordeon');
+        panel.style.display = (panel.style.display === 'none' || panel.style.display === '') ? 'block' : 'none';
+    });
+
+    // Punto 6: Cambiar tema (Modo claro/oscuro)
+    document.getElementById('btnTema').addEventListener('click', function() {
+        document.body.style.backgroundColor = (document.body.style.backgroundColor === 'rgb(240, 240, 240)') ? '#0a0a1a' : '#f0f0f0';
+        document.body.style.color = (document.body.style.color === 'rgb(17, 17, 17)') ? '#ffffff' : '#111111';
+    });
+</script>
 </body>
 </html>
