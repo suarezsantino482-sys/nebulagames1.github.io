@@ -27,16 +27,18 @@
         <!-- Contenedor donde JS mostrará el mensaje de éxito -->
         <div id="mensajeExito" style="display: none; padding: 15px; margin-bottom: 15px; background: #111133; border: 2px solid #00ffff; color: #00ffff; text-align: center;"></div>
 
-        <form action="https://httpbin.org/post" method="POST" class="form-arcade" id="formulario-contacto">
+        <form action="https://httpbin.org/post" method="POST" class="form-arcade" id="formulario-contacto" data-validate novalidate>
             
             <div class="form-group">
                 <label for="nombre">🎮 TU NOMBRE / GAMERTAG:</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ej: NeoPixel" required minlength="3">
+                <small class="error-message" data-error-for="nombre"></small>
             </div>
 
             <div class="form-group">
                 <label for="correo">📧 CORREO ELECTRÓNICO:</label>
                 <input type="email" id="correo" name="correo" placeholder="correo@dominio.com" required>
+                <small class="error-message" data-error-for="correo"></small>
             </div>
 
             <div class="form-group">
@@ -51,7 +53,8 @@
 
             <div class="form-group">
                 <label for="mensaje">✍️ MENSAJE / COMENTARIOS:</label>
-                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe aquí tu mensaje..." required></textarea>
+                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe aquí tu mensaje..." required minlength="10"></textarea>
+                <small class="error-message" data-error-for="mensaje"></small>
             </div>
 
             <div class="form-group">

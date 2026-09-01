@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nebula Games | Juegos Retro y Consolas Clásicas Arcade</title>
     <meta name="description" content="Revive la nostalgia en Nebula Games. Descubre la historia de las consolas clásicas como la Super Nintendo, Sega Genesis y Atari, y juega a los mejores videojuegos retro gratis de los 80 y 90.">
-  <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
     <header>
         <h1>★ NEBULA GAMES ★</h1>
+        <button id="btnTema" type="button" class="btn-tema" aria-label="Cambiar tema">🌙 Modo oscuro</button>
+        <div id="relojArcade" class="reloj-arcade" aria-live="polite"></div>
     </header>
 
     <nav>
@@ -36,14 +38,59 @@
             <section class="seo-text-block">
                 <h2>▌ HISTORIA Y PASIÓN POR LOS VIDEOJUEGOS RETRO</h2>
                 <p>Bienvenido a Nebula Games, la plataforma definitiva diseñada para los amantes del retrogaming y los sistemas arcade de salón. Nuestro objetivo principal es rescatar y preservar la historia dorada del entretenimiento digital, ofreciendo un catálogo interactivo con información técnica, curiosidades y guías detalladas sobre las <strong>consolas clásicas</strong> que marcaron un antes y un después en las infancias de millones de jugadores durante las décadas de los 80 y 90.</p>
-                
                 <p>Si alguna vez te has preguntado <strong>cómo jugar juegos de sega genesis en pc</strong> o cuáles son los <strong>mejores juegos de super nintendo de la historia</strong>, has llegado al rincón web indicado. Aquí exploramos desde el impacto cultural de los procesadores de 8 bits hasta la evolución gráfica tridimensional. Creemos firmemente que comprender el pasado de los videojuegos es fundamental para apreciar las obras maestras contemporáneas de la industria actual.</p>
-                
                 <p>En este espacio no solo recordamos la nostalgia técnica de los cartuchos y los microchips de sonido icónicos, sino que también te damos acceso a herramientas de aprendizaje dedicadas. A través de nuestra sección especializada, vas a poder interactuar de forma directa, leer análisis en nuestro blog de noticias retro y sumarte a nuestra comunidad mediante el formulario de contacto para debatir sobre trucos de software o mecánicas de emulación. ¡Prepara tus reflejos, selecciona tu sistema favorito aquí abajo y vuelve a disfrutar de la verdadera jugabilidad arcade sin salir de tu navegador!</p>
             </section>
 
+            <div class="accordion-wrapper">
+                <button id="accordionToggle" type="button" class="accordion-toggle" aria-expanded="false">📜 Ver reglas de la comunidad</button>
+                <div id="panelAcordeon" class="accordion-panel">
+                    <p>1. Respetar a los demás jugadores.<br>2. Prohibido el uso de cheats no autorizados.<br>3. ¡Disfrutá del contenido retro!</p>
+                </div>
+            </div>
+
+            <section class="gallery-section" aria-label="Galería de imágenes">
+                <h2 class="catalog-title">▌ GALERÍA RETRO</h2>
+                <div class="gallery-main">
+                    <button id="btnAnterior" type="button" class="gallery-btn" aria-label="Imagen anterior">◀</button>
+                    <img id="fotoPrincipal" src="imagenes/nes.jfif" alt="Imagen principal de la galería retro" class="gallery-image">
+                    <button id="btnSiguiente" type="button" class="gallery-btn" aria-label="Siguiente imagen">▶</button>
+                </div>
+                <div class="gallery-thumbs">
+                    <img class="gallery-thumb active" src="imagenes/nes.jfif" alt="Miniatura de NES" data-image="imagenes/nes.jfif">
+                    <img class="gallery-thumb" src="imagenes/snes.jpg" alt="Miniatura de SNES" data-image="imagenes/snes.jpg">
+                    <img class="gallery-thumb" src="imagenes/genesis.jpg" alt="Miniatura de Genesis" data-image="imagenes/genesis.jpg">
+                    <img class="gallery-thumb" src="imagenes/atari.jfif" alt="Miniatura de Atari" data-image="imagenes/atari.jfif">
+                </div>
+            </section>
+
+            <section class="contact-form-section">
+                <h2 class="catalog-title">▌ FORMULARIO DE PRUEBA</h2>
+                <form id="formulario-principal" class="form-arcade" data-validate novalidate>
+                    <div class="form-group">
+                        <label for="nombre">🎮 Nombre / Gamertag</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: NeoPixel" required minlength="3">
+                        <small class="error-message" data-error-for="nombre"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">📧 Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" placeholder="correo@dominio.com" required>
+                        <small class="error-message" data-error-for="correo"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensaje">✍️ Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required minlength="10"></textarea>
+                        <small class="error-message" data-error-for="mensaje"></small>
+                    </div>
+
+                    <button type="submit" class="btn-submit">ENVIAR FORMULARIO</button>
+                </form>
+                <div id="resumenFormulario" class="resumen-formulario" hidden></div>
+            </section>
+
             <h2 class="catalog-title">▌ EXPLORA POR CONSOLA</h2>
-            
             <div class="grid">
                 <a href="seccion_de_NES.html" class="card">
                     <img src="imagenes/nes.jfif" alt="Consola de mesa Nintendo Entertainment System original de ocho bits">
@@ -84,8 +131,7 @@
     <footer>
         <p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES · HECHO CON AMOR PIXELADO &nbsp; ♥ ♥ ♥</p>
     </footer>
-  <script>
-   <script src="script.js"></script>
-</script>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nebula Games | Blog Gamer</title>
-   <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <header><h1>★ NEBULA GAMES ★</h1></header>
+    <header>
+        <h1>★ NEBULA GAMES ★</h1>
+    </header>
     <nav>
-        <a href="inicio.html">Inicio</a>
+        <a href="index.html">Inicio</a>
         <a href="la_seccion_para_poder_jugar.html">Jugar</a>
         <a href="seccion_de_blog_.html">Blog</a>
         <a href="seccion_de_el_curso.html">Curso</a>
@@ -62,36 +64,12 @@
             </div>
         </div>
 
-        <a href="inicio.html" class="btn">← VOLVER AL INICIO</a>
+        <a href="index.html" class="btn">← VOLVER AL INICIO</a>
     </div>
 
-    <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
-  <script>
-    const fotos = ['imagenes/nes.jfif', 'imagenes/snes.jpg', 'imagenes/genesis.jpg']; // Cambiá por las rutas de tus imágenes
-    let posicion = 0;
-
-    const visor = document.getElementById('visorGaleria');
-    const modal = document.getElementById('modalImg');
-    const imgGrande = document.getElementById('imgGrande');
-
-    document.getElementById('btnSiguiente').addEventListener('click', function() {
-        posicion = (posicion + 1) % fotos.length;
-        visor.src = fotos[posicion];
-    });
-
-    document.getElementById('btnAnterior').addEventListener('click', function() {
-        posicion = (posicion - 1 + fotos.length) % fotos.length;
-        visor.src = fotos[posicion];
-    });
-
-    visor.addEventListener('click', function() {
-        modal.style.display = 'flex';
-        imgGrande.src = this.src;
-    });
-
-    modal.addEventListener('click', function() {
-        this.style.display = 'none';
-    });
-</script>
+    <footer>
+        <p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>

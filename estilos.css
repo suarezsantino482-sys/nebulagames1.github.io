@@ -5,36 +5,54 @@
 }
 
 body {
-    background-color: rgb(10,10,26);
-   color: rgb(224, 224, 255);
-   font-family: 'courier new', monospace;
-   line-height: 1.6;
+    background-color: rgb(10, 10, 26);
+    color: rgb(224, 224, 255);
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #f3f3f3;
+    color: #111111;
 }
 
 header {
-    background-color: rgb(17, 17, 51);  /* <--- ENCABEZADO EN RGB */
+    background-color: rgb(17, 17, 51);
     padding: 20px;
     text-align: center;
     border-bottom: 3px solid rgb(255, 0, 255);
+    position: relative;
 }
 
+body.dark-mode header,
+body.dark-mode nav,
+body.dark-mode .seo-text-block,
+body.dark-mode .card,
+body.dark-mode .accordion-wrapper,
+body.dark-mode .gallery-section,
+body.dark-mode .form-arcade,
+body.dark-mode .resumen-formulario {
+    background-color: #ffffff;
+    color: #111111;
+}
 
 header h1 {
     font-size: 2.5rem;
-    color: fuchsia;                   /* <--- TÍTULO EN FORMATO NOMBRE */
+    color: fuchsia;
     letter-spacing: 8px;
     text-shadow: 0 0 10px fuchsia;
 }
 
 nav {
-    background-color: #0d0d2b;         /* <--- MENÚ EN FORMATO HEX */
+    background-color: #0d0d2b;
     padding: 12px;
     text-align: center;
-    border-bottom: 2px solid #333333;  /* <--- BORDE EN HEX */
+    border-bottom: 2px solid #333333;
 }
 
 nav a {
-    color: #00ffff;                    /* <--- ENLACES DEL MENÚ EN HEX */
+    color: #00ffff;
     text-decoration: none;
     margin: 0 15px;
     font-size: 1rem;
@@ -43,22 +61,29 @@ nav a {
 }
 
 nav a:hover {
-    color: #ff00ff;                    /* <--- HOVER DEL MENÚ EN HEX */
+    color: #ff00ff;
     text-shadow: 0 0 8px #ff00ff;
 }
 
+.btn,
+.btn-submit,
+.gallery-btn,
+.accordion-toggle,
+.btn-tema {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
 
 .btn {
     display: inline-block;
     margin-top: 20px;
-    background-color: hsl(300, 100%, 50%);  /* <--- BOTÓN EN FORMATO HSL */
-    color: hsl(0, 0%, 0%);                 /* <--- TEXTO DEL BOTÓN EN HSL */
+    background-color: hsl(300, 100%, 50%);
+    color: hsl(0, 0%, 0%);
     padding: 12px 28px;
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
     text-decoration: none;
-    letter-spacing: 2px;
-    border: 2px solid hsl(300, 100%, 50%);  /* <--- BORDE DEL BOTÓN EN HSL */
+    border: 2px solid hsl(300, 100%, 50%);
 }
 
 .btn:hover {
@@ -66,9 +91,6 @@ nav a:hover {
     color: hsl(300, 100%, 50%);
 }
 
-/* ---------------------------------------------------------
-   ESTRUCTURA GENERAL Y TARJETAS (CONTENEDORES Y REJILLA)
-   --------------------------------------------------------- */
 main {
     display: block;
 }
@@ -101,7 +123,7 @@ main {
 
 .hero-text h2 {
     font-size: 2rem;
-    color: fuchsia;                    /* <--- TÍTULO SECUNDARIO EN NOMBRE */
+    color: fuchsia;
     text-shadow: 0 0 15px fuchsia;
     letter-spacing: 4px;
     margin-bottom: 10px;
@@ -182,21 +204,194 @@ main {
     text-align: center;
 }
 
-footer {
-    background-color: rgb(17, 17, 51);
-    border-top: 3px solid #ff00ff;
-    text-align: center;
+.accordion-wrapper,
+.gallery-section,
+.form-arcade,
+.resumen-formulario {
+    max-width: 800px;
+    margin: 20px auto 30px;
+    background: #111133;
+    border: 2px solid #00ffff;
     padding: 20px;
-    color: #888888;
+}
+
+.accordion-toggle {
+    width: 100%;
+    background: #111133;
+    color: #00ffff;
+    border: 2px solid #00ffff;
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.accordion-panel {
+    display: none;
+    margin-top: 15px;
+    color: #ffffff;
+    line-height: 1.8;
+}
+
+.accordion-panel.open {
+    display: block;
+}
+
+.gallery-section {
+    text-align: center;
+}
+
+.gallery-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.gallery-image {
+    width: 100%;
+    max-width: 500px;
+    height: 260px;
+    object-fit: cover;
+    border: 2px solid #ff00ff;
+    cursor: pointer;
+}
+
+.gallery-btn {
+    background: #ff00ff;
+    color: #ffffff;
+    border: none;
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+    border-radius: 50%;
+}
+
+.gallery-thumbs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.gallery-thumb {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    cursor: pointer;
+    opacity: 0.75;
+}
+
+.gallery-thumb.active {
+    border-color: #00ffff;
+    opacity: 1;
+}
+
+.form-arcade {
+    display: grid;
+    gap: 20px;
+}
+
+.form-group {
+    display: grid;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #00ffff;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #333333;
+    background: #0b0b1a;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea,
+body.dark-mode .form-group select {
+    background: #f1f1f1;
+    color: #111111;
+    border-color: #ff00ff;
+}
+
+.error-message {
+    display: none;
+    color: #ff5c7a;
     font-size: 0.85rem;
-    margin-top: 60px;
-    /* =========================================================
-   ESTILOS PARA LAS SECCIONES SECUNDARIAS (.page-hero)
-   ========================================================= */
+    min-height: 18px;
+}
+
+.btn-submit {
+    background: #ff00ff;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    width: fit-content;
+}
+
+.resumen-formulario {
+    display: block;
+    background: #050510;
+    border: 2px solid #00ffff;
+    color: #ffffff;
+}
+
+.resumen-formulario h3 {
+    color: #ff00ff;
+    margin-bottom: 10px;
+}
+
+.resumen-exito {
+    color: #00ffff;
+    font-weight: bold;
+}
+
+.img-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.img-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 3px solid #00ffff;
+}
+
+.reloj-arcade {
+    display: inline-block;
+    margin-top: 10px;
+    color: #00ffff;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.btn-tema {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: #ff00ff;
+    color: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
 
 .page-hero {
     position: relative;
-    height: 250px;             /* Define el alto de la portada */
+    height: 250px;
     overflow: hidden;
     text-align: center;
     display: flex;
@@ -208,8 +403,8 @@ footer {
 .page-hero img {
     width: 100%;
     height: 100%;
-    object-fit: cover;         /* Recorta la imagen sin deformarla */
-    opacity: 0.4;              /* Le da oscuridad para leer el texto */
+    object-fit: cover;
+    opacity: 0.4;
     position: absolute;
     top: 0;
     left: 0;
@@ -223,18 +418,14 @@ footer {
     text-shadow: 0 0 10px fuchsia;
     letter-spacing: 4px;
 }
-    /* Estilos adicionales para el modo claro alternativo */
-body.modo-claro {
-    background-color: #f0f0f0 !important;
-    color: #111111 !important;
-}
 
-body.modo-claro header,
-body.modo-claro nav,
-body.modo-claro .seo-text-block,
-body.modo-claro .card {
-    background-color: #ffffff !important;
-    color: #111111 !important;
-    border-color: #ff00ff !important;
+footer {
+    background-color: rgb(17, 17, 51);
+    border-top: 3px solid #ff00ff;
+    text-align: center;
+    padding: 20px;
+    color: #888888;
+    font-size: 0.85rem;
+    margin-top: 60px;
 }
 
