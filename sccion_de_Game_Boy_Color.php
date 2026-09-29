@@ -1,22 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nebula Games | Game Boy Color</title>
- <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
-    <header><h1>★ NEBULA GAMES ★</h1></header>
-    <nav>
-        <a href="index.php">Inicio</a>
-        <a href="la_seccion_para_poder_jugar.php">Jugar</a>
-        <a href="seccion_de_blog_.php">Blog</a>
-        <a href="seccion_de_el_curso.php">Curso</a>
-        <a href="seccion_de_quienes_somos.php">Quiénes Somos</a>
-        <a href="seccion_de_cv.php">CV</a>
-        <a href="seccion_de_contacto.php">Formulario</a>
-    </nav>
+<?php
+$titulo_pagina = 'Game Boy Color';
+$meta_description = 'Descubre la Game Boy Color, la portátil a color que dio nueva vida a los clásicos de Nintendo y a la era Pokémon.';
+require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/includes/nav.php';
+?>
     <div class="page-hero">
         <img src="imagenes/game boy color.jpg" alt="Game Boy Color">
         <h2>GAME BOY COLOR</h2>
@@ -59,7 +46,4 @@
         </div>
     </div>
 
-    <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
-    <script src="script.js"></script>
-</body>
-</html>
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
