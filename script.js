@@ -1,6 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
-    alert('¡Bienvenido a Nebula Games! 🎮');
     console.log('JavaScript de Nebula Games cargado correctamente.');
+
+    const header = document.querySelector('header');
+    if (header && !document.getElementById('relojArcade')) {
+        const relojNuevo = document.createElement('div');
+        relojNuevo.id = 'relojArcade';
+        relojNuevo.className = 'reloj-arcade';
+        relojNuevo.setAttribute('aria-live', 'polite');
+        header.appendChild(relojNuevo);
+    }
+
+    if (header && !document.getElementById('btnTema')) {
+        const btnTemaNuevo = document.createElement('button');
+        btnTemaNuevo.id = 'btnTema';
+        btnTemaNuevo.type = 'button';
+        btnTemaNuevo.className = 'btn-tema';
+        btnTemaNuevo.setAttribute('aria-label', 'Cambiar tema');
+        btnTemaNuevo.textContent = '🌙 Modo oscuro';
+        header.appendChild(btnTemaNuevo);
+    }
 
     const reloj = document.getElementById('relojArcade');
     if (reloj) {
@@ -14,10 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnTema = document.getElementById('btnTema');
     if (btnTema) {
+        if (localStorage.getItem('nebula-tema') === 'claro') {
+            document.body.classList.add('dark-mode');
+            btnTema.textContent = '☀️ Modo claro';
+        }
+
         btnTema.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             const modoOscuro = document.body.classList.contains('dark-mode');
             btnTema.textContent = modoOscuro ? '☀️ Modo claro' : '🌙 Modo oscuro';
+            localStorage.setItem('nebula-tema', modoOscuro ? 'claro' : 'oscuro');
         });
     }
 
@@ -103,6 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     error = 'Este campo es obligatorio.';
                 } else if (input.type === 'email' && valor && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor)) {
                     error = 'Ingresá un correo electrónico válido.';
+                } else if (input.type === 'checkbox' && input.required && !input.checked) {
+                    error = 'Debes aceptar este campo para continuar.';
                 } else if (input.name === 'mensaje' && valor.length < 10) {
                     error = 'El mensaje debe tener al menos 10 caracteres.';
                 } else if (input.name === 'nombre' && valor.length < 3) {
@@ -124,13 +150,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (resumen) {
                 resumen.hidden = false;
-                resumen.innerHTML = `
-                    <h3>📋 Resumen del formulario</h3>
-                    <p><strong>Nombre:</strong> ${datos.nombre}</p>
-                    <p><strong>Correo:</strong> ${datos.correo}</p>
-                    <p><strong>Mensaje:</strong> ${datos.mensaje}</p>
-                    <p class="resumen-exito">✔ Datos validados correctamente.</p>
-                `;
+                resumen.textContent = '';
+                const titulo = document.createElement('h3');
+                titulo.textContent = '📋 Resumen del formulario';
+                resumen.appendChild(titulo);
+                [['Nombre', datos.nombre], ['Correo', datos.correo], ['Mensaje', datos.mensaje]].forEach(([etiqueta, valor]) => {
+                    const parrafo = document.createElement('p');
+                    parrafo.textContent = `${etiqueta}: ${valor}`;
+                    resumen.appendChild(parrafo);
+                });
+                const exito = document.createElement('p');
+                exito.className = 'resumen-exito';
+                exito.textContent = '✔ Datos validados correctamente.';
+                resumen.appendChild(exito);
             }
 
             alert(`¡Formulario enviado correctamente, ${datos.nombre}!`);

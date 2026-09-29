@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Nintendo NES</title>
+   <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header><h1>★ NEBULA GAMES ★</h1></header>
+    <nav>
+        <a href="index.php">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.php">Jugar</a>
+        <a href="seccion_de_blog_.php">Blog</a>
+        <a href="seccion_de_el_curso.php">Curso</a>
+        <a href="seccion_de_quienes_somos.php">Quiénes Somos</a>
+        <a href="seccion_de_cv.php">CV</a>
+        <a href="seccion_de_contacto.php">Formulario</a>
+    </nav>
+    <div class="page-hero">
+        <img src="imagenes/nes.jfif" alt="NES">
+        <h2>NINTENDO NES</h2>
+    </div>
+
+    <div class="container">
+        <h3 class="section-title">SOBRE LA CONSOLA</h3>
+        <p>La Nintendo Entertainment System (NES) fue lanzada en Japón en 1983 como Famicom y en EE.UU. en 1985. Salvó la industria del videojuego tras la gran crisis de 1983 y vendió más de 60 millones de unidades en todo el mundo.</p>
+        <p>Con sus 8 bits de poder, su icónico control con cruceta y una biblioteca de juegos legendaria, la NES definió lo que significa ser un gamer.</p>
+
+        <h3 class="section-title">JUEGOS ICÓNICOS</h3>
+
+        <div class="game-card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png" alt="Super Mario Bros">
+            <div>
+                <h3>SUPER MARIO BROS.</h3>
+                <p>El plataformas que lo cambió todo. Mario, hongos, castillos y la princesa Peach. Un clásico absoluto de 1985.</p>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="imagenes/zelda.jpg" alt="Zelda">
+            <div>
+                <h3>THE LEGEND OF ZELDA</h3>
+                <p>Explora Hyrule, recoge las piezas del Triforce y salva a la Princesa Zelda. Aventura de mundo abierto antes de que existiera el concepto.</p>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="imagenes/contra.jpg" alt="Contra">
+            <div>
+                <h3>CONTRA</h3>
+                <p>El shooter más difícil de la NES. Dos jugadores, armas devastadoras y el código Konami más famoso de la historia.</p>
+            </div>
+        </div>
+
+        <div class="nav-btns">
+            <a href="index.php" class="btn">← VOLVER AL INICIO</a>
+            <a href="seccion_de_SNES.php" class="btn">SUPER NINTENDO →</a>
+        </div>
+    </div>
+
+    <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Sega Genesis</title>
+   <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header><h1>★ NEBULA GAMES ★</h1></header>
+   <nav>
+        <a href="index.php">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.php">Jugar</a>
+        <a href="seccion_de_blog_.php">Blog</a>
+        <a href="seccion_de_el_curso.php">Curso</a>
+        <a href="seccion_de_quienes_somos.php">Quiénes Somos</a>
+        <a href="seccion_de_cv.php">CV</a>
+        <a href="seccion_de_contacto.php">Formulario</a>
+    </nav>
+
+    <div class="page-hero">
+        <img src="imagenes/genesis.jpg" alt="Sega Genesis">
+        <h2>SEGA GENESIS</h2>
+    </div>
+
+    <div class="container">
+        <h3 class="section-title">SOBRE LA CONSOLA</h3>
+        <p>La Sega Genesis (o Mega Drive) fue lanzada entre 1988 y 1989. Con su procesador Motorola 68000 de alta velocidad y su distintivo sonido Yamaha, fue la gran rival de Nintendo durante la guerra de consolas de los 90.</p>
+        <p>Su lema "Sega does what Nintendon't" resumía perfectamente su filosofía: más velocidad, más actitud y juegos más agresivos.</p>
+
+        <h3 class="section-title">JUEGOS ICÓNICOS</h3>
+
+        <div class="game-card">
+            <img src="imagenes/sonic.jpg" alt="Sonic">
+            <div>
+                <h3>SONIC THE HEDGEHOG</h3>
+                <p>El erizo azul más veloz del mundo. Velocidad, anillos y el malvado Dr. Eggman. La mascota que le plantó cara a Mario.</p>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="imagenes/rage.jfif" alt="Streets of Rage">
+            <div>
+                <h3>STREETS OF RAGE 2</h3>
+                <p>El beat 'em up definitivo de Genesis. Música electrónica de Yuzo Koshiro y acción frenética en las calles.</p>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="imagenes/mortal kombat.jfif" alt="Mortal Kombat">
+            <div>
+                <h3>MORTAL KOMBAT</h3>
+                <p>La versión Genesis tenía sangre real. Fatalities, luchadores icónicos y la polémica que cambió la industria para siempre.</p>
+            </div>
+        </div>
+
+        <div class="nav-btns">
+            <a href="seccion_de_SNES.php" class="btn">← SUPER NINTENDO</a>
+            <a href="seccion_de_Sega_Master_System.php" class="btn">MASTER SYSTEM →</a>
+        </div>
+    </div>
+
+    <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

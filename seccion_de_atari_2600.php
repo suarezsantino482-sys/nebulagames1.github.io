@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Atari 2600</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header><h1>★ NEBULA GAMES ★</h1></header>
+     <nav>
+        <a href="index.php">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.php">Jugar</a>
+        <a href="seccion_de_blog_.php">Blog</a>
+        <a href="seccion_de_el_curso.php">Curso</a>
+        <a href="seccion_de_quienes_somos.php">Quiénes Somos</a>
+        <a href="seccion_de_cv.php">CV</a>
+        <a href="seccion_de_contacto.php">Formulario</a>
+    </nav>
+    <div class="page-hero">
+        <img src="imagenes/atari.jfif" alt="Atari 2600">
+        <h2>ATARI 2600</h2>
+    </div>
+
+    <div class="container">
+        <h3 class="section-title">SOBRE LA CONSOLA</h3>
+        <p>El Atari 2600 fue lanzado en 1977 y es considerado el padre de los videojuegos domésticos modernos. Fue la primera consola en popularizar los cartuchos intercambiables y llevó los juegos de arcade al hogar de millones de personas.</p>
+        <p>Con su joystick icónico y su paleta de colores limitada, el Atari 2600 es el origen de todo lo que amamos en los videojuegos.</p>
+
+        <h3 class="section-title">JUEGOS ICÓNICOS</h3>
+
+        <div class="game-card">
+            <img src="imagenes/space.jpg" alt="Space Invaders">
+            <div>
+                <h3>SPACE INVADERS</h3>
+                <p>El juego que hizo famosa a la consola. Aliens en formación, un cañón en la base y el simple objetivo de sobrevivir. Eterno desde 1978.</p>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="imagenes/pit.jpg" alt="Pitfall">
+            <div>
+                <h3>PITFALL!</h3>
+                <p>Harry saltando por la selva en una de las primeras aventuras de plataformas. Un juego que demostró de lo que el Atari 2600 era capaz.</p>
+            </div>
+        </div>
+
+        <div class="game-card">
+            <img src="imagenes/pacman.jfif" alt="Pac-Man Atari">
+            <div>
+                <h3>PAC-MAN</h3>
+                <p>El famoso comecocos llega al Atari. Aunque la versión fue criticada por sus diferencias con el arcade, vendió millones y es parte de la historia.</p>
+            </div>
+        </div>
+
+        <div class="nav-btns">
+            <a href="seccion_de_Game_Boy_advance.php" class="btn">← GAME BOY ADVANCE</a>
+            <a href="index.php" class="btn">↑ VOLVER AL INICIO</a>
+        </div>
+    </div>
+
+    <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>
