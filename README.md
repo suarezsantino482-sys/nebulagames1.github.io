@@ -37,3 +37,32 @@ Abre tu terminal y clona el proyecto dentro del directorio raíz de tu servidor 
 ```bash
 cd C:/xampp/htdocs/  # O la ruta correspondiente en tu sistema
 git clone [https://github.com/TU_USUARIO/NebulaGames.git](https://github.com/TU_USUARIO/NebulaGames.git)
+## Clase 5: Formularios y seguridad
+
+La carpeta `clase5/` contiene una demostración autocontenida del procesamiento de formularios del lado del servidor:
+
+- **POST, contacto:** recibe nombre, correo y mensaje; comprueba campos obligatorios, longitudes y formato de correo. Ante errores mantiene los valores ingresados y muestra mensajes de validación. Al completar el envío muestra una confirmación.
+- **GET, búsqueda:** recibe texto y consola desde la URL, limita la consola a una lista permitida y filtra un catálogo de ejemplo.
+- **Protección XSS:** normaliza entradas con `trim()` y `filter_var()` y escapa cada dato dinámico al insertarlo en HTML con `htmlspecialchars()` (`ENT_QUOTES`, UTF-8). La validación se realiza en el servidor; los atributos HTML son una ayuda adicional.
+
+### Ejecutar localmente
+
+Se necesita PHP 8 o superior. Desde la carpeta raíz del proyecto, ejecutá:
+
+```sh
+php -S localhost:8000
+```
+
+Luego abrí <http://localhost:8000/clase5/>. También se puede colocar el proyecto dentro de `htdocs` de XAMPP y entrar a `http://localhost/nebulagames1.github.io-main/clase5/`.
+
+GitHub Pages solo publica archivos estáticos y no ejecuta PHP. Para mostrar esta versión PHP públicamente, hace falta un hosting con PHP; de lo contrario, la demo local sirve para la presentación técnica.
+
+### Capturas para la entrega
+
+Todavía faltan agregar capturas reales, porque deben tomarse después de ejecutar la página con PHP. Guardalas dentro de `clase5/capturas/` y agregalas aquí:
+
+1. Formulario y confirmación luego de enviar datos válidos.
+2. Errores de validación y campos conservados después de enviar datos inválidos.
+3. Búsqueda GET con resultados y la consulta visible en la URL.
+
+Para probar XSS, ingresá texto como `<script>alert('xss')</script>` en el nombre o la búsqueda y verificá que se muestre como texto, sin ejecutarse.
