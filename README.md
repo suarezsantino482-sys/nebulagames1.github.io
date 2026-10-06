@@ -13,7 +13,7 @@ Nebula Games es una aplicación web interactiva desarrollada para la comunidad d
 
 ## 🎨 Enlace al Prototipo de Figma
 Puedes consultar el diseño web original y la maqueta de UI/UX en el siguiente enlace:
-👉 [Ver Prototipo de Nebula Games en Figma](PEGA_AQUI_TU_ENLACE_DE_FIGMA)
+👉 [Ver Prototipo de Nebula Games en Figma](https://www.figma.com/site/PVYqEAdTReC8EBLuKWpkEP/paguina-de-juegos?node-id=0-1&t=883P3YFZLWIHZ7uq-1)
 
 ---
 
