@@ -1,8 +1,9 @@
-<?php
-$titulo_pagina = 'Currículum Vitae';
-require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/includes/nav.php';
-?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Currículum Vitae</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0a0a1a; color: #e0e0ff; font-family: 'Courier New', monospace; }
@@ -25,6 +26,18 @@ require_once __DIR__ . '/includes/nav.php';
         .btn:hover { background: transparent; color: #ff00ff; }
         footer { background: #111133; border-top: 3px solid #ff00ff; text-align: center; padding: 20px; color: #888; font-size: 0.85rem; margin-top: 60px; }
     </style>
+</head>
+<body>
+    <header><h1>★ NEBULA GAMES ★</h1></header>
+ <nav>
+        <a href="index.html">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.html">Jugar</a>
+        <a href="seccion_de_blog_.html">Blog</a>
+        <a href="seccion_de_el_curso.html">Curso</a>
+        <a href="seccion_de_quienes_somos.html">Quiénes Somos</a>
+        <a href="seccion_de_cv.html">CV</a>
+        <a href="seccion_de_contacto.html">Formulario</a>
+    </nav>
     <div class="page-hero">
         <img src="imagenes/descarga.jfif" alt="CV">
         <h2>CURRÍCULUM VITAE</h2>
@@ -56,9 +69,11 @@ require_once __DIR__ . '/includes/nav.php';
             </div>
         </div>
 
-        <a href="index.php" class="btn">← VOLVER AL INICIO</a>
+        <a href="inicio.html" class="btn">← VOLVER AL INICIO</a>
         &nbsp;&nbsp;
-        <a href="secion_de_quienes_somos.php" class="btn">QUIÉNES SOMOS →</a>
+        <a href="secion_de_quienes_somos.html" class="btn">QUIÉNES SOMOS →</a>
     </div>
 
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
+    <footer><p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES &nbsp; ♥ ♥ ♥</p></footer>
+</body>
+</html>

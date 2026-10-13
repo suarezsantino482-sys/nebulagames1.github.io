@@ -1,9 +1,28 @@
-<?php
-$titulo_pagina = 'Inicio';
-$meta_description = 'Revive la nostalgia en Nebula Games. Descubre la historia de las consolas clásicas como la Super Nintendo, Sega Genesis y Atari, y juega a los mejores videojuegos retro gratis de los 80 y 90.';
-require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/includes/nav.php';
-?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Games | Juegos Retro y Consolas Clásicas Arcade</title>
+    <meta name="description" content="Revive la nostalgia en Nebula Games. Descubre la historia de las consolas clásicas como la Super Nintendo, Sega Genesis y Atari, y juega a los mejores videojuegos retro gratis de los 80 y 90.">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <h1>★ NEBULA GAMES ★</h1>
+        <button id="btnTema" type="button" class="btn-tema" aria-label="Cambiar tema">🌙 Modo oscuro</button>
+        <div id="relojArcade" class="reloj-arcade" aria-live="polite"></div>
+    </header>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="la_seccion_para_poder_jugar.html">Jugar</a>
+        <a href="seccion_de_blog_.html">Blog</a>
+        <a href="seccion_de_el_curso.html">Curso</a>
+        <a href="seccion_de_quienes_somos.html">Quiénes Somos</a>
+        <a href="seccion_de_cv.html">CV</a>
+        <a href="seccion_de_contacto.html">Formulario</a>
+    </nav>
 
     <main>
         <div class="hero">
@@ -11,7 +30,7 @@ require_once __DIR__ . '/includes/nav.php';
             <div class="hero-text">
                 <h2>INSERTA MONEDA PARA COMENZAR</h2>
                 <p>El mejor arcade retro de la web. Consolas clásicas, guías, blog y cursos.</p>
-                <a href="la_seccion_para_poder_jugar.php" class="btn">▶ JUGAR AHORA</a>
+                <a href="la_seccion_para_poder_jugar.html" class="btn">▶ JUGAR AHORA</a>
             </div>
         </div>
 
@@ -45,37 +64,63 @@ require_once __DIR__ . '/includes/nav.php';
                 </div>
             </section>
 
+            <section class="contact-form-section">
+                <h2 class="catalog-title">▌ FORMULARIO DE PRUEBA</h2>
+                <form id="formulario-principal" class="form-arcade" data-validate novalidate>
+                    <div class="form-group">
+                        <label for="nombre">🎮 Nombre / Gamertag</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: NeoPixel" required minlength="3">
+                        <small class="error-message" data-error-for="nombre"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">📧 Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" placeholder="correo@dominio.com" required>
+                        <small class="error-message" data-error-for="correo"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensaje">✍️ Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required minlength="10"></textarea>
+                        <small class="error-message" data-error-for="mensaje"></small>
+                    </div>
+
+                    <button type="submit" class="btn-submit">ENVIAR FORMULARIO</button>
+                </form>
+                <div id="resumenFormulario" class="resumen-formulario" hidden></div>
+            </section>
+
             <h2 class="catalog-title">▌ EXPLORA POR CONSOLA</h2>
             <div class="grid">
-                <a href="seccion_de_NES.php" class="card">
+                <a href="seccion_de_NES.html" class="card">
                     <img src="imagenes/nes.jfif" alt="Consola de mesa Nintendo Entertainment System original de ocho bits">
                     <h3>NINTENDO NES</h3>
                 </a>
-                <a href="seccion_de_SNES.php" class="card">
+                <a href="seccion_de_SNES.html" class="card">
                     <img src="imagenes/snes.jpg" alt="Consola Super Nintendo de 16 bits en su caja original">
                     <h3>SUPER NINTENDO</h3>
                 </a>
-                <a href="seccion_de_Sega_genesis.php" class="card">
+                <a href="seccion_de_Sega_genesis.html" class="card">
                     <img src="imagenes/genesis.jpg" alt="Consola Sega Genesis con su característico control de tres botones">
                     <h3>SEGA GENESIS</h3>
                 </a>
-                <a href="seccion_de_Sega_Master_System.php" class="card">
+                <a href="seccion_de_Sega_Master_System.html" class="card">
                     <img src="imagenes/Sega-Master-System-Set.jpg" alt="Consola Sega Master System con su joystick de palanca">
                     <h3>SEGA MASTER SYSTEM</h3>
                 </a>
-                <a href="seccion_de_Game_Boy.php" class="card">
+                <a href="seccion_de_Game_Boy.html" class="card">
                     <img src="imagenes/Game-Boy-FL.jpg" alt="Consola portátil Game Boy clásica de pantalla verde">
                     <h3>GAME BOY</h3>
                 </a>
-                <a href="sccion_de_Game_Boy_Color.php" class="card">
+                <a href="sccion_de_Game_Boy_Color.html" class="card">
                     <img src="imagenes/game boy color.jpg" alt="Consola portátil Game Boy Color de color violeta transparente">
                     <h3>GAME BOY COLOR</h3>
                 </a>
-                <a href="seccion_de_Game_Boy_advance.php" class="card">
+                <a href="seccion_de_Game_Boy_advance.html" class="card">
                     <img src="imagenes/advance.jfif" alt="Consola portátil Game Boy Advance en posición horizontal">
                     <h3>GAME BOY ADVANCE</h3>
                 </a>
-                <a href="seccion_de_atari_2600.php" class="card">
+                <a href="seccion_de_atari_2600.html" class="card">
                     <img src="imagenes/atari.jfif" alt="Consola clásica Atari 2600 con acabado de madera y palanca de mando">
                     <h3>ATARI 2600</h3>
                 </a>
@@ -83,4 +128,10 @@ require_once __DIR__ . '/includes/nav.php';
         </div>
     </main>
 
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
+    <footer>
+        <p>♥ ♥ ♥ &nbsp; © 2026 NEBULA GAMES · HECHO CON AMOR PIXELADO &nbsp; ♥ ♥ ♥</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
