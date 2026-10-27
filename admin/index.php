@@ -18,53 +18,53 @@ if (mb_strlen($search) > 120) {
     $search = mb_substr($search, 0, 120);
 }
 try {
-$consoles = load_game_options($pdo, 'consolas', 'id_consola');
-$genres = load_game_options($pdo, 'generos', 'id_genero');
-$consoleIds = array_map(static fn(array $option): string => (string) $option['id'], $consoles);
-$genreIds = array_map(static fn(array $option): string => (string) $option['id'], $genres);
-if ($console !== '' && !in_array($console, $consoleIds, true)) {
-    $errors[] = 'El filtro de consola no es válido.';
-    $console = '';
-}
-if ($genre !== '' && !in_array($genre, $genreIds, true)) {
-    $errors[] = 'El filtro de género no es válido.';
-    $genre = '';
-}
+    $consoles = load_game_options($pdo, 'consolas', 'id_consola');
+    $genres = load_game_options($pdo, 'generos', 'id_genero');
+    $consoleIds = array_map(static fn(array $option): string => (string) $option['id'], $consoles);
+    $genreIds = array_map(static fn(array $option): string => (string) $option['id'], $genres);
+    if ($console !== '' && !in_array($console, $consoleIds, true)) {
+        $errors[] = 'El filtro de consola no es válido.';
+        $console = '';
+    }
+    if ($genre !== '' && !in_array($genre, $genreIds, true)) {
+        $errors[] = 'El filtro de género no es válido.';
+        $genre = '';
+    }
 
-$conditions = [];
-$parameters = [];
-if ($search !== '') {
-    $conditions[] = '(j.titulo LIKE :titulo OR j.descripcion LIKE :descripcion OR g.nombre LIKE :genero)';
-    $parameters[':titulo'] = '%' . $search . '%';
-    $parameters[':descripcion'] = '%' . $search . '%';
-    $parameters[':genero'] = '%' . $search . '%';
-}
-if ($console !== '') {
-    $conditions[] = 'EXISTS (SELECT 1 FROM juego_consola filtro_jc WHERE filtro_jc.id_juego = j.id_juego AND filtro_jc.id_consola = :consola)';
-    $parameters[':consola'] = $console;
-}
-if ($genre !== '') {
-    $conditions[] = 'j.id_genero = :id_genero';
-    $parameters[':id_genero'] = $genre;
-}
-$sql = 'SELECT j.id_juego, j.titulo, j.anio_lanzamiento, j.descripcion, j.imagen_url,
-               g.nombre AS genero,
-               GROUP_CONCAT(DISTINCT c.nombre ORDER BY c.nombre SEPARATOR ", ") AS consolas
-        FROM juegos j
-        INNER JOIN generos g ON g.id_genero = j.id_genero
-        LEFT JOIN juego_consola jc ON jc.id_juego = j.id_juego
-        LEFT JOIN consolas c ON c.id_consola = jc.id_consola';
-if ($conditions !== []) {
-    $sql .= ' WHERE ' . implode(' AND ', $conditions);
-}
-$sql .= ' GROUP BY j.id_juego ORDER BY j.id_juego DESC';
+    $conditions = [];
+    $parameters = [];
+    if ($search !== '') {
+        $conditions[] = '(j.titulo LIKE :titulo OR j.descripcion LIKE :descripcion OR g.nombre LIKE :genero)';
+        $parameters[':titulo'] = '%' . $search . '%';
+        $parameters[':descripcion'] = '%' . $search . '%';
+        $parameters[':genero'] = '%' . $search . '%';
+    }
+    if ($console !== '') {
+        $conditions[] = 'EXISTS (SELECT 1 FROM juego_consola filtro_jc WHERE filtro_jc.id_juego = j.id_juego AND filtro_jc.id_consola = :consola)';
+        $parameters[':consola'] = $console;
+    }
+    if ($genre !== '') {
+        $conditions[] = 'j.id_genero = :id_genero';
+        $parameters[':id_genero'] = $genre;
+    }
+    $sql = 'SELECT j.id_juego, j.titulo, j.anio_lanzamiento, j.descripcion, j.imagen_url,
+                   g.nombre AS genero,
+                   GROUP_CONCAT(DISTINCT c.nombre ORDER BY c.nombre SEPARATOR ", ") AS consolas
+            FROM juegos j
+            INNER JOIN generos g ON g.id_genero = j.id_genero
+            LEFT JOIN juego_consola jc ON jc.id_juego = j.id_juego
+            LEFT JOIN consolas c ON c.id_consola = jc.id_consola';
+    if ($conditions !== []) {
+        $sql .= ' WHERE ' . implode(' AND ', $conditions);
+    }
+    $sql .= ' GROUP BY j.id_juego ORDER BY j.id_juego DESC';
     $statement = $pdo->prepare($sql);
     $statement->execute($parameters);
     $games = $statement->fetchAll();
 } catch (PDOException $exception) {
     log_database_error($exception);
     http_response_code(500);
-    $errors[] = 'No se pudo cargar el catálogo. Revisá que hayas importado database/clase6.sql.';
+    $errors[] = 'No se pudo cargar el catálogo. Revisá la conexión y el esquema schema.sql.';
 }
 
 $pageTitle = 'Catálogo de juegos';
