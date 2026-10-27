@@ -378,6 +378,192 @@ body.dark-mode .form-group select {
     letter-spacing: 1px;
 }
 
+.crud-main {
+    max-width: 1100px;
+    margin: 36px auto;
+    padding: 0 20px;
+}
+
+.crud-main h2,
+.crud-main h3 {
+    color: #00ffff;
+}
+
+.crud-main h2 {
+    margin-bottom: 12px;
+}
+
+.crud-main p {
+    margin: 10px 0;
+}
+
+.crud-actions,
+.crud-form-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.crud-button,
+.crud-link-button {
+    display: inline-block;
+    width: fit-content;
+    padding: 10px 16px;
+    border: 2px solid #ff00ff;
+    background: #ff00ff;
+    color: #ffffff;
+    font: bold 0.95rem 'Courier New', monospace;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.crud-button:hover,
+.crud-link-button:hover {
+    background: transparent;
+    color: #ff00ff;
+}
+
+.crud-button-danger {
+    border-color: #ff6b6b;
+    background: #a3213a;
+}
+
+.crud-panel,
+.crud-form {
+    margin: 20px 0;
+    padding: 20px;
+    border: 2px solid #00ffff;
+    background: #111133;
+}
+
+.crud-form {
+    display: grid;
+    gap: 16px;
+}
+
+.crud-form label {
+    display: block;
+    margin-bottom: 6px;
+    color: #00ffff;
+    font-weight: bold;
+}
+
+.crud-form input,
+.crud-form textarea,
+.crud-form select,
+.crud-search input,
+.crud-search select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #00ffff;
+    background: #0a0a1a;
+    color: #e0e0ff;
+    font: inherit;
+}
+
+.crud-field-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #00ffff;
+    font-weight: bold;
+}
+
+.crud-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+}
+
+.crud-checkboxes label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0;
+}
+
+.crud-checkboxes input {
+    width: auto;
+}
+
+.crud-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.crud-search {
+    display: grid;
+    grid-template-columns: minmax(180px, 1.3fr) repeat(2, minmax(140px, 1fr)) auto;
+    align-items: end;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.crud-search label {
+    display: block;
+    margin-bottom: 6px;
+    color: #00ffff;
+    font-weight: bold;
+}
+
+.crud-table-wrap {
+    overflow-x: auto;
+}
+
+.crud-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.crud-table th,
+.crud-table td {
+    padding: 10px;
+    border: 1px solid #00ffff;
+    text-align: left;
+    vertical-align: top;
+}
+
+.crud-table th {
+    background: #111133;
+    color: #00ffff;
+}
+
+.crud-notice {
+    margin: 16px 0;
+    padding: 12px 16px;
+    border: 2px solid;
+}
+
+.crud-notice-success {
+    border-color: #8cffb1;
+    color: #8cffb1;
+}
+
+.crud-notice-error {
+    border-color: #ff6b6b;
+    color: #ff9b9b;
+}
+
+.crud-errors {
+    padding-left: 22px;
+}
+
+.crud-inline-form {
+    display: inline;
+}
+
+@media (max-width: 700px) {
+    .crud-search {
+        grid-template-columns: 1fr;
+    }
+
+    .crud-table th,
+    .crud-table td {
+        padding: 8px;
+    }
+}
+
 .btn-tema {
     position: absolute;
     top: 18px;
@@ -549,4 +735,3 @@ footer {
     font-size: 0.85rem;
     margin-top: 60px;
 }
-
