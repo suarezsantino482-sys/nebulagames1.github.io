@@ -1,5 +1,104 @@
 # Nebula Games
 
+Sitio web en español dedicado a videojuegos y consolas retro. El proyecto reúne un catálogo de juegos por plataforma y género, páginas informativas, una sala arcade, registro e inicio de sesión, perfiles y administración del catálogo.
+
+## Proyecto y refactorización
+
+La maqueta se evolucionó a PHP para ejecutarse en un servidor local. Las vistas reutilizan plantillas SSI (`includes/header.php`, `includes/nav.php` e `includes/footer.php`), generan títulos y navegación desde el servidor (SSR) y obtienen sus parámetros globales de `.env` o de la configuración local de PHP.
+
+## Prototipo de Figma
+
+**Enlace de lectura:** pendiente de agregar el enlace público al prototipo original de Nebula Games.
+
+## Tecnologías
+
+- HTML5 y CSS3 (hoja de estilos propia y diseño adaptable).
+- JavaScript.
+- PHP 8.x, con PDO para el acceso a MySQL.
+- MySQL/MariaDB.
+- Apache mediante XAMPP o Laragon.
+
+> Bootstrap no está incluido actualmente; la interfaz utiliza CSS propio.
+
+## Requisitos
+
+- XAMPP o Laragon con Apache y MySQL/MariaDB.
+- PHP 8.0 o superior con las extensiones PDO MySQL, Fileinfo y Mbstring.
+- Git, si vas a clonar el repositorio.
+
+## Instalación y ejecución local
+
+1. Cloná el repositorio en la carpeta pública de Apache. Por ejemplo, con XAMPP:
+
+   ```bash
+   cd C:\xampp\htdocs
+   git clone <URL_DEL_REPOSITORIO> Nebula
+   ```
+
+   En Laragon, usá su carpeta `www`.
+
+2. Copiá `.env.example` como `.env` en la raíz y revisá los valores de la aplicación y la conexión. El archivo `.env` es local y está excluido de Git.
+3. Iniciá Apache y MySQL desde el panel de XAMPP/Laragon.
+4. Abrí phpMyAdmin y ejecutá `schema.sql` para crear la base de datos `nebula_games`.
+5. Opcionalmente, ejecutá `catalogo_juegos.sql` para cargar el catálogo de ejemplo. `consultas.sql` sirve para validar operaciones CRUD y termina eliminando su registro temporal de prueba.
+6. Abrí `http://localhost/Nebula/`.
+
+Para instalaciones anteriores que tengan `usuarios_app`, **no vuelvas a importar `schema.sql` sobre la base existente**. Exportá una copia de seguridad y ejecutá una sola vez `migrar_usuarios.sql` desde phpMyAdmin.
+
+## SSI, SSR y configuración
+
+- `includes/header.php` genera el documento HTML, los metadatos, la hoja de estilos común y el título dinámico definido mediante `$titulo_pagina` antes de incluir la plantilla.
+- `includes/nav.php` renderiza la navegación y marca la sección actual con la clase `active` y `aria-current="page"`.
+- `includes/footer.php` centraliza el pie de página y carga `script.js`.
+- [`config/env.php`](./config/env.php) contiene la carga de configuración compartida y valores predeterminados seguros para desarrollo.
+- [`.env.example`](./.env.example) documenta las variables esperadas. No guardes contraseñas reales en ese archivo ni publiques `.env`.
+- `.gitignore` excluye `.env` para evitar subir configuraciones locales.
+
+## Base de datos (TP6)
+
+- [`normalizacion.md`](./normalizacion.md): ejemplo sin normalizar y desarrollo de 1FN, 2FN y 3FN.
+- [`schema.sql`](./schema.sql): esquema MySQL con tablas, PK, FK, auditoría e índices.
+- [`consultas.sql`](./consultas.sql): datos y consultas CRUD de demostración.
+- [`migrar_usuarios.sql`](./migrar_usuarios.sql): migración para la tabla de usuarios antigua.
+- [`catalogo_juegos.sql`](./catalogo_juegos.sql): carga opcional del catálogo retro.
+
+Las cuentas nuevas se almacenan en `usuarios`, relacionadas con `roles`; las contraseñas se guardan con `password_hash()`. Para habilitar una cuenta administradora después de registrarla, ejecutá en phpMyAdmin (reemplazando el correo):
+
+```sql
+USE nebula_games;
+
+UPDATE usuarios
+SET id_rol = (SELECT id_rol FROM roles WHERE nombre = 'admin')
+WHERE email = 'admin@example.com';
+```
+
+## TP8: sesiones, autenticación y roles
+
+El módulo está integrado en la aplicación principal y usa PDO/MySQL:
+
+- **Base de datos:** [`schema.sql`](./schema.sql) define `usuarios` con `id_usuario` autoincremental, nombre, email único, `password_hash` de 255 caracteres, marcas de tiempo y una FK a `roles`. El rol se normaliza en una tabla maestra en vez de repetirse como texto en cada usuario.
+- **Registro e inicio de sesión:** [`auth/login.php`](./auth/login.php) contiene ambos formularios. El registro valida nombre, email y contraseña, verifica que el email no exista y guarda el hash generado con `password_hash(..., PASSWORD_BCRYPT)` mediante consulta preparada. El login recupera el hash con PDO, lo comprueba usando `password_verify()`, regenera el ID de sesión y guarda `usuario_id`, `usuario_nombre` y `rol` en `$_SESSION`.
+- **Cookies de sesión:** [`includes/session_bootstrap.php`](./includes/session_bootstrap.php) inicia la sesión con cookies `HttpOnly`, `SameSite=Lax` y `Secure` cuando la conexión usa HTTPS.
+- **Control de acceso:** [`includes/auth_guard.php`](./includes/auth_guard.php) redirige a la pantalla de login si no hay sesión y restringe por rol cuando corresponde. Protege, entre otras, [`panel.php`](./panel.php) (usuario autenticado) y [`admin_panel.php`](./admin_panel.php) / [`admin/index.php`](./admin/index.php) (solo `admin`).
+- **Cierre de sesión:** [`auth/logout.php`](./auth/logout.php) vacía `$_SESSION`, expira la cookie y destruye la sesión antes de redirigir al inicio del proyecto.
+
+Para probarlo localmente, creá una cuenta desde `http://localhost/Nebula/auth/login.php#registro`, iniciá sesión y abrí **Mi panel** desde el botón **Cuenta**. El acceso de administrador se habilita cambiando el rol de esa cuenta con el SQL de la sección Administración. Al cerrar sesión, las rutas protegidas deben volver a solicitar autenticación.
+
+## Evidencia para la entrega
+
+Guardá capturas propias en `docs/capturas/` y actualizá los enlaces siguientes antes de entregar:
+
+- [ ] Sitio ejecutándose en `http://localhost/Nebula/`.
+- [ ] Código de `includes/header.php`, `includes/nav.php` e `includes/footer.php`.
+- [ ] Títulos distintos y enlace activo al navegar entre secciones.
+- [ ] `.env.example` presente en el repositorio (sin publicar `.env`).
+- [x] TP8: registro, login, sesiones seguras, rutas protegidas por autenticación y rol, y logout.
+
+## Git y entrega
+
+El flujo solicitado para la entrega es trabajar en una rama como `feature/migracion-php-ssi`, integrar los cambios mediante Pull Request a `main` y entregar el enlace público del repositorio. Usá commits pequeños y descriptivos, por ejemplo `feat: modulariza las vistas con SSI y títulos dinámicos`.
+
+
 Sitio web de videojuegos retro. El sitio conserva sus páginas actuales; el
 procesamiento de formularios de la **Clase 5** está en [`clase5/`](./clase5/)
 y la administración del catálogo se integra desde la sección existente **Jugar**.
