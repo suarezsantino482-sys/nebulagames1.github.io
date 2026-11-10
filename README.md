@@ -99,11 +99,9 @@ Guardá capturas propias en `docs/capturas/` y actualizá los enlaces siguientes
 El flujo solicitado para la entrega es trabajar en una rama como `feature/migracion-php-ssi`, integrar los cambios mediante Pull Request a `main` y entregar el enlace público del repositorio. Usá commits pequeños y descriptivos, por ejemplo `feat: modulariza las vistas con SSI y títulos dinámicos`.
 
 
-Sitio web de videojuegos retro. El sitio conserva sus páginas actuales; el
-procesamiento de formularios de la **Clase 5** está en [`clase5/`](./clase5/)
-y la administración del catálogo se integra desde la sección existente **Jugar**.
+## Clase 5: Seguridad web, formularios POST y GET
 
-## Clase 5: formularios y procesamiento seguro
+El procesamiento de formularios de esta entrega está en [`clase5/`](./clase5/).
 
 La página [`clase5/index.php`](./clase5/index.php) incluye dos formularios:
 
@@ -152,3 +150,47 @@ conservados, el mensaje de éxito y una búsqueda GET filtrada:
 ![Envío POST exitoso](./clase5/capturas/post-exito.png)
 
 ![Resultados de búsqueda GET](./clase5/capturas/get-busqueda.png)
+
+## Migración a PHP, Modularización (SSI) y Renderizado Server-Side (SSR)
+
+Objetivo: convertir la maqueta estática del Hito 1 en un sitio PHP con plantillas comunes, título dinámico y configuración por entorno.
+
+- **Plantillas SSI:** `includes/header.php`, `includes/nav.php` y `includes/footer.php`, incluidas con `require_once` desde las vistas.
+- **Título dinámico:** cada vista define `$titulo_pagina` antes de incluir `header.php`.
+- **Navegación activa:** `nav.php` marca el enlace de la sección actual con `active` y `aria-current="page"`.
+- **Configuración (.env):** variables globales de nombre del sitio, correo de contacto y `APP_ENV=local`. `.env` está excluido de Git; `.env.example` sirve de plantilla.
+
+Estado de la migración (pendiente de completar):
+
+- [ ] Renombrar las páginas `.html` restantes a `.php` (la raíz aún contiene archivos `.html`).
+- [ ] Incorporar `config/env.php` y `.env.example` al repositorio.
+- [ ] Capturas de sitio ejecutándose, código de las plantillas y del `.env.example`.
+
+## Persistencia y conexión PHP-MySQL segura (PDO y CRUD)
+
+Objetivo: conectar PHP con MySQL mediante PDO y construir un CRUD integrado al sitio.
+
+- **Conexión:** [`config/conexion.php`](./config/conexion.php) crea la instancia PDO con `ERRMODE_EXCEPTION` dentro de un bloque `try-catch (PDOException)`.
+- **Módulo:** [`admin/`](./admin/) con `index.php` (listado), `crear.php` (alta), `editar.php` (modificación) y `eliminar.php` (baja).
+- **Seguridad:** todas las consultas usan sentencias preparadas con marcadores nombrados, y las variables impresas en HTML pasan por `htmlspecialchars()`.
+- **Entidad:** juegos, con las tablas definidas en [`schema.sql`](./schema.sql).
+
+## Manejo de Estado, Sesiones y Autenticación
+
+Objetivo: persistir el estado del usuario con `$_SESSION` y cookies seguras, y proteger rutas por rol.
+
+- **Registro y login:** [`auth/register.php`](./auth/register.php) y [`auth/login.php`](./auth/login.php). El registro verifica que el email no exista y guarda el hash con `password_hash(..., PASSWORD_BCRYPT)`. El login compara con `password_verify()` y, ante credenciales correctas, regenera el ID de sesión y guarda `usuario_id`, `usuario_nombre` y `rol`.
+- **Logout:** [`auth/logout.php`](./auth/logout.php) vacía `$_SESSION`, expira la cookie de sesión y ejecuta `session_destroy()`.
+- **Control de acceso:** las vistas protegidas verifican `$_SESSION['usuario_id']` y, en el área de administración, el rol `admin`.
+
+Estado (pendiente de completar):
+
+- [ ] Guardián reutilizable `includes/auth_guard.php` (redirige a `login.php?error=acceso_denegado`).
+- [ ] Gestor de cookies de sesión `includes/session_bootstrap.php` (`HttpOnly`, `SameSite`, `Secure`).
+- [ ] Dos vistas protegidas por sesión y una restringida por rol.
+
+## Base de datos: modelo y normalización
+
+- [`normalizacion.md`](./normalizacion.md) (pendiente de incluir en el repositorio): desarrollo de 1FN, 2FN y 3FN.
+- [`schema.sql`](./schema.sql): tablas con PK, FK, auditoría (`created_at`) e índices.
+- [`consultas.sql`](./consultas.sql): datos de demostración y consultas CRUD.
