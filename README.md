@@ -60,11 +60,23 @@ Objetivo: convertir la maqueta estática del Hito 1 en un sitio PHP con plantill
 - [`.env.example`](./.env.example) documenta las variables esperadas. No guardes contraseñas reales en ese archivo ni publiques `.env`.
 - `.gitignore` excluye `.env` para evitar subir configuraciones locales.
 
+  1. Vista previa del formulario de Registro (POST)
+Descripción: Captura del formulario de registro de usuarios (registro.php) funcionando en el navegador local, mostrando los campos limpios y listos para capturar datos de forma segura mediante el método POST con protección XSS.
+
 ![Servidor Local](./docs/capturas/ssi-ssr/servidor-local.png)
+
+2. Mensajes de validación y persistencia de datos (POST)
+Descripción: Visualización del formulario tras un intento de envío con errores (por ejemplo, campos vacíos o correo ya registrado), donde se aprecian claramente los mensajes de advertencia en pantalla y cómo los datos ingresados previamente se conservan en los inputs.
 
 ![Plantillas SSI](./docs/capturas/ssi-ssr/plantillas-ssi.png)
 
+3. Éxito en el registro y almacenamiento del Hash (Base de Datos)
+Descripción: Captura combinada o vista del sistema tras un registro exitoso, evidenciando el mensaje de confirmación y el registro creado en la base de datos de phpMyAdmin con su respectiva contraseña encriptada (password_hash).
+
 ![Navegación Dinámica](./docs/capturas/ssi-ssr/navegacion.png)
+
+4. Módulo de Autenticación / Login y Acceso al Panel
+Descripción: Pantalla de inicio de sesión (login.php) completada con credenciales válidas, mostrando el redireccionamiento correcto hacia el panel protegido del usuario (panel.php) gracias a la gestión de sesiones ($_SESSION).
 
 ![Variables de Entorno](./docs/capturas/ssi-ssr/env-example.png)
 
@@ -111,12 +123,18 @@ preparadas, validación de servidor, escape HTML y token CSRF.
 
 ### Capturas de funcionamiento
 
-Las imágenes muestran la validación del formulario POST con los campos
-conservados, el mensaje de éxito y una búsqueda GET filtrada:
+1. Validación de errores y persistencia de datos (POST)
+Descripción: Captura del formulario de envío por POST (como el de contacto o registro) tras un intento fallido. Se aprecian claramente los mensajes de advertencia o error en pantalla y cómo los datos que el usuario ya había escrito se conservan en los inputs (evitando que tenga que reescribirlos).
 
 ![Errores de validación POST y valores conservados](./clase5/capturas/post-validacion.png)
 
+2. Éxito en el envío del formulario (POST)
+Descripción: Visualización del mismo formulario POST completado correctamente y procesado por el servidor. Muestra el mensaje claro en pantalla que confirma el éxito de la operación, aplicando sanitización estricta (htmlspecialchars) para prevenir ataques XSS.
+
 ![Envío POST exitoso](./clase5/capturas/post-exito.png)
+
+3. Resultados de búsqueda o filtrado (GET)
+Descripción: Captura del módulo de búsqueda o filtros funcionando mediante el método GET. Muestra cómo los parámetros enviados se reflejan de forma segura en la URL y cómo el sistema devuelve los resultados específicos filtrados en la interfaz.
 
 ![Resultados de búsqueda GET](./clase5/capturas/get-busqueda.png)
 
@@ -135,14 +153,14 @@ Las cuentas nuevas se almacenan en la tabla `usuarios` y están relacionadas con
 Para habilitar una cuenta administradora después de registrarla, podés ejecutar la siguiente sentencia en phpMyAdmin (reemplazando el correo):
 
 Para habilitar una cuenta administradora después de registrarla, podés ejecutar la siguiente sentencia en phpMyAdmin (reemplazando el correo):
-
-``sql
+```
+sql
 USE nebula_games;
 
 UPDATE usuarios
 SET id_rol = (SELECT id_rol FROM roles WHERE nombre = 'admin')
 WHERE email = 'tu-correo@example.com';
-
+```
 ## TP Persistencia y conexión PHP-MySQL segura (PDO y CRUD)
 
 Objetivo: conectar PHP con MySQL mediante PDO y construir un CRUD integrado al sitio.
