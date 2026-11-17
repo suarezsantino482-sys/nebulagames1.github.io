@@ -134,12 +134,14 @@ Las cuentas nuevas se almacenan en la tabla `usuarios` y están relacionadas con
 
 Para habilitar una cuenta administradora después de registrarla, podés ejecutar la siguiente sentencia en phpMyAdmin (reemplazando el correo):
 
-* sql
+Para habilitar una cuenta administradora después de registrarla, podés ejecutar la siguiente sentencia en phpMyAdmin (reemplazando el correo):
+
+``sql
 USE nebula_games;
 
 UPDATE usuarios
 SET id_rol = (SELECT id_rol FROM roles WHERE nombre = 'admin')
-WHERE email = 'tu-correo@example.com´;
+WHERE email = 'tu-correo@example.com';
 
 ## TP Persistencia y conexión PHP-MySQL segura (PDO y CRUD)
 
