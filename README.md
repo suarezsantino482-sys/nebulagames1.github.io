@@ -45,8 +45,14 @@ La maqueta se evolucionó a PHP para ejecutarse en un servidor local. Las vistas
 
 Para instalaciones anteriores que tengan `usuarios_app`, **no vuelvas a importar `schema.sql` sobre la base existente**. Exportá una copia de seguridad y ejecutá una sola vez `migrar_usuarios.sql` desde phpMyAdmin.
 
-## SSI, SSR y configuración
+## Migración a PHP, Modularización (SSI) y Renderizado Server-Side (SSR)
 
+Objetivo: convertir la maqueta estática del Hito 1 en un sitio PHP con plantillas comunes, título dinámico y configuración por entorno.
+
+- **Plantillas SSI:** `includes/header.php`, `includes/nav.php` y `includes/footer.php`, incluidas con `require_once` desde las vistas.
+- **Título dinámico:** cada vista define `$titulo_pagina` antes de incluir `header.php`.
+- **Navegación activa:** `nav.php` marca el enlace de la sección actual con `active` y `aria-current="page"`.
+- **Configuración (.env):** variables globales de nombre del sitio, correo de contacto y `APP_ENV=local`. `.env` está excluido de Git; `.env.example` sirve de plantilla.
 - `includes/header.php` genera el documento HTML, los metadatos, la hoja de estilos común y el título dinámico definido mediante `$titulo_pagina` antes de incluir la plantilla.
 - `includes/nav.php` renderiza la navegación y marca la sección actual con la clase `active` y `aria-current="page"`.
 - `includes/footer.php` centraliza el pie de página y carga `script.js`.
@@ -54,52 +60,13 @@ Para instalaciones anteriores que tengan `usuarios_app`, **no vuelvas a importar
 - [`.env.example`](./.env.example) documenta las variables esperadas. No guardes contraseñas reales en ese archivo ni publiques `.env`.
 - `.gitignore` excluye `.env` para evitar subir configuraciones locales.
 
-## Base de datos (TP6)
+Estado de la migración (pendiente de completar):
 
-- [`normalizacion.md`](./normalizacion.md): ejemplo sin normalizar y desarrollo de 1FN, 2FN y 3FN.
-- [`schema.sql`](./schema.sql): esquema MySQL con tablas, PK, FK, auditoría e índices.
-- [`consultas.sql`](./consultas.sql): datos y consultas CRUD de demostración.
-- [`migrar_usuarios.sql`](./migrar_usuarios.sql): migración para la tabla de usuarios antigua.
-- [`catalogo_juegos.sql`](./catalogo_juegos.sql): carga opcional del catálogo retro.
+- [ ] Renombrar las páginas `.html` restantes a `.php` (la raíz aún contiene archivos `.html`).
+- [ ] Incorporar `config/env.php` y `.env.example` al repositorio.
+- [ ] Capturas de sitio ejecutándose, código de las plantillas y del `.env.example`.
 
-Las cuentas nuevas se almacenan en `usuarios`, relacionadas con `roles`; las contraseñas se guardan con `password_hash()`. Para habilitar una cuenta administradora después de registrarla, ejecutá en phpMyAdmin (reemplazando el correo):
-
-```sql
-USE nebula_games;
-
-UPDATE usuarios
-SET id_rol = (SELECT id_rol FROM roles WHERE nombre = 'admin')
-WHERE email = 'admin@example.com';
-```
-
-## TP8: sesiones, autenticación y roles
-
-El módulo está integrado en la aplicación principal y usa PDO/MySQL:
-
-- **Base de datos:** [`schema.sql`](./schema.sql) define `usuarios` con `id_usuario` autoincremental, nombre, email único, `password_hash` de 255 caracteres, marcas de tiempo y una FK a `roles`. El rol se normaliza en una tabla maestra en vez de repetirse como texto en cada usuario.
-- **Registro e inicio de sesión:** [`auth/login.php`](./auth/login.php) contiene ambos formularios. El registro valida nombre, email y contraseña, verifica que el email no exista y guarda el hash generado con `password_hash(..., PASSWORD_BCRYPT)` mediante consulta preparada. El login recupera el hash con PDO, lo comprueba usando `password_verify()`, regenera el ID de sesión y guarda `usuario_id`, `usuario_nombre` y `rol` en `$_SESSION`.
-- **Cookies de sesión:** [`includes/session_bootstrap.php`](./includes/session_bootstrap.php) inicia la sesión con cookies `HttpOnly`, `SameSite=Lax` y `Secure` cuando la conexión usa HTTPS.
-- **Control de acceso:** [`includes/auth_guard.php`](./includes/auth_guard.php) redirige a la pantalla de login si no hay sesión y restringe por rol cuando corresponde. Protege, entre otras, [`panel.php`](./panel.php) (usuario autenticado) y [`admin_panel.php`](./admin_panel.php) / [`admin/index.php`](./admin/index.php) (solo `admin`).
-- **Cierre de sesión:** [`auth/logout.php`](./auth/logout.php) vacía `$_SESSION`, expira la cookie y destruye la sesión antes de redirigir al inicio del proyecto.
-
-Para probarlo localmente, creá una cuenta desde `http://localhost/Nebula/auth/login.php#registro`, iniciá sesión y abrí **Mi panel** desde el botón **Cuenta**. El acceso de administrador se habilita cambiando el rol de esa cuenta con el SQL de la sección Administración. Al cerrar sesión, las rutas protegidas deben volver a solicitar autenticación.
-
-## Evidencia para la entrega
-
-Guardá capturas propias en `docs/capturas/` y actualizá los enlaces siguientes antes de entregar:
-
-- [ ] Sitio ejecutándose en `http://localhost/Nebula/`.
-- [ ] Código de `includes/header.php`, `includes/nav.php` e `includes/footer.php`.
-- [ ] Títulos distintos y enlace activo al navegar entre secciones.
-- [ ] `.env.example` presente en el repositorio (sin publicar `.env`).
-- [x] TP8: registro, login, sesiones seguras, rutas protegidas por autenticación y rol, y logout.
-
-## Git y entrega
-
-El flujo solicitado para la entrega es trabajar en una rama como `feature/migracion-php-ssi`, integrar los cambios mediante Pull Request a `main` y entregar el enlace público del repositorio. Usá commits pequeños y descriptivos, por ejemplo `feat: modulariza las vistas con SSI y títulos dinámicos`.
-
-
-## Clase 5: Seguridad web, formularios POST y GET
+## Seguridad web: formularios POST y GET
 
 El procesamiento de formularios de esta entrega está en [`clase5/`](./clase5/).
 
@@ -151,22 +118,33 @@ conservados, el mensaje de éxito y una búsqueda GET filtrada:
 
 ![Resultados de búsqueda GET](./clase5/capturas/get-busqueda.png)
 
-## Migración a PHP, Modularización (SSI) y Renderizado Server-Side (SSR)
+## TP Bases de datos
 
-Objetivo: convertir la maqueta estática del Hito 1 en un sitio PHP con plantillas comunes, título dinámico y configuración por entorno.
+### Base de datos (TP6)
 
-- **Plantillas SSI:** `includes/header.php`, `includes/nav.php` y `includes/footer.php`, incluidas con `require_once` desde las vistas.
-- **Título dinámico:** cada vista define `$titulo_pagina` antes de incluir `header.php`.
-- **Navegación activa:** `nav.php` marca el enlace de la sección actual con `active` y `aria-current="page"`.
-- **Configuración (.env):** variables globales de nombre del sitio, correo de contacto y `APP_ENV=local`. `.env` está excluido de Git; `.env.example` sirve de plantilla.
+- [`normalizacion.md`](./normalizacion.md): ejemplo sin normalizar y desarrollo de 1FN, 2FN y 3FN.
+- [`schema.sql`](./schema.sql): esquema MySQL con tablas, PK, FK, auditoría e índices.
+- [`consultas.sql`](./consultas.sql): datos y consultas CRUD de demostración.
+- [`migrar_usuarios.sql`](./migrar_usuarios.sql): migración para la tabla de usuarios antigua.
+- [`catalogo_juegos.sql`](./catalogo_juegos.sql): carga opcional del catálogo retro.
 
-Estado de la migración (pendiente de completar):
+Las cuentas nuevas se almacenan en `usuarios`, relacionadas con `roles`; las contraseñas se guardan con `password_hash()`. Para habilitar una cuenta administradora después de registrarla, ejecutá en phpMyAdmin (reemplazando el correo):
 
-- [ ] Renombrar las páginas `.html` restantes a `.php` (la raíz aún contiene archivos `.html`).
-- [ ] Incorporar `config/env.php` y `.env.example` al repositorio.
-- [ ] Capturas de sitio ejecutándose, código de las plantillas y del `.env.example`.
+```sql
+USE nebula_games;
 
-## Persistencia y conexión PHP-MySQL segura (PDO y CRUD)
+UPDATE usuarios
+SET id_rol = (SELECT id_rol FROM roles WHERE nombre = 'admin')
+WHERE email = 'admin@example.com';
+```
+
+### Modelo y normalización
+
+- [`normalizacion.md`](./normalizacion.md) (pendiente de incluir en el repositorio): desarrollo de 1FN, 2FN y 3FN.
+- [`schema.sql`](./schema.sql): tablas con PK, FK, auditoría (`created_at`) e índices.
+- [`consultas.sql`](./consultas.sql): datos de demostración y consultas CRUD.
+
+## TP Persistencia y conexión PHP-MySQL segura (PDO y CRUD)
 
 Objetivo: conectar PHP con MySQL mediante PDO y construir un CRUD integrado al sitio.
 
@@ -175,7 +153,19 @@ Objetivo: conectar PHP con MySQL mediante PDO y construir un CRUD integrado al s
 - **Seguridad:** todas las consultas usan sentencias preparadas con marcadores nombrados, y las variables impresas en HTML pasan por `htmlspecialchars()`.
 - **Entidad:** juegos, con las tablas definidas en [`schema.sql`](./schema.sql).
 
-## Manejo de Estado, Sesiones y Autenticación
+## TP Manejo de Estado, Sesiones y Autenticación
+
+### TP8: sesiones, autenticación y roles
+
+El módulo está integrado en la aplicación principal y usa PDO/MySQL:
+
+- **Base de datos:** [`schema.sql`](./schema.sql) define `usuarios` con `id_usuario` autoincremental, nombre, email único, `password_hash` de 255 caracteres, marcas de tiempo y una FK a `roles`. El rol se normaliza en una tabla maestra en vez de repetirse como texto en cada usuario.
+- **Registro e inicio de sesión:** [`auth/login.php`](./auth/login.php) contiene ambos formularios. El registro valida nombre, email y contraseña, verifica que el email no exista y guarda el hash generado con `password_hash(..., PASSWORD_BCRYPT)` mediante consulta preparada. El login recupera el hash con PDO, lo comprueba usando `password_verify()`, regenera el ID de sesión y guarda `usuario_id`, `usuario_nombre` y `rol` en `$_SESSION`.
+- **Cookies de sesión:** [`includes/session_bootstrap.php`](./includes/session_bootstrap.php) inicia la sesión con cookies `HttpOnly`, `SameSite=Lax` y `Secure` cuando la conexión usa HTTPS.
+- **Control de acceso:** [`includes/auth_guard.php`](./includes/auth_guard.php) redirige a la pantalla de login si no hay sesión y restringe por rol cuando corresponde. Protege, entre otras, [`panel.php`](./panel.php) (usuario autenticado) y [`admin_panel.php`](./admin_panel.php) / [`admin/index.php`](./admin/index.php) (solo `admin`).
+- **Cierre de sesión:** [`auth/logout.php`](./auth/logout.php) vacía `$_SESSION`, expira la cookie y destruye la sesión antes de redirigir al inicio del proyecto.
+
+Para probarlo localmente, creá una cuenta desde `http://localhost/Nebula/auth/login.php#registro`, iniciá sesión y abrí **Mi panel** desde el botón **Cuenta**. El acceso de administrador se habilita cambiando el rol de esa cuenta con el SQL de la sección Administración. Al cerrar sesión, las rutas protegidas deben volver a solicitar autenticación.
 
 Objetivo: persistir el estado del usuario con `$_SESSION` y cookies seguras, y proteger rutas por rol.
 
@@ -189,8 +179,39 @@ Estado (pendiente de completar):
 - [ ] Gestor de cookies de sesión `includes/session_bootstrap.php` (`HttpOnly`, `SameSite`, `Secure`).
 - [ ] Dos vistas protegidas por sesión y una restringida por rol.
 
-## Base de datos: modelo y normalización
+## Evidencia para la entrega
 
-- [`normalizacion.md`](./normalizacion.md) (pendiente de incluir en el repositorio): desarrollo de 1FN, 2FN y 3FN.
-- [`schema.sql`](./schema.sql): tablas con PK, FK, auditoría (`created_at`) e índices.
-- [`consultas.sql`](./consultas.sql): datos de demostración y consultas CRUD.
+Guardá capturas propias en `docs/capturas/` y actualizá los enlaces siguientes antes de entregar:
+
+- [ ] Sitio ejecutándose en `http://localhost/Nebula/`.
+- [ ] Código de `includes/header.php`, `includes/nav.php` e `includes/footer.php`.
+- [ ] Títulos distintos y enlace activo al navegar entre secciones.
+- [ ] `.env.example` presente en el repositorio (sin publicar `.env`).
+- [x] TP8: registro, login, sesiones seguras, rutas protegidas por autenticación y rol, y logout.
+
+## Git y entrega
+
+El flujo solicitado para la entrega es trabajar en una rama como `feature/migracion-php-ssi`, integrar los cambios mediante Pull Request a `main` y entregar el enlace público del repositorio. Usá commits pequeños y descriptivos, por ejemplo `feat: modulariza las vistas con SSI y títulos dinámicos`.
+
+## Ubicación de imágenes y capturas por trabajo práctico
+
+Las imágenes que se muestran en las páginas del sitio van en `imagenes/`. En el archivo PHP de cada página, cambia la ruta del atributo `src` de la etiqueta `<img>`, por ejemplo `src="imagenes/retro.jpg"`. Las imágenes guardadas en el catálogo se indican desde el campo `imagen_url` del formulario de administración; las imágenes de perfil se gestionan en `uploads/perfiles/`.
+
+Las capturas de evidencia de los TP no van en `imagenes/`. Guárdalas en `docs/capturas/`, organizadas por trabajo práctico. Si las carpetas aún no existen, créalas:
+
+| TP o entrega | Capturas sugeridas | Ubicación |
+| --- | --- | --- |
+| Hito 1 / sitio web | Inicio, secciones y diseño de la página | `docs/capturas/hito1/` |
+| Clase 5: GET y POST | Búsqueda, errores de validación y envío exitoso | `clase5/capturas/` (ya incluye estas capturas) |
+| TP6: base de datos y normalización | Tablas, relaciones en phpMyAdmin y consultas CRUD | `docs/capturas/tp6/` |
+| Migración PHP, SSI y SSR | Sitio ejecutándose, plantillas reutilizadas, títulos y navegación activa | `docs/capturas/ssi-ssr/` |
+| Persistencia y CRUD con PDO | Listado, alta, edición y eliminación de juegos | `docs/capturas/crud/` |
+| TP8: sesiones, autenticación y roles | Registro, login, panel de usuario, permisos de administrador y logout | `docs/capturas/tp8/` |
+
+Para mostrar una captura guardada en `docs/capturas/tp6/` dentro de este README, agrega una referencia Markdown como la siguiente y reemplaza el nombre por el de tu archivo:
+
+```markdown
+![Esquema de la base de datos del TP6](./docs/capturas/tp6/esquema-db.png)
+```
+
+Para cambiar un enlace a una imagen externa, reemplaza la dirección dentro de `src="..."` en el PHP de la página que la muestra. Para las imágenes de este README, cambia la ruta dentro de `![descripción](ruta/de/la/imagen.png)`.
