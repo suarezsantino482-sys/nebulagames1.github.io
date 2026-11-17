@@ -121,30 +121,25 @@ conservados, el mensaje de éxito y una búsqueda GET filtrada:
 ![Resultados de búsqueda GET](./clase5/capturas/get-busqueda.png)
 
 ## TP Bases de datos
+## TP6: Base de Datos y Normalización
 
-### Base de datos (TP6)
+- **[`normalizacion.md`](./normalizacion.md):** Ejemplo sin normalizar y desarrollo completo de 1FN, 2FN y 3FN de la entidad principal.
+- **[`schema.sql`](./schema.sql):** Esquema MySQL completo con tablas, claves primarias (PK), claves foráneas (FK), campos de auditoría (`created_at`) e índices de optimización.
+- **[`consultas.sql`](./consultas.sql):** Datos de prueba y consultas CRUD de demostración (SELECT, INNER JOIN, UPDATE, DELETE).
+- **[`migrar_usuarios.sql`](./migrar_usuarios.sql):** Script de migración para la tabla de usuarios anterior.
+- **[`catalogo_juegos.sql`](./catalogo_juegos.sql):** Carga opcional del catálogo retro de juegos.
 
-- [`normalizacion.md`](./normalizacion.md): ejemplo sin normalizar y desarrollo de 1FN, 2FN y 3FN.
-- [`schema.sql`](./schema.sql): esquema MySQL con tablas, PK, FK, auditoría e índices.
-- [`consultas.sql`](./consultas.sql): datos y consultas CRUD de demostración.
-- [`migrar_usuarios.sql`](./migrar_usuarios.sql): migración para la tabla de usuarios antigua.
-- [`catalogo_juegos.sql`](./catalogo_juegos.sql): carga opcional del catálogo retro.
+### Gestión de Usuarios y Roles
+Las cuentas nuevas se almacenan en la tabla `usuarios` y están relacionadas con la tabla `roles`; las contraseñas se almacenan de forma segura utilizando `password_hash()`. 
 
-Las cuentas nuevas se almacenan en `usuarios`, relacionadas con `roles`; las contraseñas se guardan con `password_hash()`. Para habilitar una cuenta administradora después de registrarla, ejecutá en phpMyAdmin (reemplazando el correo):
+Para habilitar una cuenta administradora después de registrarla, podés ejecutar la siguiente sentencia en phpMyAdmin (reemplazando el correo):
 
 ```sql
 USE nebula_games;
 
 UPDATE usuarios
 SET id_rol = (SELECT id_rol FROM roles WHERE nombre = 'admin')
-WHERE email = 'admin@example.com';
-```
-
-### Modelo y normalización
-
-- [`normalizacion.md`](./normalizacion.md) (pendiente de incluir en el repositorio): desarrollo de 1FN, 2FN y 3FN.
-- [`schema.sql`](./schema.sql): tablas con PK, FK, auditoría (`created_at`) e índices.
-- [`consultas.sql`](./consultas.sql): datos de demostración y consultas CRUD.
+WHERE email = 'tu-correo@example.com';
 
 ## TP Persistencia y conexión PHP-MySQL segura (PDO y CRUD)
 
@@ -175,45 +170,3 @@ Objetivo: persistir el estado del usuario con `$_SESSION` y cookies seguras, y p
 - **Logout:** [`auth/logout.php`](./auth/logout.php) vacía `$_SESSION`, expira la cookie de sesión y ejecuta `session_destroy()`.
 - **Control de acceso:** las vistas protegidas verifican `$_SESSION['usuario_id']` y, en el área de administración, el rol `admin`.
 
-Estado (pendiente de completar):
-
-- [ ] Guardián reutilizable `includes/auth_guard.php` (redirige a `login.php?error=acceso_denegado`).
-- [ ] Gestor de cookies de sesión `includes/session_bootstrap.php` (`HttpOnly`, `SameSite`, `Secure`).
-- [ ] Dos vistas protegidas por sesión y una restringida por rol.
-
-## Evidencia para la entrega
-
-Guardá capturas propias en `docs/capturas/` y actualizá los enlaces siguientes antes de entregar:
-
-- [ ] Sitio ejecutándose en `http://localhost/Nebula/`.
-- [ ] Código de `includes/header.php`, `includes/nav.php` e `includes/footer.php`.
-- [ ] Títulos distintos y enlace activo al navegar entre secciones.
-- [ ] `.env.example` presente en el repositorio (sin publicar `.env`).
-- [x] TP8: registro, login, sesiones seguras, rutas protegidas por autenticación y rol, y logout.
-
-## Git y entrega
-
-El flujo solicitado para la entrega es trabajar en una rama como `feature/migracion-php-ssi`, integrar los cambios mediante Pull Request a `main` y entregar el enlace público del repositorio. Usá commits pequeños y descriptivos, por ejemplo `feat: modulariza las vistas con SSI y títulos dinámicos`.
-
-## Ubicación de imágenes y capturas por trabajo práctico
-
-Las imágenes que se muestran en las páginas del sitio van en `imagenes/`. En el archivo PHP de cada página, cambia la ruta del atributo `src` de la etiqueta `<img>`, por ejemplo `src="imagenes/retro.jpg"`. Las imágenes guardadas en el catálogo se indican desde el campo `imagen_url` del formulario de administración; las imágenes de perfil se gestionan en `uploads/perfiles/`.
-
-Las capturas de evidencia de los TP no van en `imagenes/`. Guárdalas en `docs/capturas/`, organizadas por trabajo práctico. Si las carpetas aún no existen, créalas:
-
-| TP o entrega | Capturas sugeridas | Ubicación |
-| --- | --- | --- |
-| Hito 1 / sitio web | Inicio, secciones y diseño de la página | `docs/capturas/hito1/` |
-| Clase 5: GET y POST | Búsqueda, errores de validación y envío exitoso | `clase5/capturas/` (ya incluye estas capturas) |
-| TP6: base de datos y normalización | Tablas, relaciones en phpMyAdmin y consultas CRUD | `docs/capturas/tp6/` |
-| Migración PHP, SSI y SSR | Sitio ejecutándose, plantillas reutilizadas, títulos y navegación activa | `docs/capturas/ssi-ssr/` |
-| Persistencia y CRUD con PDO | Listado, alta, edición y eliminación de juegos | `docs/capturas/crud/` |
-| TP8: sesiones, autenticación y roles | Registro, login, panel de usuario, permisos de administrador y logout | `docs/capturas/tp8/` |
-
-Para mostrar una captura guardada en `docs/capturas/tp6/` dentro de este README, agrega una referencia Markdown como la siguiente y reemplaza el nombre por el de tu archivo:
-
-```markdown
-![Esquema de la base de datos del TP6](./docs/capturas/tp6/esquema-db.png)
-```
-
-Para cambiar un enlace a una imagen externa, reemplaza la dirección dentro de `src="..."` en el PHP de la página que la muestra. Para las imágenes de este README, cambia la ruta dentro de `![descripción](ruta/de/la/imagen.png)`.
