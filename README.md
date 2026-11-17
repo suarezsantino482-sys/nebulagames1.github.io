@@ -8,7 +8,7 @@ La maqueta se evolucionó a PHP para ejecutarse en un servidor local. Las vistas
 
 ## Prototipo de Figma
 
-**Enlace de lectura:** pendiente de agregar el enlace público al prototipo original de Nebula Games.
+**https://www.figma.com/site/PVYqEAdTReC8EBLuKWpkEP/paguina-de-juegos?node-id=23-4020:** este es el diseño prototipo de Nebula Games.
 
 ## Tecnologías
 
@@ -60,11 +60,13 @@ Objetivo: convertir la maqueta estática del Hito 1 en un sitio PHP con plantill
 - [`.env.example`](./.env.example) documenta las variables esperadas. No guardes contraseñas reales en ese archivo ni publiques `.env`.
 - `.gitignore` excluye `.env` para evitar subir configuraciones locales.
 
-Estado de la migración (pendiente de completar):
+![Servidor Local](./docs/capturas/ssi-ssr/servidor-local.png)
 
-- [ ] Renombrar las páginas `.html` restantes a `.php` (la raíz aún contiene archivos `.html`).
-- [ ] Incorporar `config/env.php` y `.env.example` al repositorio.
-- [ ] Capturas de sitio ejecutándose, código de las plantillas y del `.env.example`.
+![Plantillas SSI](./docs/capturas/ssi-ssr/plantillas-ssi.png)
+
+![Navegación Dinámica](./docs/capturas/ssi-ssr/navegacion.png)
+
+![Variables de Entorno](./docs/capturas/ssi-ssr/env-example.png)
 
 ## Seguridad web: formularios POST y GET
 
